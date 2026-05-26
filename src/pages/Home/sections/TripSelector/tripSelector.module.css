@@ -1,0 +1,81 @@
+.tripSelector {
+  padding: 16px;
+}
+
+.tripSelectorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #fff;
+  padding: 32px 16px 16px 16px;
+  border-radius: 12px;
+}
+
+.tripSelectorLocate {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  background-color: #dadada;
+  transition: 0.2s ease;
+}
+
+.tripSelectorLocate:focus-within {
+  border-color: #0057d9;
+  box-shadow: 0 0 0 3px rgba(0, 87, 217, 0.1);
+}
+
+.tripSelectorLocate input {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: auto;
+  letter-spacing: 0;
+}
+
+.tripSelectorLocate input::placeholder {
+  color: #717786;
+}
+
+.iconStart {
+  font-size: 1.3rem;
+  color: #0057d9;
+  flex-shrink: 0;
+}
+
+.iconEnd {
+  font-size: 1.3rem;
+  color: #059669;
+  flex-shrink: 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 56px;
+  border-radius: 12px;
+  background: #0057d9;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  filter: brightness(1.05);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button svg {
+  font-size: 1.2rem;
+}

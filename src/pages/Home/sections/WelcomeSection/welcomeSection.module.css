@@ -1,0 +1,23 @@
+.welcomeSection {
+  padding: 16px;
+}
+
+.welcomeSection h1 {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 40px;
+  letter-spacing: -0.64px;
+  color: #151c27;
+}
+
+.welcomeSection h1 span {
+  color: #0058bc;
+}
+
+.welcomeSection p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: #414755;
+}

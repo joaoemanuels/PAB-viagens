@@ -1,7 +1,7 @@
 import { UserSearch, User, BusFront } from "lucide-react";
-import styles from "./footer.module.css";
+import styles from "./footerAdmin.module.css";
 
-export default function Footer() {
+export default function FooterAdmin() {
   const activeTab = "passageiros";
 
   return (
