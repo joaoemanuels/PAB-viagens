@@ -222,7 +222,7 @@ pab-viagens/
   - [x] Configurar região mais próxima (América do Sul)
   - [x] Configurar senha segura do PostgreSQL
 - [x] Obter credenciais (`SUPABASE_URL` e `PUBLISHABLE_KEY`)
-- [ ] Habilitar autenticação por email
+- [x] Habilitar autenticação por email
 - [x] Copiar variáveis para `.env.local`
 
 ### Documentação Base
@@ -232,8 +232,8 @@ pab-viagens/
   - Como rodar localmente
   - Estrutura de pastas
   - Contribuição
-- [ ] Criar `ARCHITECTURE.md` com diagrama de arquitetura
-- [ ] Criar `API.md` com endpoints esperados
+- [x] Criar `ARCHITECTURE.md` com diagrama de arquitetura
+- [x] Criar `API.md` com endpoints esperados
 
 ---
 
@@ -243,7 +243,7 @@ pab-viagens/
 ### Criação de Tabelas
 
 #### 1. Tabela `users` (Passageiros e Motoristas)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -267,13 +267,13 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_users_auth_id ON users(auth_id);`
   - `CREATE INDEX idx_users_email ON users(email);`
   - `CREATE INDEX idx_users_role ON users(role);`
 
 #### 2. Tabela `routes` (Rotas Fixas)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE routes (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -296,12 +296,12 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_routes_driver_id ON routes(driver_id);`
   - `CREATE INDEX idx_routes_origin_destination ON routes(origin_city, destination_city);`
 
 #### 3. Tabela `schedules` (Horários Recorrentes)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE schedules (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -314,12 +314,12 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_schedules_route_id ON schedules(route_id);`
   - `CREATE INDEX idx_schedules_day_time ON schedules(day_of_week, departure_time);`
 
 #### 4. Tabela `trips` (Viagens Instanciadas)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE trips (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -339,13 +339,13 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_trips_route_id ON trips(route_id);`
   - `CREATE INDEX idx_trips_departure_date ON trips(departure_date);`
   - `CREATE INDEX idx_trips_status ON trips(status);`
 
 #### 5. Tabela `bookings` (Reservas)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE bookings (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -364,14 +364,14 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_bookings_trip_id ON bookings(trip_id);`
   - `CREATE INDEX idx_bookings_passenger_id ON bookings(passenger_id);`
   - `CREATE INDEX idx_bookings_status ON bookings(status);`
   - `CREATE UNIQUE INDEX idx_bookings_trip_seat ON bookings(trip_id, seat_number);`
 
 #### 6. Tabela `payments` (Registro de Pagamentos)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE payments (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -387,12 +387,12 @@ pab-viagens/
     updated_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_payments_booking_id ON payments(booking_id);`
   - `CREATE INDEX idx_payments_status ON payments(status);`
 
 #### 7. Tabela `reviews` (Avaliações)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE reviews (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -403,12 +403,12 @@ pab-viagens/
     created_at TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_reviews_trip_id ON reviews(trip_id);`
   - `CREATE INDEX idx_reviews_reviewer_id ON reviews(reviewer_id);`
 
 #### 8. Tabela `driver_locations` (Histórico de Localizações)
-- [ ] Criar tabela com campos:
+- [x] Criar tabela com campos:
   ```sql
   CREATE TABLE driver_locations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -419,13 +419,13 @@ pab-viagens/
     timestamp TIMESTAMP DEFAULT NOW()
   );
   ```
-- [ ] Criar índices:
+- [x] Criar índices:
   - `CREATE INDEX idx_locations_trip_id ON driver_locations(trip_id);`
   - `CREATE INDEX idx_locations_timestamp ON driver_locations(timestamp);`
 
 ### RLS (Row Level Security) Policies
 
-- [ ] Habilitar RLS em todas as tabelas:
+- [x] Habilitar RLS em todas as tabelas:
   ```sql
   ALTER TABLE users ENABLE ROW LEVEL SECURITY;
   ALTER TABLE routes ENABLE ROW LEVEL SECURITY;
@@ -437,7 +437,7 @@ pab-viagens/
   ALTER TABLE driver_locations ENABLE ROW LEVEL SECURITY;
   ```
 
-- [ ] Criar políticas básicas de segurança:
+- [x] Criar políticas básicas de segurança:
   - Users podem ver seu próprio perfil
   - Passageiros podem ver rotas públicas
   - Motorista pode ver suas próprias rotas
@@ -445,15 +445,15 @@ pab-viagens/
   - etc.
 
 ### Realtime Setup
-- [ ] Ativar Realtime para tabelas:
-  - [ ] `trips` (para tracking)
-  - [ ] `bookings` (para confirmações)
-  - [ ] `driver_locations` (para posição em tempo real)
+- [x] Ativar Realtime para tabelas:
+  - [x] `trips` (para tracking)
+  - [x] `bookings` (para confirmações)
+  - [x] `driver_locations` (para posição em tempo real)
 
 ### Serviços Supabase Criados
 
 #### Service: Auth.js
-- [ ] Criar arquivo `src/services/auth.js`:
+- [x] Criar arquivo `src/services/auth.js`:
   ```javascript
   import { supabase } from './supabase'
 
@@ -477,7 +477,7 @@ pab-viagens/
   ```
 
 #### Service: Trips.js
-- [ ] Criar arquivo `src/services/trips.js`:
+- [x] Criar arquivo `src/services/trips.js`:
   ```javascript
   export const tripService = {
     createTrip: async (routeId, scheduleId, departureDate) => {},
@@ -1616,4 +1616,3 @@ Adicione ao `package.json`:
 ---
 
 **Última atualização: Maio 2026**
-**Mantém este documento atualizado conforme avança!**
