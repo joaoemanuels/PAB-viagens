@@ -5,10 +5,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "env": {
-    "VITE_API_URL": "https://api.orbit.app",
-    "VITE_APP_ENV": "production"
-  },
+
   "regions": [
     "sao1"
   ],
@@ -138,9 +135,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "buildEnv": [
-    "VITE_API_URL",
-    "VITE_APP_ENV"
   ]
 }
