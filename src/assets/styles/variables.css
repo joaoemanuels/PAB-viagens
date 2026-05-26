@@ -1,0 +1,253 @@
+:root {
+  /* ========================================
+     COLORS - PRIMARY
+  ======================================== */
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* ========================================
+     COLORS - SUCCESS
+  ======================================== */
+
+  --color-success-50: #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-200: #a7f3d0;
+  --color-success-300: #6ee7b7;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+
+  /* ========================================
+     COLORS - WARNING
+  ======================================== */
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+
+  /* ========================================
+     COLORS - DANGER
+  ======================================== */
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+
+  /* ========================================
+     COLORS - NEUTRAL
+  ======================================== */
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* ========================================
+     BACKGROUNDS
+  ======================================== */
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-tertiary: #eef2f7;
+  --bg-card: #ffffff;
+  --bg-hover: #f3f4f6;
+  --bg-active: #eff6ff;
+
+  /* ========================================
+     TEXT
+  ======================================== */
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-white: #ffffff;
+
+  /* ========================================
+     BORDERS
+  ======================================== */
+
+  --border-color: #e5e7eb;
+  --border-color-light: #f3f4f6;
+  --border-color-focus: #60a5fa;
+
+  /* ========================================
+     STATUS COLORS
+  ======================================== */
+
+  --status-online: #10b981;
+  --status-offline: #9ca3af;
+  --status-traveling: #2563eb;
+  --status-delayed: #f59e0b;
+  --status-cancelled: #ef4444;
+
+  /* ========================================
+     PAYMENT STATUS
+  ======================================== */
+
+  --payment-paid: #10b981;
+  --payment-pending: #f59e0b;
+  --payment-failed: #ef4444;
+
+  /* ========================================
+     SEATS STATUS
+  ======================================== */
+
+  --seat-available: #d1fae5;
+  --seat-selected: #3b82f6;
+  --seat-occupied: #ef4444;
+
+  /* ========================================
+     SHADOWS
+  ======================================== */
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.16);
+
+  /* ========================================
+     BORDER RADIUS
+  ======================================== */
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ========================================
+     SPACING SYSTEM
+  ======================================== */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+
+  /* ========================================
+     TYPOGRAPHY
+  ======================================== */
+
+  --font-primary: "Inter", sans-serif;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* ========================================
+     TRANSITIONS
+  ======================================== */
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* ========================================
+     Z-INDEX
+  ======================================== */
+
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 500;
+  --z-modal: 1000;
+  --z-toast: 1200;
+  --z-tooltip: 1500;
+
+  /* ========================================
+     LAYOUT
+  ======================================== */
+
+  --header-height: 72px;
+  --bottom-nav-height: 72px;
+  --container-width: 1200px;
+
+  /* ========================================
+     MAP
+  ======================================== */
+
+  --map-height-mobile: 320px;
+  --map-height-desktop: 500px;
+
+  /* ========================================
+     BUTTONS
+  ======================================== */
+
+  --button-height-sm: 36px;
+  --button-height-md: 44px;
+  --button-height-lg: 52px;
+
+  /* ========================================
+     INPUTS
+  ======================================== */
+
+  --input-height: 48px;
+  --input-padding-x: 16px;
+
+  /* ========================================
+     EFFECTS
+  ======================================== */
+
+  --backdrop-blur: blur(12px);
+
+  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+
+  /* ========================================
+     SAFE AREA MOBILE
+  ======================================== */
+
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --safe-area-top: env(safe-area-inset-top);
+}

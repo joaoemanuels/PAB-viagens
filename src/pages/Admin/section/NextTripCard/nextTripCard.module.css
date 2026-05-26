@@ -1,0 +1,58 @@
+.nextTripCard {
+  padding: 0 16px;
+}
+
+.nextTripContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #0070eb;
+  padding: 16px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.nextTripGrid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0070eb;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.nextTripLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nextTripLeft h2 {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-align: left;
+  color: #fefcff;
+}
+
+.nextTripLeft p {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0;
+  text-align: left;
+  color: #fefcff;
+}
+
+.nextTripRight {
+  padding: 4px 12px;
+  background-color: #348cee;
+  border-radius: 99px;
+}
+
+.tripImage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

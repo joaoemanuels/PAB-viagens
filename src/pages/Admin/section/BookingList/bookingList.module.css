@@ -1,0 +1,45 @@
+.bookingList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: #151c27;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter .filterIcon {
+  width: 16px;
+  color: #0058bc;
+}
+
+.filter span {
+  font-size: 12px;
+  font-weight: medium;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+  color: #0058bc;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

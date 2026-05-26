@@ -1,0 +1,36 @@
+.travelControls {
+  padding: 0 16px;
+}
+
+.travelControlsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.travelControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px;
+  border-radius: 12px;
+  gap: 8px;
+}
+
+.travelControl p {
+  font-size: 12px;
+  font-weight: medium;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+  text-align: center;
+}
+
+.travelControlLeft {
+  background-color: #006c49;
+  color: #fff;
+}
+
+.travelControlRight {
+  background-color: #dce2f3;
+  color: #414755;
+}
