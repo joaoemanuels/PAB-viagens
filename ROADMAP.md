@@ -117,7 +117,7 @@ pab-viagens/
 └── README.md
 ```
 
-- [ ] Criar arquivo `.env.example` com variáveis necessárias:
+- [x] Criar arquivo `.env` com variáveis necessárias:
   ```
   VITE_SUPABASE_URL=
   VITE_SUPABASE_ANON_KEY=
@@ -217,13 +217,13 @@ pab-viagens/
   ```
 
 ### Conta Supabase Criada
-- [ ] Acessar [supabase.com](https://supabase.com)
-- [ ] Criar novo projeto
-  - [ ] Configurar região mais próxima (América do Sul)
-  - [ ] Configurar senha segura do PostgreSQL
-- [ ] Obter credenciais (`SUPABASE_URL` e `ANON_KEY`)
+- [x] Acessar [supabase.com](https://supabase.com)
+- [x] Criar novo projeto
+  - [x] Configurar região mais próxima (América do Sul)
+  - [x] Configurar senha segura do PostgreSQL
+- [x] Obter credenciais (`SUPABASE_URL` e `PUBLISHABLE_KEY`)
 - [ ] Habilitar autenticação por email
-- [ ] Copiar variáveis para `.env.local`
+- [x] Copiar variáveis para `.env.local`
 
 ### Documentação Base
 - [x] Criar `README.md` com:
