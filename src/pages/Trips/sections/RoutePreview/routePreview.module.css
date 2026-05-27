@@ -1,0 +1,45 @@
+.routePreview {
+  padding: 16px;
+}
+
+.routePreviewContainer {
+  background-image: url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg");
+  height: 192px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 12px;
+}
+
+.routePreviewContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #f4f5f3;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.routePreviewIcon {
+  color: #0058bc;
+}
+
+.routePreviewItem span {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  color: #0058bc;
+}
+
+.routePreviewItem p {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #151c27;
+}

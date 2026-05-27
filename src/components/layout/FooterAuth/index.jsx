@@ -1,4 +1,4 @@
-import { User, BusFront, Navigation, House, Ticket } from "lucide-react";
+import { User, BusFront, Navigation, House } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
 
@@ -13,9 +13,11 @@ export default function FooterAuth() {
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
       >
-        <House />
+        <div className={styles.iconWrapper}>
+          <House />
 
-        <span>Home</span>
+          <span>Home</span>
+        </div>
       </NavLink>
 
       <NavLink
@@ -24,9 +26,11 @@ export default function FooterAuth() {
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
       >
-        <BusFront />
+        <div className={styles.iconWrapper}>
+          <BusFront />
 
-        <span>Viagens</span>
+          <span>Viagens</span>
+        </div>
       </NavLink>
 
       <NavLink
@@ -35,20 +39,11 @@ export default function FooterAuth() {
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
       >
-        <Navigation />
+        <div className={styles.iconWrapper}>
+          <Navigation />
 
-        <span>Rastrear</span>
-      </NavLink>
-
-      <NavLink
-        to="/reservations"
-        className={({ isActive }) =>
-          `${styles.navButton} ${isActive ? styles.active : ""}`
-        }
-      >
-        <Ticket />
-
-        <span>Reservas</span>
+          <span>Rastrear</span>
+        </div>
       </NavLink>
 
       <NavLink
@@ -57,9 +52,11 @@ export default function FooterAuth() {
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
       >
-        <User />
+        <div className={styles.iconWrapper}>
+          <User />
 
-        <span>Perfil</span>
+          <span>Perfil</span>
+        </div>
       </NavLink>
     </nav>
   );

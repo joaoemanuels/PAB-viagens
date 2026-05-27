@@ -9,7 +9,6 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Trips from "../pages/Trips";
 import Tracking from "../pages/Tracking";
-import Reservations from "../pages/Reservations";
 import Profile from "../pages/Profile";
 
 import Admin from "../pages/Admin";
@@ -27,9 +26,6 @@ function AppRoutes() {
         <Route path="/trips" element={<Trips />} />
 
         <Route path="/tracking" element={<Tracking />} />
-
-        <Route path="/reservations" element={<Reservations />} />
-
         <Route path="/profile" element={<Profile />} />
       </Route>
 
