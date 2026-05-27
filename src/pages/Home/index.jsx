@@ -3,6 +3,8 @@ import styles from "./home.module.css";
 import Header from "../../components/ui/Header";
 import WelcomeSection from "./sections/WelcomeSection";
 import TripSelector from "./sections/TripSelector";
+import QuickFilters from "./sections/QuickFilters";
+import UpcomingTrips from "./sections/UpcomingTrips";
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <Header />
       <WelcomeSection />
       <TripSelector />
+      <QuickFilters />
+      <UpcomingTrips />
     </section>
   );
 }
