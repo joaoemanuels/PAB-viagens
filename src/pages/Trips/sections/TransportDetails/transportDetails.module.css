@@ -1,0 +1,137 @@
+.transportDetails {
+  padding: 16px;
+}
+
+.transportDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+
+  gap: 1rem;
+  border: 1px solid #ececf1;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #151c27;
+}
+
+.vehicleCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vehicleIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: 0.9rem;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0057d9;
+  flex-shrink: 0;
+}
+
+.vehicleIcon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.vehicleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.vehicleInfo h2 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f2937;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.code {
+  background: #dbe4ff;
+  color: #5b6475;
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.type {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.driver {
+  border-top: 1px solid #ececf1;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.driverInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.driverInfo img {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid #10b981;
+}
+
+.driverInfo h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  color: #825100;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.chatButton {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: #6cf8bb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00714d;
+  cursor: pointer;
+  transition: 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chatButton:hover {
+  filter: brightness(0.96);
+}

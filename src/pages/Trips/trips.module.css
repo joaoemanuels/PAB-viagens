@@ -1,0 +1,7 @@
+.trips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: fit-content;
+  margin-bottom: 80px;
+}
