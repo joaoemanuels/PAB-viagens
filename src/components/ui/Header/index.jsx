@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { CircleUserRound, Menu } from "lucide-react";
 import styles from "./header.module.css";
 
 export default function Header() {
@@ -13,6 +13,9 @@ export default function Header() {
           src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg"
           alt="Avatar"
         />
+      </div>
+      <div className={styles.supportIcon}>
+        <CircleUserRound />
       </div>
     </div>
   );

@@ -1,17 +1,36 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home";
-import Admin from "../pages/Admin";
-
 import PrivateRoute from "./PrivateRoute";
+
 import AuthLayout from "../components/layout/AuthLayout";
 import AdminLayout from "../components/layout/AdminLayout";
+
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import Trips from "../pages/Trips";
+import Tracking from "../pages/Tracking";
+import Reservations from "../pages/Reservations";
+import Profile from "../pages/Profile";
+
+import Admin from "../pages/Admin";
+
+import NotFound from "../pages/NotFound";
 
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+
       <Route element={<AuthLayout />}>
         <Route path="/" element={<Home />} />
+
+        <Route path="/trips" element={<Trips />} />
+
+        <Route path="/tracking" element={<Tracking />} />
+
+        <Route path="/reservations" element={<Reservations />} />
+
+        <Route path="/profile" element={<Profile />} />
       </Route>
 
       <Route
@@ -23,6 +42,8 @@ function AppRoutes() {
       >
         <Route path="/admin" element={<Admin />} />
       </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

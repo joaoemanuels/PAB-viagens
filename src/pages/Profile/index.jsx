@@ -1,4 +1,4 @@
-export default function NotFound() {
+export default function Profile() {
   return (
     <section>
       <h1>teste</h1>
