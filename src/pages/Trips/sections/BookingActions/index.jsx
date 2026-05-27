@@ -1,10 +1,16 @@
 import { ChevronRight, Phone, QrCode } from "lucide-react";
 import styles from "./bookingActions.module.css";
+import { useNavigate } from "react-router-dom";
 
-export default function BookingActions() {
+export default function BookingActions({ tripId }) {
+  const navigate = useNavigate();
+
+  function handleBooking() {
+    navigate(`/trips/${tripId}/booking`);
+  }
   return (
     <section className={styles.bookingActions}>
-      <button className={styles.buttonPrimary}>
+      <button className={styles.buttonPrimary} onClick={handleBooking}>
         Reservar agora
         <ChevronRight />
       </button>

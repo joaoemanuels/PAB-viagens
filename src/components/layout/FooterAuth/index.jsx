@@ -21,7 +21,7 @@ export default function FooterAuth() {
       </NavLink>
 
       <NavLink
-        to="/trips"
+        to="/reserves"
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
@@ -29,7 +29,7 @@ export default function FooterAuth() {
         <div className={styles.iconWrapper}>
           <BusFront />
 
-          <span>Viagens</span>
+          <span>Reservas</span>
         </div>
       </NavLink>
 

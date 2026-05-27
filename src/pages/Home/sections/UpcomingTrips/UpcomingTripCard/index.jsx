@@ -14,7 +14,7 @@ export default function UpcomingTripCard({
   const navigate = useNavigate();
 
   function handleBooking() {
-    navigate(`/booking/${tripId}`);
+    navigate(`/trips/${tripId}`);
   }
 
   return (

@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 import styles from "./trips.module.css";
 
 import Header from "../../components/ui/Header";
@@ -6,16 +8,24 @@ import TransportDetails from "./sections/TransportDetails";
 import TripStatsGrid from "./sections/TripStatsGrid";
 import SeatSelector from "./sections/SeatSelector";
 import BookingActions from "./sections/BookingActions";
+import { TripsData } from "../../data/trips";
 
 export default function Trips() {
+  const { tripId } = useParams();
+
+  
+  const trip = TripsData.find((trip) => trip.id === Number(tripId));
+  if (!trip) {
+    return <p>Viagem não encontrada</p>;
+  }
   return (
     <section className={styles.trips}>
       <Header />
-      <RoutePreview />
+      <RoutePreview route={trip.route} />
       <TripStatsGrid />
       <TransportDetails />
       <SeatSelector />
-      <BookingActions />
+      <BookingActions tripId={trip.id} />
     </section>
   );
 }
