@@ -1,0 +1,44 @@
+.tracking {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.tracking > :first-child {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+  background: #fff;
+}
+
+.tracking > :nth-child(2) {
+  flex: 1;
+  position: relative;
+  min-height: 0; 
+  z-index: 5;
+}
+
+.tracking > :last-child {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 15;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .tracking {
+    height: 100dvh;
+  }
+}

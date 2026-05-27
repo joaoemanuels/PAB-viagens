@@ -1,0 +1,72 @@
+.mapBackground {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+  z-index: 1;
+}
+
+.mapBackground :global(.leaflet-container) {
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+}
+
+.mapBackground :global(.leaflet-control-attribution) {
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+}
+
+.mapBackground :global(.leaflet-control-zoom) {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mapBackground :global(.leaflet-popup-content-wrapper) {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+  padding: 0;
+}
+
+.mapBackground :global(.leaflet-popup-content) {
+  margin: 12px 16px;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.mapBackground :global(.leaflet-popup-tip) {
+  background-color: #fff;
+}
+
+.mapBackground :global(.leaflet-popup-close-button) {
+  display: none;
+}
+
+/* Markers */
+.userMarker {
+  filter: drop-shadow(0 2px 4px rgba(0, 122, 255, 0.2));
+}
+
+.driverMarker {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .mapBackground :global(.leaflet-control-zoom) {
+    margin: 12px;
+  }
+
+  .mapBackground :global(.leaflet-control-attribution) {
+    display: none;
+  }
+}
