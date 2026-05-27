@@ -47,7 +47,7 @@ export default function FooterAuth() {
       </NavLink>
 
       <NavLink
-        to="/profile"
+        to="/profileUser"
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }

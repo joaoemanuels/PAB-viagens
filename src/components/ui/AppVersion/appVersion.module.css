@@ -1,0 +1,7 @@
+.appVersion {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 32px;
+  margin-bottom: 16px;
+}

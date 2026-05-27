@@ -2,3 +2,15 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+
+:root {
+  --bg-app: #f4f6f9;
+  --bg-card: #ffffff;
+  --text-main: #1e252d;
+  --text-muted: #8e99a5;
+  --text-link: #4a90e2;
+  --color-danger: #d93838;
+  --color-premium: #10b981;
+  --bg-premium: #e6f7f0;
+  --border-color: #f0f2f5;
+}

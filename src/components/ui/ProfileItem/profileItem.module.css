@@ -1,0 +1,75 @@
+.profileItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.profileItem:last-child {
+  border-bottom: none;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable:hover {
+  background-color: #fafbfc;
+}
+
+.itemLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.itemIcon {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  width: 24px;
+  text-align: center;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemLabelMini {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.itemValue {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.itemLabelMain {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.itemRight {
+  display: flex;
+  align-items: center;
+}
+
+.arrowIcon {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Variante Vermelha (Sair da Conta) */
+.itemDanger .itemLabelMain {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.itemDanger .itemIcon {
+  color: var(--color-danger);
+}
