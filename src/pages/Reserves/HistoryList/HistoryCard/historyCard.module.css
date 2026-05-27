@@ -1,0 +1,139 @@
+.historyCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.02);
+  border: 1px solid #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badgeDone {
+  background-color: #e6f4ea;
+  color: #137333;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  align-self: flex-start;
+  letter-spacing: 0.3px;
+}
+
+.dateText {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0056b3; /* Preço azul em destaque igual ao print */
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  z-index: 2;
+}
+
+.dotOrigin, .dotDest {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.dotOrigin { color: #0284c7; }
+.dotDest { color: #64748b; }
+
+.line {
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.locationInfo label {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.locationInfo p {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Grupo de Ações (Botões Lado a Lado) */
+.actionGroup {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.actionGroup button {
+  flex: 1; /* Faz ambos os botões terem exatamente o mesmo tamanho */
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Botão Ver Detalhes (Borda sutil, texto cinza) */
+.btnSecondary {
+  background-color: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.btnSecondary:hover {
+  background-color: #f8fafc;
+}
+
+/* Botão Repetir (Fundo azul bem claro, texto azul) */
+.btnAction {
+  background-color: #e8f2fe;
+  color: #0056b3;
+  border: none;
+}
+
+.btnAction:hover {
+  background-color: #d2e5fc;
+}

@@ -15,7 +15,7 @@ import Admin from "../pages/Admin";
 
 import NotFound from "../pages/NotFound";
 import Booking from "../pages/Booking";
-import Reserves from "../pages/Reservers";
+import Reserves from "../pages/Reserves";
 
 function AppRoutes() {
   return (
