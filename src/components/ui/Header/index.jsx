@@ -1,7 +1,7 @@
 import { CircleUserRound, Menu } from "lucide-react";
 import styles from "./header.module.css";
 
-export default function Header() {
+export default function Header({ showSupportIcon = true }) {
   return (
     <div className={styles.header}>
       <Menu className={styles.menuHamburguer} />
@@ -14,9 +14,11 @@ export default function Header() {
           alt="Avatar"
         />
       </div>
-      <div className={styles.supportIcon}>
-        <CircleUserRound />
-      </div>
+      {showSupportIcon && (
+        <div className={styles.supportIcon}>
+          <CircleUserRound />
+        </div>
+      )}
     </div>
   );
 }

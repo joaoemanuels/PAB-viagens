@@ -14,6 +14,7 @@ import Profile from "../pages/Profile";
 import Admin from "../pages/Admin";
 
 import NotFound from "../pages/NotFound";
+import Booking from "../pages/Booking";
 
 function AppRoutes() {
   return (
@@ -28,6 +29,8 @@ function AppRoutes() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
+      
+      <Route path="/booking/:id" element={<Booking />} />
 
       <Route
         element={

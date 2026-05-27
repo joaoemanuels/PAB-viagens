@@ -1,0 +1,163 @@
+.passengerForm {
+  padding: 16px;
+}
+
+.container {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  color: #1c2434;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  color: #4a5568;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: #7a828a;
+  pointer-events: none; /* Garante que o clique passe direto para o input */
+}
+
+.input {
+  width: 100%;
+  padding: 16px 16px 16px 48px; /* Espaço extra na esquerda para não cobrir o ícone */
+  border: 1px solid #d2d6dc;
+  border-radius: 14px;
+  font-size: 1rem;
+  color: #1c2434;
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: #9aa2ac;
+}
+
+.input:focus {
+  border-color: #1a73e8; /* Borda azul ao focar */
+}
+
+.helperText {
+  color: #7a828a;
+  font-size: 0.75rem;
+  margin: 4px 0 0 0;
+}
+
+/* --- Card do Seletor de Assentos --- */
+
+.seatCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #d2d6dc;
+  border-radius: 14px;
+  padding: 16px;
+  background-color: #ffffff;
+  margin-top: 8px;
+}
+
+.seatInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.seatIconWrapper {
+  color: #1a73e8; /* Ícone azul da poltrona */
+  display: flex;
+  align-items: center;
+}
+
+.seatTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.seatTitle {
+  color: #1c2434;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.seatSubtitle {
+  color: #7a828a;
+  font-size: 0.75rem;
+}
+
+/* --- Controle do Stepper (Contador) --- */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  background-color: #f0f4fa; /* Fundo arredondado cinza/azul claro */
+  padding: 4px;
+  border-radius: 30px;
+  gap: 16px;
+}
+
+.stepperButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #ffffff; /* Botão de menos padrão branco */
+  color: #1a73e8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stepperButtonPrimary {
+  background-color: #0056c6; /* Botão de mais azul destacado */
+  color: #ffffff;
+}
+
+.stepperButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.stepperValue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1c2434;
+  min-width: 12px;
+  text-align: center;
+}

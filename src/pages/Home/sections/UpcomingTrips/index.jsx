@@ -51,6 +51,7 @@ export default function UpcomingTrips() {
       {TripsData.map((trip) => (
         <UpcomingTripCard
           key={trip.id}
+          tripId={trip.id}
           category={trip.category}
           route={trip.route}
           price={trip.price}

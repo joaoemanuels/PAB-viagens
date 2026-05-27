@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./upcomingTripCard.module.css";
 
 import { BusFront, Clock3 } from "lucide-react";
@@ -8,7 +9,14 @@ export default function UpcomingTripCard({
   price,
   departure,
   seatsRemaining,
+  tripId,
 }) {
+  const navigate = useNavigate();
+
+  function handleBooking() {
+    navigate(`/booking/${tripId}`);
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.top}>
@@ -39,7 +47,9 @@ export default function UpcomingTripCard({
         <div className={styles.seats}>{seatsRemaining} lugares restantes</div>
       </div>
 
-      <button className={styles.button}>Reservar</button>
+      <button className={styles.button} onClick={handleBooking}>
+        Reservar
+      </button>
     </div>
   );
 }

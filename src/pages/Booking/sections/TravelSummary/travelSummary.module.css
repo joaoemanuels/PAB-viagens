@@ -1,0 +1,93 @@
+.travelSummary {
+  padding: 16px;
+}
+
+.travelSummaryContainer {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); /* Sombra bem leve para destacar do fundo */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  max-width: 400px; /* Limite padrão para telas mobile */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  color: #1a73e8; /* Azul destacado do topo */
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priceBadge {
+  background-color: #52ecac; /* Verde menta da imagem */
+  color: #0b5133; /* Texto interno contrastante */
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.route {
+  color: #1c2434; /* Azul escuro quase preto para o texto principal */
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metaGrid {
+  display: flex;
+  gap: 24px; /* Espaçamento entre o bloco de Data e Horário */
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.iconWrapper {
+  background-color: #e8edf7; /* Fundo suave azulado dos ícones */
+  color: #4a5568; /* Cor do ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0; /* Garante que o container do ícone não esmague */
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaLabel {
+  color: #7a828a; /* Cinza médio para o label */
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.metaValue {
+  color: #2d3748; /* Cor mais escura para o valor final */
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}

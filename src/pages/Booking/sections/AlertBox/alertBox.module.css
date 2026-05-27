@@ -1,0 +1,22 @@
+.alertBox {
+  padding: 16px;
+}
+
+.alertContent {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  background-color: #ffddb8;
+  border-radius: 12px;
+  padding: 16px;
+  height: 93px;
+}
+
+.alertContent p {
+  font-size: 14px;
+  color: #2a1700;
+  line-height: 17.5px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
