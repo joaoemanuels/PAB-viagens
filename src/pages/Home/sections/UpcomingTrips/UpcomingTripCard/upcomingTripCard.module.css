@@ -1,0 +1,126 @@
+.card {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #ececf1;
+  border-radius: 1rem;
+
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tripInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.category span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  color: #0057d9;
+}
+
+.category svg {
+  color: #0057d9;
+}
+
+.tripInfo h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+
+  color: #111827;
+}
+
+.price {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.15rem;
+
+  color: #0057d9;
+}
+
+.price span {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.price strong {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.seats {
+  background: #dcfce7;
+
+  color: #15803d;
+
+  padding: 0.35rem 0.6rem;
+
+  border-radius: 0.5rem;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.button {
+  width: 100%;
+  height: 3rem;
+
+  border: 0;
+  border-radius: 0.75rem;
+
+  background: #eef2ff;
+
+  color: #0057d9;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  filter: brightness(0.97);
+}
