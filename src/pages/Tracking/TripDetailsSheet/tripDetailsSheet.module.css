@@ -1,0 +1,176 @@
+.tripDetailsSheet {
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding: 16px 24px 24px 24px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 74px;
+}
+
+.dragHandle {
+  width: 36px;
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  margin: 0 auto 20px auto;
+}
+
+.destinationSection {
+  margin-bottom: 20px;
+}
+
+.destinationSection h2 {
+  color: #1c2434;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #7a828a;
+}
+
+.locationWrapper svg {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.locationWrapper p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.driverCard {
+  background-color: #f4f7fc;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.avatarWrapper img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.verifiedBadge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background-color: #0b8a5a; /* Verde escuro idêntico à imagem */
+  color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #f4f7fc; /* Borda da cor do card para dar o efeito de recorte */
+}
+
+.driverInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.driverHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.driverName {
+  color: #1c2434;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ratingBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #1a73e8;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.starIcon {
+  color: #1a73e8;
+}
+
+.vehicleDetails {
+  color: #7a828a;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.dotSeparator {
+  margin: 0 4px;
+  color: #cbd5e1;
+}
+
+.actionsGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.primaryActionButton,
+.secondaryActionButton {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+  color: #fff;
+  padding: 12px;
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.primaryActionButton {
+  background-color: #0158bc;
+  color: #ffffff;
+}
+
+.primaryActionButton:hover {
+  background-color: #0043a4;
+}
+
+.secondaryActionButton {
+  background-color: #e8edf7;
+  color: #4a5568;
+}
+
+.secondaryActionButton:hover {
+  background-color: #d8e2f3;
+}

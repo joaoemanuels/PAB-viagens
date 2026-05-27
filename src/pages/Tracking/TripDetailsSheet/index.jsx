@@ -1,0 +1,68 @@
+import { MapPin, Phone, Share, Star } from "lucide-react";
+import styles from "./tripDetailsSheet.module.css";
+
+const currentTrip = {
+  statusText: "Indo para Campinas",
+  dropoffPoint: "Ponto de desembarque: Terminal Multimodal",
+  driver: {
+    name: "Ricardo Oliveira",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80", // Substitua pelo caminho correto da imagem
+    rating: "4.9",
+    vehicleModel: "Van Branca",
+    licensePlate: "PAB-2024",
+  },
+};
+
+export default function TripDetailsSheet() {
+  return (
+    <div className={styles.tripDetailsSheet}>
+      <div className={styles.dragHandle} />
+
+      <div className={styles.destinationSection}>
+        <h2>{currentTrip.statusText}</h2>
+
+        <div className={styles.locationWrapper}>
+          <MapPin size={16} />
+          <p>{currentTrip.dropoffPoint}</p>
+        </div>
+      </div>
+
+      <div className={styles.driverCard}>
+        <div className={styles.avatarWrapper}>
+          <img src={currentTrip.driver.avatar} alt={currentTrip.driver.name} />
+          <div className={styles.verifiedBadge}>
+            <Star className={styles.starIcon} fill="#fff" />
+          </div>
+        </div>
+
+        <div className={styles.driverInfo}>
+          <div className={styles.driverHeader}>
+            <h3 className={styles.driverName}>{currentTrip.driver.name}</h3>
+            <div className={styles.ratingBadge}>
+              <span>{currentTrip.driver.rating}</span>
+              <Star className={styles.starIcon} fill="currentColor" />
+            </div>
+          </div>
+          <p className={styles.vehicleDetails}>
+            {currentTrip.driver.vehicleModel}
+            <span className={styles.dotSeparator}>&bull;</span>
+            <strong>{currentTrip.driver.licensePlate}</strong>
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.actionsGroup}>
+        <button className={styles.primaryActionButton}>
+          <Phone />
+          Ligar para Ricardo
+        </button>
+
+        <button className={styles.secondaryActionButton}>
+          <Share />
+          Compartilhar
+        </button>
+      </div>
+    </div>
+  );
+}
