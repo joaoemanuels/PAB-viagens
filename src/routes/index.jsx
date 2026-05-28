@@ -19,37 +19,41 @@ import ProfileAdmin from "../pages/ProfileAdmin";
 import ProfileUser from "../pages/ProfileUser";
 import Travels from "../pages/Travels";
 import PayMethod from "../pages/PayMethod";
+import ScrollToTop from "../components/common/ScrollToTop";
 
 function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/login" element={<Login />} />
 
-      <Route element={<AuthLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/trips/:tripId" element={<Trips />} />
-        <Route path="/tracking" element={<Tracking />} />
-        <Route path="/reserves" element={<Reserves />} />
-        <Route path="/profileUser" element={<ProfileUser />} />
-        <Route path="/payMethod" element={<PayMethod />} />
-      </Route>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/trips/:tripId" element={<Trips />} />
+          <Route path="/tracking" element={<Tracking />} />
+          <Route path="/reserves" element={<Reserves />} />
+          <Route path="/profileUser" element={<ProfileUser />} />
+          <Route path="/payMethod" element={<PayMethod />} />
+        </Route>
 
-      <Route path="/trips/:tripId/booking" element={<Booking />} />
+        <Route path="/trips/:tripId/booking" element={<Booking />} />
 
-      <Route
-        element={
-          <PrivateRoute>
-            <AdminLayout />
-          </PrivateRoute>
-        }
-      >
-        <Route path="/travels" element={<Travels />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/profileAdmin" element={<ProfileAdmin />} />
-      </Route>
+        <Route
+          element={
+            <PrivateRoute>
+              <AdminLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/travels" element={<Travels />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/profileAdmin" element={<ProfileAdmin />} />
+        </Route>
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
