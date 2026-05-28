@@ -12,7 +12,6 @@ export default function Home() {
       <WelcomeSection />
       <TripSelector />
       <QuickFilters />
-      
     </section>
   );
 }

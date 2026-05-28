@@ -2,10 +2,10 @@
 
 export const bookingsData = [
   {
-    id: "1",
+    id: 1,
 
     // relação com viagem
-    tripId: "310",
+    tripId: 310,
 
     // status
     status: "IN_PROGRESS",
@@ -22,9 +22,9 @@ export const bookingsData = [
   },
 
   {
-    id: "2",
+    id: 2,
 
-    tripId: "777",
+    tripId: 777,
 
     status: "CONFIRMED",
     statusLabel: "CONFIRMADA",
@@ -39,9 +39,9 @@ export const bookingsData = [
   // histórico
 
   {
-    id: "3",
+    id: 3,
 
-    tripId: "102",
+    tripId: 102,
 
     status: "COMPLETED",
     statusLabel: "CONCLUÍDA",
@@ -54,9 +54,9 @@ export const bookingsData = [
   },
 
   {
-    id: "4",
+    id: 4,
 
-    tripId: "310",
+    tripId: 310,
 
     status: "COMPLETED",
     statusLabel: "CONCLUÍDA",
@@ -69,9 +69,9 @@ export const bookingsData = [
   },
 
   {
-    id: "5",
+    id: 5,
 
-    tripId: "221",
+    tripId: 221,
 
     status: "COMPLETED",
     statusLabel: "CONCLUÍDA",

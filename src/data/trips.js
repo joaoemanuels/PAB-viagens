@@ -2,7 +2,7 @@
 
 export const tripsData = [
   {
-    id: "310",
+    id: 310,
 
     // categoria
     category: "EXECUTIVO",
@@ -53,7 +53,7 @@ export const tripsData = [
   },
 
   {
-    id: "102",
+    id: 102,
 
     category: "CONVENCIONAL",
     type: "CONVENCIONAL 102",
@@ -91,7 +91,7 @@ export const tripsData = [
   },
 
   {
-    id: "221",
+    id: 221,
 
     category: "LEITO",
     type: "LEITO 221",
@@ -135,7 +135,7 @@ export const tripsData = [
   },
 
   {
-    id: "408",
+    id: 408,
 
     category: "SEMI-LEITO",
     type: "SEMI-LEITO 408",
@@ -179,7 +179,7 @@ export const tripsData = [
   },
 
   {
-    id: "550",
+    id: 550,
 
     category: "CONVENCIONAL",
     type: "CONVENCIONAL 550",
@@ -223,7 +223,7 @@ export const tripsData = [
   },
 
   {
-    id: "777",
+    id: 777,
 
     category: "EXECUTIVO",
     type: "EXECUTIVO 777",

@@ -1,4 +1,4 @@
-import { TripsData } from "../../../../data/trips";
+import { tripsData } from "../../../../data/trips";
 import UpcomingTripCard from "./UpcomingTripCard";
 import styles from "./upcomingTrips.module.css";
 
@@ -11,7 +11,7 @@ export default function UpcomingTrips() {
         <span>Ver todas</span>
       </div>
 
-      {TripsData.map((trip) => (
+      {tripsData.map((trip) => (
         <UpcomingTripCard
           key={trip.id}
           tripId={trip.id}
