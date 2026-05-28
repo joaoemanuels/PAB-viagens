@@ -1,38 +1,28 @@
+// HistoryList.jsx
+
 import styles from "./historyList.module.css";
+
 import HistoryCard from "./HistoryCard";
 
+import { bookingsData } from "../../../data/bookingsData";
+import { tripsData } from "../../../data/trips";
+
 export default function HistoryList() {
-  const historyData = [
-    {
-      id: "h1",
-      statusLabel: "CONCLUÍDA",
-      dateInfo: "10 Out, 09:00",
-      price: "R$ 35,00",
-      origin: "Terminal Rodoviário Tietê",
-      destination: "São José dos Campos",
-    },
-    {
-      id: "h2",
-      statusLabel: "CONCLUÍDA",
-      dateInfo: "05 Out, 14:30",
-      price: "R$ 42,50",
-      origin: "Campinas (Rodoviária)",
-      destination: "São Paulo (Barra Funda)",
-    },
-    {
-      id: "h3",
-      statusLabel: "CONCLUÍDA",
-      dateInfo: "05 Out, 14:30",
-      price: "R$ 42,50",
-      origin: "Campinas (Rodoviária)",
-      destination: "São Paulo (Barra Funda)",
-    },
-  ];
+  const historyBookings = bookingsData
+    .filter((booking) => booking.status === "COMPLETED")
+    .map((booking) => {
+      const trip = tripsData.find((trip) => trip.id === booking.tripId);
+
+      return {
+        ...booking,
+        trip,
+      };
+    });
 
   return (
     <section className={styles.historyList}>
-      {historyData.map((item) => (
-        <HistoryCard key={item.id} data={item} />
+      {historyBookings.map((booking) => (
+        <HistoryCard key={booking.id} data={booking} />
       ))}
     </section>
   );

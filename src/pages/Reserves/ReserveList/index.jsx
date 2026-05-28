@@ -1,33 +1,25 @@
+// sections/ReserveList/index.jsx
+
 import styles from "./reserveList.module.css";
+
 import ReserveCard from "./ReserveCard";
 
+import { bookingsData } from "../../../data/bookingsData";
+import { tripsData } from "../../../data/trips";
+
 export default function ReserveList() {
-  const mockReservas = [
-    {
-      id: "1",
-      status: "IN_PROGRESS", 
-      statusLabel: "EM ANDAMENTO",
-      price: "R$ 42,50",
-      origin: "Terminal Rodoviário Tietê",
-      destination: "Aeroporto de Congonhas",
-      date: "Hoje, 14 Out",
-      time: "15:30",
-    },
-    {
-      id: "2",
-      status: "CONFIRMED", 
-      statusLabel: "CONFIRMADA",
-      price: "R$ 28,90",
-      origin: "Av. Paulista, 1000",
-      destination: "Vila Madalena",
-      date: "Amanhã, 15 Out",
-      time: "08:00",
-    },
-  ];
+  const reservasComViagem = bookingsData.map((booking) => {
+    const trip = tripsData.find((trip) => trip.id === booking.tripId);
+
+    return {
+      ...booking,
+      trip,
+    };
+  });
 
   return (
     <section className={styles.reserveList}>
-      {mockReservas.map((reserva) => (
+      {reservasComViagem.map((reserva) => (
         <ReserveCard key={reserva.id} data={reserva} />
       ))}
     </section>

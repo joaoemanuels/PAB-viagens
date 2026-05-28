@@ -1,13 +1,16 @@
 import { Calendar, Clock, Rocket } from "lucide-react";
+
 import styles from "./reserveCard.module.css";
 
 export default function ReserveCard({ data }) {
-  const { status, statusLabel, price, origin, destination, date, time } = data;
+  const { status, statusLabel, trip } = data;
 
   const isProgress = status === "IN_PROGRESS";
 
   const badgeClass = isProgress ? styles.badgeProgress : styles.badgeConfirmed;
+
   const buttonClass = isProgress ? styles.btnPrimary : styles.btnOutline;
+
   const buttonText = isProgress ? "Rastrear" : "Ver Ticket";
 
   return (
@@ -17,17 +20,21 @@ export default function ReserveCard({ data }) {
           {isProgress ? "⏳ " : "✓ "}
           {statusLabel}
         </span>
-        <span className={styles.price}>{price}</span>
+
+        <span className={styles.price}>R$ {trip.price.toFixed(2)}</span>
       </div>
 
       <div className={styles.timeline}>
         <div className={styles.timelineItem}>
           <div
-            className={`${styles.dot} ${isProgress ? styles.dotBlue : styles.dotGray}`}
+            className={`${styles.dot} ${
+              isProgress ? styles.dotBlue : styles.dotGray
+            }`}
           />
+
           <div className={styles.locationInfo}>
             <label>ORIGEM</label>
-            <p>{origin}</p>
+            <p>{trip.origin}</p>
           </div>
         </div>
 
@@ -35,9 +42,10 @@ export default function ReserveCard({ data }) {
 
         <div className={styles.timelineItem}>
           <div className={`${styles.dot} ${styles.dotDest}`} />
+
           <div className={styles.locationInfo}>
             <label>DESTINO</label>
-            <p>{destination}</p>
+            <p>{trip.destination}</p>
           </div>
         </div>
       </div>
@@ -45,24 +53,28 @@ export default function ReserveCard({ data }) {
       <div className={styles.footerInfo}>
         <div className={styles.infoGroup}>
           <span>
-            <Calendar />
+            <Calendar size={18} />
           </span>
-          <p>{date}</p>
+
+          <p>{trip.date}</p>
         </div>
+
         <div className={styles.infoGroup}>
           <span>
-            <Clock />
+            <Clock size={18} />
           </span>
-          <p>{time}</p>
+
+          <p>{trip.departure}</p>
         </div>
       </div>
 
       <button className={`${styles.btnAction} ${buttonClass}`}>
         {isProgress && (
           <span style={{ marginRight: 8 }}>
-            <Rocket />
+            <Rocket size={18} />
           </span>
         )}
+
         {buttonText}
       </button>
     </article>
