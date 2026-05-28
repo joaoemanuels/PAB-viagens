@@ -5,6 +5,7 @@ import ProfileHeader from "../../components/ui/ProfileHeader";
 import ProfileItem from "../../components/ui/ProfileItem";
 import ProfileSection from "../../components/ui/ProfileSection";
 import AppVersion from "../../components/ui/AppVersion";
+
 import {
   BadgeQuestionMark,
   Bell,
@@ -15,32 +16,32 @@ import {
   Phone,
   User,
 } from "lucide-react";
-
+import { passengersData } from "../../data/passengers";
 
 export default function ProfileUser() {
   return (
     <section className={styles.profileUser}>
       <Header showSupportIcon={false} />
       <div className={styles.profileContainer}>
-        <ProfileHeader />
+        <ProfileHeader name={passengersData.firstName} />
 
         <ProfileSection title="Dados Pessoais">
           <ProfileItem
             icon={<User />}
             label="Nome Completo"
-            value="Ricardo de Oliveira Santos"
+            value={passengersData.fullName}
             isLink
           />
           <ProfileItem
             icon={<Mail />}
             label="E-mail"
-            value="ricardo.santos@email.com"
+            value={passengersData.email}
             isLink
           />
           <ProfileItem
             icon={<Phone />}
             label="Telefone"
-            value="+55 (11) 98765-4321"
+            value={passengersData.phone}
             isLink
           />
         </ProfileSection>
@@ -54,7 +55,7 @@ export default function ProfileUser() {
           <ProfileItem
             icon={<Globe />}
             label="Idioma"
-            value="Português (Brasil)"
+            value={passengersData.settings.language}
             isLink
           />
         </ProfileSection>
@@ -72,7 +73,7 @@ export default function ProfileUser() {
           />
         </ProfileSection>
 
-        <AppVersion version="v2.4.1" />
+        <AppVersion className={styles.version} version="Versão 1.0.0" />
       </div>
     </section>
   );

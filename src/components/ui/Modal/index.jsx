@@ -9,6 +9,8 @@ import {
 import { NavLink } from "react-router-dom";
 import styles from "./modal.module.css";
 import Icon from "../../../../public/favicon.svg";
+import { passengersData } from "../../../data/passengers";
+import AppVersion from "../AppVersion";
 
 export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -21,15 +23,15 @@ export default function Modal({ isOpen, onClose }) {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.profileHeader}>
           <div className={styles.avatarWrapper}>
-            <img src="/images/ricardo-avatar.png" alt="Ricardo de Oliveira" />
+            <img src={passengersData.avatar} alt="Ricardo de Oliveira" />
             <span>
               <Star fill={"#fff"} size={12} />
             </span>
           </div>
 
           <div className={styles.profileTextInfo}>
-            <h2>Ricardo de Oliveira</h2>
-            <p>ricardo.oliveira@email.com</p>
+            <h2>{passengersData.fullName}</h2>
+            <p>{passengersData.email}</p>
             <div className={styles.premiumTagWrapper}>
               <span>Premium Member</span>
             </div>
@@ -40,7 +42,11 @@ export default function Modal({ isOpen, onClose }) {
 
         <nav className={styles.navigation}>
           <ul className={styles.menuList}>
-            <NavLink to="/" className={getNavLinkClass} onClick={onClose}>
+            <NavLink
+              to="/profileUser"
+              className={getNavLinkClass}
+              onClick={onClose}
+            >
               <span className={styles.icon}>
                 <User />
               </span>
@@ -99,8 +105,9 @@ export default function Modal({ isOpen, onClose }) {
             </span>
             <span className={styles.brandName}>PAB Viagens</span>
           </div>
+
           <p className={styles.versionText}>
-            v4.2.0 - Mobilidade Interestadual
+            <AppVersion version={passengersData.appVersion} />
           </p>
         </div>
       </div>

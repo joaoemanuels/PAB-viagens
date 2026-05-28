@@ -1,9 +1,5 @@
 import styles from "./appVersion.module.css";
 
-export default function AppVersion({ name, version }) {
-  return (
-    <footer className={styles.appVersion}>
-      {name} {version}
-    </footer>
-  );
+export default function AppVersion({ version }) {
+  return <footer className={styles.appVersion}>{version}</footer>;
 }

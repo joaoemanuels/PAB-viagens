@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, CircleUserRound, Menu } from "lucide-react";
 import styles from "./header.module.css";
 import Modal from "../Modal";
+import { passengersData } from "../../../data/passengers";
 
 export default function Header({
   navigationType = "menu",
@@ -31,7 +32,7 @@ export default function Header({
 
       <div className={styles.userAvatar}>
         <img
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg"
+          src={passengersData.avatar}
           alt="Avatar"
         />
       </div>
