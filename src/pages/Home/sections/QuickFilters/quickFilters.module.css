@@ -1,4 +1,18 @@
-.quickFilters {
+.quickFilters::-webkit-scrollbar {
+  height: 6px;
+}
+
+.quickFilters::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.quickFilters::-webkit-scrollbar-thumb {
+  background: #0057d9;
+  border-radius: 999px;
+}
+
+.filterList {
   padding: 0 16px;
 
   width: 100%;
@@ -13,20 +27,6 @@
 
   scrollbar-width: thin;
   scrollbar-color: #0057d9 #e5e7eb;
-}
-
-.quickFilters::-webkit-scrollbar {
-  height: 6px;
-}
-
-.quickFilters::-webkit-scrollbar-track {
-  background: #e5e7eb;
-  border-radius: 999px;
-}
-
-.quickFilters::-webkit-scrollbar-thumb {
-  background: #0057d9;
-  border-radius: 999px;
 }
 
 .filter {

@@ -1,0 +1,184 @@
+.container {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  max-width: 400px;
+  padding: 16px;
+  background-color: #f8fafd;
+}
+
+.header h2 {
+  color: #0c2d57;
+  font-size: 1.15rem;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+}
+
+.header p {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0 0 20px 0;
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #edf2f7;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.executive {
+  background-color: #e6f0fa;
+  color: #2b6cb0;
+}
+
+.conventional {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.busIcon {
+  font-size: 1.1rem;
+  color: #4a5568;
+}
+
+.routeTitle {
+  color: #1a202c;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+}
+
+.routeTitle span {
+  color: #a0aec0;
+  font-weight: 400;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 16px;
+
+  min-height: 70px;
+}
+
+.timelineItem:last-child {
+  min-height: auto;
+}
+
+.timelineGraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 2;
+  background-color: #fff;
+}
+
+.departure {
+  border: 3px solid #3182ce;
+}
+
+.connection {
+  background-color: #718096;
+  border: 3px solid #718096;
+}
+
+.arrival {
+  background-color: #0f766e;
+  border: 3px solid #0f766e;
+}
+
+.line {
+  flex: 1;
+  width: 0;
+  border-left: 2px dashed #cbd5e1;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.timelineContent {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+}
+
+.stopLabel {
+  font-size: 0.72rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+.stopLocation {
+  font-size: 0.95rem;
+  color: #1a202c;
+  font-weight: 600;
+  margin: 2px 0 4px 0;
+}
+
+.stopTime {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.departureTime {
+  color: #3182ce;
+}
+
+.connectionTime {
+  color: #718096;
+}
+
+.arrivalTime {
+  color: #0f766e;
+}
+
+.detailsButton {
+  width: 100%;
+  background: none;
+  border: 1px solid #3182ce;
+  color: #3182ce;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.detailsButton:hover {
+  background-color: #f0f7ff;
+}
