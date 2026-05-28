@@ -1,3 +1,7 @@
+.quickFilters{
+  margin-bottom: 20px;
+}
+
 .quickFilters::-webkit-scrollbar {
   height: 6px;
 }

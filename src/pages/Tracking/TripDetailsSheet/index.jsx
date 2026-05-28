@@ -5,11 +5,10 @@ const currentTrip = {
   statusText: "Indo para Campinas",
   dropoffPoint: "Ponto de desembarque: Terminal Multimodal",
   driver: {
-    name: "Ricardo Oliveira",
     avatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80", // Substitua pelo caminho correto da imagem
-    rating: "4.9",
-    vehicleModel: "Van Branca",
+
+    vehicleModel: "Kombi Branca",
     licensePlate: "PAB-2024",
   },
 };
@@ -38,9 +37,9 @@ export default function TripDetailsSheet() {
 
         <div className={styles.driverInfo}>
           <div className={styles.driverHeader}>
-            <h3 className={styles.driverName}>{currentTrip.driver.name}</h3>
+            <h3 className={styles.driverName}>Paulo Aguiar</h3>
             <div className={styles.ratingBadge}>
-              <span>{currentTrip.driver.rating}</span>
+              <span>5.0</span>
               <Star className={styles.starIcon} fill="currentColor" />
             </div>
           </div>
@@ -55,7 +54,7 @@ export default function TripDetailsSheet() {
       <div className={styles.actionsGroup}>
         <button className={styles.primaryActionButton}>
           <Phone />
-          Ligar para Ricardo
+          Falar com Paulo
         </button>
 
         <button className={styles.secondaryActionButton}>

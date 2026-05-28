@@ -101,7 +101,7 @@ export const tripsData = [
     origin: "Recife",
     destination: "João Pessoa",
 
-    date: "2026-10-17",
+    date: "2026-05-28",
     departure: "08:15",
     arrival: "10:40",
     duration: "2h 25min",

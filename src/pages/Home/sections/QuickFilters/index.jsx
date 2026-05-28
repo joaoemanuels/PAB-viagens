@@ -11,11 +11,10 @@ const Filters = {
   HORARIOS: "horarios",
 };
 
-export default function QuickFilters() {
+export default function QuickFilters({ origin, destination }) {
   const [activeFilters, setActiveFilters] = useState(Filters.HOJE);
-
   return (
-    <section>
+    <section className={styles.quickFilters}>
       <div className={styles.filterList} role="filterlist">
         <button
           role="tab"
@@ -49,11 +48,25 @@ export default function QuickFilters() {
       </div>
 
       <div className={styles.tabContent}>
-        {activeFilters === Filters.HOJE && <UpcomingTrips />}
+        {activeFilters === Filters.HOJE && (
+          <UpcomingTrips
+            filterType="hoje"
+            origin={origin}
+            destination={destination}
+          />
+        )}
 
-        {activeFilters === Filters.PROXIMAS && <UpcomingTrips />}
+        {activeFilters === Filters.PROXIMAS && (
+          <UpcomingTrips
+            filterType="proximas"
+            origin={origin}
+            destination={destination}
+          />
+        )}
 
-        {activeFilters === Filters.HORARIOS && <TimeTravels />}
+        {activeFilters === Filters.HORARIOS && (
+          <TimeTravels origin={origin} destination={destination} />
+        )}
       </div>
     </section>
   );
