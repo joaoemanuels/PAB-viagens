@@ -18,7 +18,7 @@ export default function Booking() {
   }
   return (
     <section className={styles.booking}>
-      <Header showSupportIcon={false} />
+      <Header showSupportIcon={false} navigationType="back"/>
       <TravelSummary
         route={trip.route}
         price={trip.price}

@@ -1,0 +1,211 @@
+.payMethod {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #333333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.pageHeader {
+  margin-bottom: 32px;
+}
+
+.pageHeader h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a73e8;
+  margin-bottom: 8px;
+}
+
+.pageHeader p {
+  font-size: 14px;
+  color: #5f6368;
+}
+
+/* Blocos de seção */
+.sectionBlock {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3c4043;
+  margin-bottom: 16px;
+}
+
+/* Grid de cartões */
+.cardsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardItem {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cardInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cardIconWrapper {
+  color: #1a73e8;
+  background-color: #e8f0fe;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardName {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.cardExpiry {
+  font-size: 12px;
+  color: #757575;
+  margin: 0;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.defaultBadge {
+  background-color: #e3f2fd;
+  color: #1a73e8;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #9aa0a6;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  color: #db4437;
+  background-color: #fce8e6;
+}
+
+/* Botão adicionar cartão */
+.addCardButton {
+  background-color: transparent;
+  border: 2px dashed #dadce0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #1a73e8;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addCardButton:hover {
+  background-color: #f1f3f4;
+  border-color: #1a73e8;
+}
+
+/* Lista de Outras Opções */
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.optionItem {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.optionItem:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-color: #bfa; /* Opcional: ou manter sutil */
+}
+
+.optionLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pixIcon {
+  color: #4caf50;
+}
+
+.boletoIcon {
+  color: #ff9800;
+}
+
+.optionName {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.optionDescription {
+  font-size: 12px;
+  color: #757575;
+  margin: 0;
+}
+
+.arrowIcon {
+  color: #9aa0a6;
+  font-weight: bold;
+}
+
+/* Responsividade simples para telas mobile */
+@media (max-width: 600px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .cardItem,
+  .optionItem {
+    padding: 12px;
+  }
+
+  .optionDescription {
+    display: none; /* Esconde texto longo em telas muito pequenas */
+  }
+}

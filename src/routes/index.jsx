@@ -18,6 +18,7 @@ import Reserves from "../pages/Reserves";
 import ProfileAdmin from "../pages/ProfileAdmin";
 import ProfileUser from "../pages/ProfileUser";
 import Travels from "../pages/Travels";
+import PayMethod from "../pages/PayMethod";
 
 function AppRoutes() {
   return (
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/reserves" element={<Reserves />} />
         <Route path="/profileUser" element={<ProfileUser />} />
+        <Route path="/payMethod" element={<PayMethod />} />
       </Route>
 
       <Route path="/trips/:tripId/booking" element={<Booking />} />
