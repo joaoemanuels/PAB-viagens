@@ -453,7 +453,7 @@ pab-viagens/
 ### Serviços Supabase Criados
 
 #### Service: Auth.js
-- [x] Criar arquivo `src/services/auth.js`:
+- [ ] Criar arquivo `src/services/auth.js`:
   ```javascript
   import { supabase } from './supabase'
 
@@ -477,7 +477,7 @@ pab-viagens/
   ```
 
 #### Service: Trips.js
-- [x] Criar arquivo `src/services/trips.js`:
+- [ ] Criar arquivo `src/services/trips.js`:
   ```javascript
   export const tripService = {
     createTrip: async (routeId, scheduleId, departureDate) => {},
@@ -523,25 +523,25 @@ pab-viagens/
 ### Componentes Comuns
 
 #### Button.jsx
-- [ ] Criar com variantes: `primary`, `secondary`, `danger`, `ghost`
-- [ ] Estados: `default`, `hover`, `active`, `disabled`, `loading`
-- [ ] Tamanhos: `sm`, `md`, `lg`
-- [ ] Suportar `isLoading` com spinner
-- [ ] Responsive e acessível (aria labels)
+- [x] Criar com variantes: `primary`, `secondary`, `danger`, `ghost`
+- [x] Estados: `default`, `hover`, `active`, `disabled`, `loading`
+- [x] Tamanhos: `sm`, `md`, `lg`
+- [x] Suportar `isLoading` com spinner
+- [x] Responsive e acessível (aria labels)
 
 #### Input.jsx
-- [ ] Criar com variantes de campo
-- [ ] Suportar: `text`, `email`, `password`, `number`, `tel`
-- [ ] Estados de validação (error, success)
-- [ ] Labels e helper text
-- [ ] Mobile-first (toque em inputs)
-- [ ] Acessibilidade (label associations)
+- [x] Criar com variantes de campo
+- [x] Suportar: `text`, `email`, `password`, `number`, `tel`
+- [x] Estados de validação (error, success)
+- [x] Labels e helper text
+- [x] Mobile-first (toque em inputs)
+- [x] Acessibilidade (label associations)
 
 #### Card.jsx
-- [ ] Container flexível com estilo padrão
-- [ ] Padding consistente
-- [ ] Sombra e border-radius
-- [ ] Suporte a variants
+- [x] Container flexível com estilo padrão
+- [x] Padding consistente
+- [x] Sombra e border-radius
+- [x] Suporte a variants
 
 #### Modal.jsx
 - [ ] Modal acessível com backdrop
@@ -555,15 +555,15 @@ pab-viagens/
 - [ ] Estados de carregamento
 
 #### Header.jsx
-- [ ] Navegação responsiva
-- [ ] Logo + Menu
-- [ ] User menu (dropdown)
-- [ ] Mobile: hamburger menu
+- [x] Navegação responsiva
+- [x] Logo + Menu
+- [x] User menu (dropdown)
+- [x] Mobile: hamburger menu
 
 #### Footer.jsx
-- [ ] Links úteis
-- [ ] Copyright
-- [ ] Info de contato
+- [x] Links úteis
+- [x] Copyright
+- [x] Info de contato
 
 #### ErrorBoundary.jsx
 - [ ] Capturar erros de componentes
@@ -573,21 +573,21 @@ pab-viagens/
 ### Layouts
 
 #### MainLayout.jsx
-- [ ] Header com navegação
-- [ ] Main content area
-- [ ] Footer
-- [ ] Sidebar com menu (mobile: drawer)
-- [ ] Padrão responsivo
+- [x] Header com navegação
+- [x] Main content area
+- [x] Footer
+- [x] Sidebar com menu (mobile: drawer)
+- [x] Padrão responsivo
 
 #### PassengerLayout.jsx
-- [ ] Estendido de MainLayout
-- [ ] Menu passenger-specific
-- [ ] Quick access buttons
+- [x] Estendido de MainLayout
+- [x] Menu passenger-specific
+- [x] Quick access buttons
 
 #### DriverLayout.jsx
-- [ ] Estendido de MainLayout
-- [ ] Menu driver-specific
-- [ ] Status indicator
+- [x] Estendido de MainLayout
+- [x] Menu driver-specific
+- [x] Status indicator
 
 ### Hooks Customizados
 
@@ -669,25 +669,25 @@ export const useLocationStore = create((set) => ({
 ### Pages Estrutura
 
 #### App.jsx (Routing)
-- [ ] Configurar React Router v6
-- [ ] Rotas públicas:
-  - [ ] `/` - Home/Landing
-  - [ ] `/login` - Login
-  - [ ] `/signup` - Cadastro
-  - [ ] `/404` - Página não encontrada
-- [ ] Rotas protegidas (Passageiro):
-  - [ ] `/passenger/dashboard` - Dashboard
-  - [ ] `/passenger/search` - Buscar viagens
-  - [ ] `/passenger/booking/:tripId` - Reserva
-  - [ ] `/passenger/my-bookings` - Minhas reservas
-  - [ ] `/passenger/tracking/:tripId` - Rastreamento
-  - [ ] `/passenger/profile` - Perfil
-- [ ] Rotas protegidas (Motorista):
-  - [ ] `/driver/dashboard` - Dashboard
-  - [ ] `/driver/routes` - Minhas rotas
-  - [ ] `/driver/trips` - Minhas viagens
-  - [ ] `/driver/trip/:tripId/manage` - Gerenciar viagem
-  - [ ] `/driver/profile` - Perfil
+- [x] Configurar React Router v6
+- [x] Rotas públicas:
+  - [x] `/` - Home/Landing
+  - [x] `/login` - Login
+  - [x] `/signup` - Cadastro
+  - [x] `/404` - Página não encontrada
+- [x] Rotas protegidas (Passageiro):
+  - [x] `/passenger/dashboard` - Dashboard
+  - [x] `/passenger/search` - Buscar viagens
+  - [x] `/passenger/booking/:tripId` - Reserva
+  - [x] `/passenger/my-bookings` - Minhas reservas
+  - [x] `/passenger/tracking/:tripId` - Rastreamento
+  - [x] `/passenger/profile` - Perfil
+- [x] Rotas protegidas (Motorista):
+  - [x] `/driver/dashboard` - Dashboard
+  - [x] `/driver/routes` - Minhas rotas
+  - [x] `/driver/trips` - Minhas viagens
+  - [x] `/driver/trip/:tripId/manage` - Gerenciar viagem
+  - [x] `/driver/profile` - Perfil
 
 #### Login.jsx
 - [ ] Form com email + senha
@@ -705,10 +705,10 @@ export const useLocationStore = create((set) => ({
 - [ ] Responsivo
 
 #### Home.jsx
-- [ ] Hero section
-- [ ] Features principais
-- [ ] Call-to-action
-- [ ] Links para login/signup
+- [x] Hero section
+- [x] Features principais
+- [x] Call-to-action
+- [x] Links para login/signup
 
 ### Estilos CSS Modules
 
@@ -976,8 +976,8 @@ export const useLocationStore = create((set) => ({
 ### Map Integration
 
 #### Leaflet Setup
-- [ ] Instalar Leaflet e react-leaflet
-- [ ] Criar componente `MapComponent.jsx`:
+- [x] Instalar Leaflet e react-leaflet
+- [x] Criar componente `MapComponent.jsx`:
   ```javascript
   const MapComponent = ({ center, zoom, markers }) => {
     return (
@@ -988,26 +988,26 @@ export const useLocationStore = create((set) => ({
     )
   }
   ```
-- [ ] Estilos para mapa responsivo
-- [ ] Considerar OpenStreetMap (gratuito)
+- [x] Estilos para mapa responsivo
+- [x] Considerar OpenStreetMap (gratuito)
 
 #### Track Trip Page (Passageiro)
-- [ ] URL: `/passenger/tracking/:tripId`
-- [ ] Mapa full-screen (80-90% da altura)
-- [ ] Marcadores:
-  - [ ] Origem (casa icon)
-  - [ ] Destino (flag icon)
-  - [ ] Posição atual do motorista (bus icon)
-- [ ] Linha da rota (polyline do Leaflet)
-- [ ] Painel de informações no rodapé:
-  - [ ] "Motorista está a X km"
-  - [ ] ETA (estimated time of arrival)
-  - [ ] Velocidade atual (opcional)
-  - [ ] Status "Em viagem"
-- [ ] Real-time updates (Supabase Realtime):
-  - [ ] Subscribe a `driver_locations` para `tripId`
-  - [ ] Atualizar posição a cada atualização
-  - [ ] Auto-center no ônibus
+- [x] URL: `/passenger/tracking/:tripId`
+- [x] Mapa full-screen (80-90% da altura)
+- [x] Marcadores:
+  - [x] Origem (casa icon)
+  - [x] Destino (flag icon)
+  - [x] Posição atual do motorista (bus icon)
+- [x] Linha da rota (polyline do Leaflet)
+- [x] Painel de informações no rodapé:
+  - [x] "Motorista está a X km"
+  - [x] ETA (estimated time of arrival)
+  - [x] Velocidade atual (opcional)
+  - [x] Status "Em viagem"
+- [x] Real-time updates (Supabase Realtime):
+  - [x] Subscribe a `driver_locations` para `tripId`
+  - [x] Atualizar posição a cada atualização
+  - [x] Auto-center no ônibus
 
 #### Driver Location Updates
 - [ ] Geolocalização ativa durante viagem:
