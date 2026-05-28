@@ -19,7 +19,7 @@ export default function Trips() {
   }
   return (
     <section className={styles.trips}>
-      <Header showSupportIcon={false} />
+      <Header showSupportIcon={false} navigationType="back" />
       <RoutePreview origin={trip.origin} destination={trip.destination} />
       <TripStatsGrid
         arrival={trip.arrival}

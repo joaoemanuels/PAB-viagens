@@ -6,7 +6,7 @@ export default function TransportDetails() {
   return (
     <section className={styles.transportDetails}>
       <div className={styles.transportDetailsContainer}>
-        <span className={styles.label}>TRANSPORT DETAILS</span>
+        <span className={styles.label}>DETALHES DO TRANSPORTE</span>
 
         <div className={styles.vehicleCard}>
           <div className={styles.vehicleIcon}>

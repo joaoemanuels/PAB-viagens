@@ -6,7 +6,7 @@ export default function TravelSummary({
   origin,
   destination,
   date,
-  time,
+  departure,
 }) {
   return (
     <article className={styles.travelSummary}>
@@ -40,7 +40,7 @@ export default function TravelSummary({
             </div>
             <div className={styles.metaText}>
               <span className={styles.metaLabel}>Horário</span>
-              <time className={styles.metaValue}>{time}</time>
+              <time className={styles.metaValue}>{departure}</time>
             </div>
           </div>
         </div>

@@ -25,7 +25,7 @@ export default function Booking() {
         origin={trip.origin}
         destination={trip.destination}
         date={trip.date}
-        time={trip.time}
+        departure={trip.departure}
       />
       <PassengerForm />
       <PaymentMethod />

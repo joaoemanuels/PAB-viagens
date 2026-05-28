@@ -1,0 +1,201 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #ffffff;
+  width: 280px;
+  max-width: 80vw;
+  height: 100vh;
+  position: relative;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.avatarWrapper {
+  position: relative;
+}
+
+.avatarWrapper img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0070eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.avatarWrapper span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #0058bc;
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #f9f9ff;
+}
+
+.profileTextInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profileTextInfo h2 {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0;
+  font-weight: 600;
+  margin: 0;
+  color: #151c27;
+}
+
+.profileTextInfo p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+  margin: 0;
+  color: #414755;
+}
+
+.premiumTagWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 2px 8px;
+  margin-top: 4px;
+  background-color: #d8e2ff;
+  width: 179px;
+  border-radius: 12px;
+}
+
+.premiumTagWrapper span {
+  color: #001a41;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  font-weight: 600;
+}
+
+.divider {
+  height: 1px;
+  background-color: #f1f3f4;
+  margin: 8px 0 24px 0;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #5f6368;
+}
+
+.menuItem:hover {
+  background-color: #f8f9fa;
+}
+
+.activeItem {
+  background-color: #0070eb;
+  color: #fefcff;
+  font-weight: 600;
+}
+
+.logoutItem {
+  color: #db4437;
+}
+
+.itemText {
+  font-size: 14px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brandFooter {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #f1f3f4;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandIcon {
+  background-color: #8fbfff;
+  border-radius: 6px;
+}
+
+.brandIcon img {
+  width: 50px;
+  height: 50px;
+}
+
+.brandName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a73e8;
+  margin: 0;
+}
+
+.versionText {
+  font-size: 11px;
+  color: #757575;
+  margin: 0;
+}
