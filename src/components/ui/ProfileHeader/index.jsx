@@ -1,3 +1,4 @@
+import { Pencil } from "lucide-react";
 import styles from "./profileHeader.module.css";
 
 export default function ProfileHeader({
@@ -9,13 +10,19 @@ export default function ProfileHeader({
   return (
     <div className={styles.profileHeader}>
       <div className={styles.avatarContainer}>
-        <img src={avatarUrl} alt={name} className={styles.avatarImage} />
+        <img
+          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg"
+          alt={name}
+          className={styles.avatarImage}
+        />
         <button
           className={styles.avatarEditBtn}
           onClick={onEditAvatar}
           aria-label="Editar foto"
         >
-          <span>✎</span>
+          <span>
+            <Pencil size={14} />
+          </span>
         </button>
       </div>
       <h1 className={styles.profileName}>{name}</h1>

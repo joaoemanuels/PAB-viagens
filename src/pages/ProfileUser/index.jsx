@@ -5,30 +5,39 @@ import ProfileHeader from "../../components/ui/ProfileHeader";
 import ProfileItem from "../../components/ui/ProfileItem";
 import ProfileSection from "../../components/ui/ProfileSection";
 import AppVersion from "../../components/ui/AppVersion";
-import { SwitchCamera } from "lucide-react";
+import {
+  BadgeQuestionMark,
+  Bell,
+  Globe,
+  LockKeyhole,
+  LogOut,
+  Mail,
+  Phone,
+  User,
+} from "lucide-react";
 
 export default function ProfileUser() {
   return (
     <section className={styles.profileUser}>
       <Header showSupportIcon={false} />
-      <div className="profile-container">
+      <div className={styles.profileContainer}>
         <ProfileHeader />
 
         <ProfileSection title="Dados Pessoais">
           <ProfileItem
-            icon="user"
+            icon={<User />}
             label="Nome Completo"
             value="Ricardo de Oliveira Santos"
             isLink
           />
           <ProfileItem
-            icon="mail"
+            icon={<Mail />}
             label="E-mail"
             value="ricardo.santos@email.com"
             isLink
           />
           <ProfileItem
-            icon="phone"
+            icon={<Phone />}
             label="Telefone"
             value="+55 (11) 98765-4321"
             isLink
@@ -36,18 +45,13 @@ export default function ProfileUser() {
         </ProfileSection>
 
         <ProfileSection title="Segurança">
-          <ProfileItem icon="lock" label="Alterar Senha" isLink />
-          <ProfileItem
-            icon="shield"
-            label="Autenticação em 2 etapas"
-            rightElement={<SwitchCamera />}
-          />
+          <ProfileItem icon={<LockKeyhole />} label="Alterar Senha" isLink />
         </ProfileSection>
 
         <ProfileSection title="Configurações">
-          <ProfileItem icon="bell" label="Notificações" isLink />
+          <ProfileItem icon={<Bell />} label="Notificações" isLink />
           <ProfileItem
-            icon="globe"
+            icon={<Globe />}
             label="Idioma"
             value="Português (Brasil)"
             isLink
@@ -55,8 +59,16 @@ export default function ProfileUser() {
         </ProfileSection>
 
         <ProfileSection>
-          <ProfileItem icon="help" label="Ajuda e Suporte" isLink />
-          <ProfileItem icon="logout" label="Sair da Conta" variant="danger" />
+          <ProfileItem
+            icon={<BadgeQuestionMark />}
+            label="Ajuda e Suporte"
+            isLink
+          />
+          <ProfileItem
+            icon={<LogOut />}
+            label="Sair da Conta"
+            variant="danger"
+          />
         </ProfileSection>
 
         <AppVersion version="v2.4.1" />
