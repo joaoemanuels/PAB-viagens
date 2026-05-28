@@ -15,9 +15,6 @@
 }
 
 .navButton {
-  background: none;
-  border: none;
-  outline: none;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -25,7 +22,7 @@
   justify-content: center;
   gap: 4px;
   width: 80px;
-  color: #334155;
+  color: #414755;
   font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -41,8 +38,13 @@
   transition: all 0.2s ease;
 }
 
-.navButton.active .iconWrapper {
-  background-color: #0070EB;
-  color: #ffffff;
-  padding: 0 24px;
+.active {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+  color: #fefcff;
+  background-color: #0070eb;
+  padding: 6px 16px;
+  border-radius: 99px;
+  width: 103px;
 }

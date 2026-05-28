@@ -1,33 +1,29 @@
+import { NavLink } from "react-router-dom";
 import { UserSearch, User, BusFront } from "lucide-react";
 import styles from "./footerAdmin.module.css";
 
 export default function FooterAdmin() {
-  const activeTab = "passageiros";
+  const checkActive = ({ isActive }) =>
+    `${styles.navButton} ${isActive ? styles.active : ""}`;
 
   return (
     <nav className={styles.footer}>
-      <button
-        className={`${styles.navButton} ${activeTab === "viagens" ? styles.active : ""}`}
-      >
+      <NavLink to="/travels" className={checkActive}>
         <BusFront />
         <span>Viagens</span>
-      </button>
+      </NavLink>
 
-      <button
-        className={`${styles.navButton} ${activeTab === "passageiros" ? styles.active : ""}`}
-      >
+      <NavLink to="/admin" className={checkActive}>
         <div className={styles.iconWrapper}>
           <UserSearch />
         </div>
         <span>Passageiros</span>
-      </button>
+      </NavLink>
 
-      <button
-        className={`${styles.navButton} ${activeTab === "perfil" ? styles.active : ""}`}
-      >
+      <NavLink to="/profileAdmin" className={checkActive}>
         <User />
         <span>Perfil</span>
-      </button>
+      </NavLink>
     </nav>
   );
 }

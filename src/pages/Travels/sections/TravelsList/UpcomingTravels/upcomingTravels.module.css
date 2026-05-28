@@ -1,0 +1,152 @@
+.upcomingTravels {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b; /* Tom cinza suave do mockup */
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  margin-left: 4px;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tripCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Header do Card */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconContainer {
+  background-color: #5effbc; /* Verde água brilhante da imagem */
+  color: #0f172a;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routeInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.routeName {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 2px 0;
+}
+
+.routeName span {
+  color: #94a3b8;
+  font-size: 12px;
+  margin: 0 2px;
+}
+
+.plateText {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Horários */
+.dateTimeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.timeText {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0056c6; /* Mantendo o padrão de cor de destaque */
+}
+
+.dateText {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+/* Separador interno */
+.divider {
+  border: none;
+  border-top: 1px solid #f1f5f9;
+  margin: 14px 0;
+}
+
+/* Footer do Card */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Badges de Passageiro */
+.passengerBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* Estilo para quando ainda há vagas (Azul acinzentado/Roxinho claro) */
+.badgeNormal {
+  background-color: #eef2ff;
+  color: #4338ca;
+}
+
+/* Estilo alternativo caso queira diferenciar o ônibus 100% lotado */
+.badgeFull {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+/* Link Ver Detalhes */
+.detailsButton {
+  background: none;
+  border: none;
+  color: #0056c6;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.detailsButton:hover {
+  background-color: #f0f7ff;
+}

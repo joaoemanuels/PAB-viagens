@@ -17,6 +17,7 @@ import Booking from "../pages/Booking";
 import Reserves from "../pages/Reserves";
 import ProfileAdmin from "../pages/ProfileAdmin";
 import ProfileUser from "../pages/ProfileUser";
+import Travels from "../pages/Travels";
 
 function AppRoutes() {
   return (
@@ -25,15 +26,9 @@ function AppRoutes() {
 
       <Route element={<AuthLayout />}>
         <Route path="/" element={<Home />} />
-
         <Route path="/trips/:tripId" element={<Trips />} />
-
         <Route path="/tracking" element={<Tracking />} />
-        
         <Route path="/reserves" element={<Reserves />} />
-
-        <Route path="/profileAdmin" element={<ProfileAdmin />} />
-
         <Route path="/profileUser" element={<ProfileUser />} />
       </Route>
 
@@ -46,7 +41,9 @@ function AppRoutes() {
           </PrivateRoute>
         }
       >
+        <Route path="/travels" element={<Travels />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/profileAdmin" element={<ProfileAdmin />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

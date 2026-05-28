@@ -16,6 +16,7 @@ import {
   User,
 } from "lucide-react";
 
+
 export default function ProfileUser() {
   return (
     <section className={styles.profileUser}>
