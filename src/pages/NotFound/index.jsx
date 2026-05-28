@@ -10,13 +10,12 @@ export default function NotFound() {
           <img
             src="/404.png"
             alt="Ilustração de um ônibus e um carro em um cruzamento com uma placa escrito 404"
-            className={styles.image}
           />
         </div>
 
-        <h1 className={styles.title}>Ops! Você pegou o caminho errado</h1>
+        <h1>Ops! Você pegou o caminho errado</h1>
 
-        <p className={styles.description}>
+        <p>
           Não conseguimos encontrar a página que você está procurando. Talvez
           ela tenha mudado de lugar ou nunca existiu.
         </p>
