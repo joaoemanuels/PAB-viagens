@@ -3,6 +3,7 @@ import styles from "./register.module.css";
 import { User, Mail, Phone, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import Header from "../../components/ui/Header";
 import { Link } from "react-router-dom";
+import Button from "../../components/ui/Button";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -85,9 +86,7 @@ export default function Register() {
             </label>
           </div>
 
-          <button type="submit" className={styles.submitButton}>
-            Criar conta
-          </button>
+          <Button content={"Criar conta"} className={styles.submitButton} />
         </form>
 
         <footer className={styles.footer}>

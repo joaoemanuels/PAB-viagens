@@ -1,15 +1,9 @@
-// components/profile/NotLoggedState.jsx
 import { Search, User } from "lucide-react";
 import styles from "./notLoggedState.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "../../ui/Button";
 
 export default function NotLoggedState() {
-  const navigate = useNavigate();
-
-  function handleBooking() {
-    navigate(`/login`);
-  }
-
   return (
     <div className={styles.notLogged}>
       <div className={styles.notLoggedContent}>
@@ -22,13 +16,14 @@ export default function NotLoggedState() {
           informações pessoais.
         </p>
 
-        <button className={styles.loginButton} onClick={handleBooking}>
-          <Search size={20} />
-          <span>Entrar na conta</span>
-        </button>
+        <Button
+          content={<Link to="/login">Entrar na Conta</Link>}
+          btnIcon={<Search size={20} />}
+          className={styles.loginButton}
+        />
 
         <p className={styles.signup}>
-          Ainda não tem conta? <span>Criar agora</span>
+          Ainda não tem conta? <Link to="/register">Criar Agora</Link>
         </p>
       </div>
     </div>

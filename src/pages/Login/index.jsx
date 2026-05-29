@@ -3,6 +3,7 @@ import styles from "./login.module.css";
 import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import Header from "../../components/ui/Header";
 import { Link } from "react-router-dom";
+import Button from "../../components/ui/Button";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,10 +58,7 @@ export default function Login() {
               </button>
             </div>
           </div>
-
-          <button type="submit" className={styles.submitButton}>
-            Entrar
-          </button>
+          <Button content={"Entrar"} className={styles.submitButton} />
         </form>
 
         <div className={styles.divider}>

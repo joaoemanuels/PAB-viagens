@@ -1,5 +1,6 @@
 import { MapPin, Phone, Share, Star } from "lucide-react";
 import styles from "./tripDetailsSheet.module.css";
+import Button from "../../../components/ui/Button";
 
 const currentTrip = {
   statusText: "Indo para Campinas",
@@ -52,15 +53,17 @@ export default function TripDetailsSheet() {
       </div>
 
       <div className={styles.actionsGroup}>
-        <button className={styles.primaryActionButton}>
-          <Phone />
-          Falar com Paulo
-        </button>
+        <Button
+          content={"Falar com Paulo"}
+          className={styles.primaryActionButton}
+          btnIcon={<Phone />}
+        />
 
-        <button className={styles.secondaryActionButton}>
-          <Share />
-          Compartilhar
-        </button>
+        <Button
+          content={"Compartilhar"}
+          className={styles.secondaryActionButton}
+          btnIcon={<Share />}
+        />
       </div>
     </div>
   );

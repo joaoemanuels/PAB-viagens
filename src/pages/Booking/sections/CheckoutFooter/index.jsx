@@ -1,3 +1,4 @@
+import Button from "../../../../components/ui/Button";
 import { formatCurrency } from "../../../../utils/formatCurrency";
 import styles from "./checkoutFooter.module.css";
 
@@ -8,7 +9,7 @@ export default function CheckoutFooter({ price }) {
         <span>Total a pagar: </span>
         <p>{formatCurrency(price)}</p>
       </div>
-      <button className={styles.confirmButton}>Confirmar Reserva</button>
+      <Button content={"Confirmar Reserva"} className={styles.confirmButton} />
     </section>
   );
 }

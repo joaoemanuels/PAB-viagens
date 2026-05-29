@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 56px;
+  border-radius: 12px;
+  background-color: #0057d9;
+  
+  margin-top: 16px;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  filter: brightness(1.05);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button svg {
+  font-size: 1.2rem;
+}

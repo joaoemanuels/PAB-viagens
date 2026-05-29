@@ -1,6 +1,7 @@
 import { ChevronRight, Phone, QrCode } from "lucide-react";
 import styles from "./bookingActions.module.css";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../../components/ui/Button";
 
 export default function BookingActions({ tripId }) {
   const navigate = useNavigate();
@@ -10,10 +11,12 @@ export default function BookingActions({ tripId }) {
   }
   return (
     <section className={styles.bookingActions}>
-      <button className={styles.buttonPrimary} onClick={handleBooking}>
-        Reservar agora
-        <ChevronRight />
-      </button>
+      <Button
+        className={styles.buttonPrimary}
+        content={"Reservar agora"}
+        btnIcon={<ChevronRight />}
+        onClick={handleBooking}
+      />
 
       <div className={styles.secondaryRow}>
         <button className={`${styles.buttonSecondary} ${styles.pix}`}>

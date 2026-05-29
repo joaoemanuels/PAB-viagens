@@ -1,5 +1,6 @@
 import { Locate, MapPin, Search } from "lucide-react";
 import styles from "./tripSelector.module.css";
+import Button from "../../../../components/ui/Button";
 
 export default function TripSelector({
   origin,
@@ -30,10 +31,7 @@ export default function TripSelector({
           />
         </div>
 
-        <button className={styles.button}>
-          <Search size={20} />
-          <span>Buscar Viagens</span>
-        </button>
+        <Button content={"Buscar Viagens"} btnIcon={<Search />} />
       </div>
     </section>
   );
