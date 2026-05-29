@@ -1,3 +1,4 @@
+import Badge from "../../../../components/ui/Badge";
 import styles from "./transportDetails.module.css";
 
 import { Star, MessageSquareText, Car } from "lucide-react";
@@ -17,7 +18,7 @@ export default function TransportDetails() {
             <h2>Kombi</h2>
 
             <div className={styles.tags}>
-              <span className={styles.code}>PAB-2026</span>
+              <Badge variant="tertiary" content="PAB-2026" />
 
               <span className={styles.type}>• Executivo</span>
             </div>

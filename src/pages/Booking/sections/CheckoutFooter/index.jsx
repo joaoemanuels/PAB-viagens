@@ -9,7 +9,13 @@ export default function CheckoutFooter({ price }) {
         <span>Total a pagar: </span>
         <p>{formatCurrency(price)}</p>
       </div>
-      <Button content={"Confirmar Reserva"} className={styles.confirmButton} />
+      <Button
+        type="submit"
+        className={styles.confirmButton}
+        variant="primary"
+        onClick={""}
+        content={"Confirmar Reserva"}
+      />
     </section>
   );
 }

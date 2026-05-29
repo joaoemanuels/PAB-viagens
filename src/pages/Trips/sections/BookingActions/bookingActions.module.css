@@ -13,28 +13,6 @@
     sans-serif;
 }
 
-.buttonPrimary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 14px;
-  background-color: #0056c6;
-  color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 86, 198, 0.15);
-  transition: background-color 0.2s;
-}
-
-.buttonPrimary:hover {
-  background-color: #0045a3;
-}
-
 .secondaryRow {
   display: flex;
   gap: 12px;
@@ -52,7 +30,6 @@
   border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
-  cursor: pointer;
   transition: opacity 0.2s;
 }
 

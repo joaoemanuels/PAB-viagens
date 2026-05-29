@@ -30,15 +30,6 @@
   letter-spacing: 0.5px;
 }
 
-.priceBadge {
-  background-color: #52ecac; /* Verde menta da imagem */
-  color: #0b5133; /* Texto interno contrastante */
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-
 .route {
   color: #1c2434; /* Azul escuro quase preto para o texto principal */
   font-size: 1.35rem;

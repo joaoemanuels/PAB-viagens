@@ -64,15 +64,6 @@
   gap: 0.5rem;
 }
 
-.code {
-  background: #dbe4ff;
-  color: #5b6475;
-  padding: 0.2rem 0.55rem;
-  border-radius: 0.45rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
 .type {
   font-size: 0.85rem;
   color: #6b7280;

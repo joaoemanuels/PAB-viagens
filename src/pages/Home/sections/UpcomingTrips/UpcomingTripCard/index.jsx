@@ -3,6 +3,8 @@ import styles from "./upcomingTripCard.module.css";
 
 import { BusFront, Clock3 } from "lucide-react";
 import { formatCurrency } from "../../../../../utils/formatCurrency";
+import Badge from "../../../../../components/ui/Badge";
+import Button from "../../../../../components/ui/Button";
 
 export default function UpcomingTripCard({
   category,
@@ -43,12 +45,20 @@ export default function UpcomingTripCard({
           <span>Partida: {departure}</span>
         </div>
 
-        <div className={styles.seats}>{seatsRemaining} lugares restantes</div>
+        <Badge
+          content={seatsRemaining}
+          context={"lugares restantes"}
+          variant="primary"
+        />
       </div>
 
-      <button className={styles.button} onClick={handleBooking}>
-        Reservar
-      </button>
+      <Button
+        type="button"
+        content="Reservar agora"
+        className={styles.button}
+        onClick={handleBooking}
+        variant="secondary"
+      ></Button>
     </div>
   );
 }

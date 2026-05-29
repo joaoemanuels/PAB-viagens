@@ -2,6 +2,7 @@ import { CalendarDays, Clock, MoveRight } from "lucide-react";
 import styles from "./travelSummary.module.css";
 import { formatCurrency } from "../../../../utils/formatCurrency";
 import { formatDate } from "../../../../utils/formatDate";
+import Badge from "../../../../components/ui/Badge";
 
 export default function TravelSummary({
   price,
@@ -15,7 +16,11 @@ export default function TravelSummary({
       <div className={styles.travelSummaryContainer}>
         <div className={styles.header}>
           <span className={styles.sectionTitle}>Resumo da viagem</span>
-          <span className={styles.priceBadge}>{formatCurrency(price)}</span>
+          <Badge
+            className={styles.priceBadge}
+            content={formatCurrency(price)}
+            variant="secondary"
+          />
         </div>
 
         <h2 className={styles.route}>

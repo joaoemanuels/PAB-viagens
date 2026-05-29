@@ -12,8 +12,9 @@ export default function BookingActions({ tripId }) {
   return (
     <section className={styles.bookingActions}>
       <Button
-        className={styles.buttonPrimary}
-        content={"Reservar agora"}
+        type="submit"
+        variant="primary"
+        content="Reservar agora"
         btnIcon={<ChevronRight />}
         onClick={handleBooking}
       />

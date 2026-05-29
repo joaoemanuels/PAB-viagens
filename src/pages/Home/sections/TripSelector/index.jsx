@@ -31,7 +31,13 @@ export default function TripSelector({
           />
         </div>
 
-        <Button content={"Buscar Viagens"} btnIcon={<Search />} />
+        <Button
+          type={"submit"}
+          variant="primary"
+          onClick={""}
+          content={"Buscar Viagens"}
+          btnIcon={<Search />}
+        />
       </div>
     </section>
   );

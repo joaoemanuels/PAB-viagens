@@ -1,15 +1,13 @@
 import { Bus } from "lucide-react";
 import styles from "../timeTravels.module.css";
+import Badge from "../../../../../components/ui/Badge";
 
 export default function TravelCard({ travel }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
-        <span
-          className={`${styles.badge} ${travel.isExecutive ? styles.executive : styles.conventional}`}
-        >
-          {travel.type}
-        </span>
+        <Badge content={travel.type} className={styles.conventional} />
+
         <span className={styles.busIcon}>
           <Bus />
         </span>

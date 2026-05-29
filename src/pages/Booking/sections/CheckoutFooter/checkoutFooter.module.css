@@ -33,15 +33,3 @@
   letter-spacing: -0.24px;
   color: #0058bc;
 }
-
-.confirmButton {
-  color: #fff;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: 0;
-  text-align: center;
-  background-color: #0158bc;
-  border-radius: 12px;
-  height: 56px;
-}

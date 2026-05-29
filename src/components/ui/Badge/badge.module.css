@@ -1,0 +1,23 @@
+.badge {
+  padding: 6px 14px;
+
+  border-radius: 20px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.primary {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.secondary {
+  background-color: #52ecac;
+  color: #0b5133;
+}
+
+.tertiary {
+  background: #dbe4ff;
+  color: #5b6475;
+}
