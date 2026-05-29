@@ -4,6 +4,9 @@ import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import Header from "../../components/ui/Header";
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button";
+import SocialButton from "../../components/ui/SocialButton";
+
+import Google from "../../assets/icons/google.svg";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +49,7 @@ export default function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
-                placeholder="Sua senha secreta"
+                placeholder="Digite sua senha"
               />
               <button
                 type="button"
@@ -66,18 +69,12 @@ export default function Login() {
         </div>
 
         <div className={styles.socialContainer}>
-          <button type="button" className={styles.socialButton}>
-            <span
-              className={`${styles.socialIcon} ${styles.googleIcon}`}
-            ></span>
-            Google
-          </button>
-          <button type="button" className={styles.socialButton}>
-            <span
-              className={`${styles.socialIcon} ${styles.facebookIcon}`}
-            ></span>
-            Facebook
-          </button>
+          <SocialButton
+            type="button"
+            className="googleIcon"
+            icon={Google}
+            content="Google"
+          />
         </div>
 
         <div className={styles.bannerWrapper}>

@@ -56,7 +56,7 @@ Fase 8: Deploy & Go-Live
   ```bash
   npm install clsx date-fns
   ```
-- [ ] Validação de Formulários
+- [x] Validação de Formulários
   ```bash
   npm install zod react-hook-form @hookform/resolvers
   ```
@@ -137,9 +137,10 @@ pab-viagens/
 
   export default defineConfig({
     plugins: [react()],
+
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve('./src'),
       }
     }
   })
@@ -453,7 +454,7 @@ pab-viagens/
 ### Serviços Supabase Criados
 
 #### Service: Auth.js
-- [ ] Criar arquivo `src/services/auth.js`:
+- [x] Criar arquivo `src/services/auth.js`:
   ```javascript
   import { supabase } from './supabase'
 
@@ -477,7 +478,7 @@ pab-viagens/
   ```
 
 #### Service: Trips.js
-- [ ] Criar arquivo `src/services/trips.js`:
+- [x] Criar arquivo `src/services/trips.js`:
   ```javascript
   export const tripService = {
     createTrip: async (routeId, scheduleId, departureDate) => {},
@@ -491,7 +492,7 @@ pab-viagens/
   ```
 
 #### Service: Bookings.js
-- [ ] Criar arquivo `src/services/bookings.js`:
+- [x] Criar arquivo `src/services/bookings.js`:
   ```javascript
   export const bookingService = {
     createBooking: async (tripId, passengerData) => {},
@@ -504,7 +505,7 @@ pab-viagens/
   ```
 
 #### Service: Routes.js
-- [ ] Criar arquivo `src/services/routes.js`:
+- [x] Criar arquivo `src/services/routes.js`:
   ```javascript
   export const routeService = {
     createRoute: async (driverData) => {},
@@ -544,10 +545,10 @@ pab-viagens/
 - [x] Suporte a variants
 
 #### Modal.jsx
-- [ ] Modal acessível com backdrop
-- [ ] Fechamento via ESC ou botão
-- [ ] Focus trap
-- [ ] Animação suave
+- [x] Modal acessível com backdrop
+- [x] Fechamento via ESC ou botão
+- [x] Focus trap
+- [x] Animação suave
 
 #### Loading.jsx
 - [ ] Spinner animado
@@ -690,19 +691,19 @@ export const useLocationStore = create((set) => ({
   - [x] `/driver/profile` - Perfil
 
 #### Login.jsx
-- [ ] Form com email + senha
-- [ ] Validação
-- [ ] Link "Cadastre-se"
-- [ ] Loading state
-- [ ] Error handling
-- [ ] Responsivo
+- [x] Form com email + senha
+- [x] Validação
+- [x] Link "Cadastre-se"
+- [x] Loading state
+- [x] Error handling
+- [x] Responsivo
 
 #### Signup.jsx
-- [ ] Form multi-step (se necessário)
-- [ ] Seleção de tipo (passageiro/motorista)
-- [ ] Validação de dados
-- [ ] Confirmação de email
-- [ ] Responsivo
+- [x] Form multi-step (se necessário)
+- [x] Seleção de tipo (passageiro/motorista)
+- [x] Validação de dados
+- [x] Confirmação de email
+- [x] Responsivo
 
 #### Home.jsx
 - [x] Hero section
