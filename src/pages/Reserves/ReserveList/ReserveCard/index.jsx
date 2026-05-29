@@ -1,6 +1,7 @@
 import { Calendar, Clock, Rocket } from "lucide-react";
 
 import styles from "./reserveCard.module.css";
+import { formatCurrency } from "../../../../utils/formatCurrency";
 
 export default function ReserveCard({ data }) {
   const { status, statusLabel, trip } = data;
@@ -21,7 +22,7 @@ export default function ReserveCard({ data }) {
           {statusLabel}
         </span>
 
-        <span className={styles.price}>R$ {trip.price.toFixed(2)}</span>
+        <span className={styles.price}>{formatCurrency(trip.price)}</span>
       </div>
 
       <div className={styles.timeline}>

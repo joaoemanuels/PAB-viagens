@@ -18,7 +18,7 @@ export default function Booking() {
   }
   return (
     <section className={styles.booking}>
-      <Header showSupportIcon={false} navigationType="back"/>
+      <Header showSupportIcon={false} navigationType="back" />
       <TravelSummary
         route={trip.route}
         price={trip.price}
@@ -30,7 +30,7 @@ export default function Booking() {
       <PassengerForm />
       <PaymentMethod />
       <AlertBox />
-      <CheckoutFooter />
+      <CheckoutFooter price={trip.price} />
     </section>
   );
 }

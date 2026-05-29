@@ -1,5 +1,6 @@
 import { Banknote, Clock, Hourglass } from "lucide-react";
 import styles from "./tripStatsGrid.module.css";
+import { formatCurrency } from "../../../../utils/formatCurrency";
 
 export default function TripStatsGrid({ price, departure, arrival }) {
   return (
@@ -22,7 +23,7 @@ export default function TripStatsGrid({ price, departure, arrival }) {
       >
         <Banknote style={{ color: "#fff" }} />
         <p style={{ color: "#D8E2FF" }}>Preço</p>
-        <span style={{ color: "#fff" }}>R$ {price}</span>
+        <span style={{ color: "#fff" }}>{formatCurrency(price)}</span>
       </div>
     </section>
   );

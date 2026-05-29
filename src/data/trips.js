@@ -1,267 +1,810 @@
-// data/tripsData.js
-
 export const tripsData = [
+  // ==========================================
+  // 1. PARTIDAS DE CAMPINA GRANDE
+  // ==========================================
   {
-    id: 310,
-
-    // categoria
-    category: "EXECUTIVO",
-    type: "EXECUTIVO 310",
-    isExecutive: true,
-
-    // rota
-    route: "São Paulo → Campinas",
-    origin: "São Paulo",
-    destination: "Campinas",
-
-    // viagem
+    id: 802,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 802",
+    isExecutive: false,
+    route: "Campina Grande → Queimadas",
+    origin: "Campina Grande",
+    destination: "Queimadas",
     date: "2026-10-15",
-    departure: "14:30",
-    arrival: "16:00",
-    duration: "1h 30min",
-
-    // preço
-    price: 45.9,
-
-    // vagas
-    seatsRemaining: 4,
-
-    // detalhes
+    departure: "11:30",
+    arrival: "12:00",
+    duration: "30min",
+    price: 8.0,
+    seatsRemaining: 18,
     hasDetails: true,
-
-    // paradas
     stops: [
       {
         type: "departure",
         label: "Partida",
-        location: "Terminal Tietê",
-        time: "14:30",
+        location: "Rodoviária Velha (CG)",
+        time: "11:30",
       },
       {
         type: "connection",
-        label: "Conexão",
-        location: "Rodoviária Jundiaí",
+        label: "Ponto",
+        location: "Sítios/Área Rural Sul (BR-104)",
+        time: "11:45",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Queimadas Centro",
+        time: "12:00",
+      },
+    ],
+  },
+  {
+    id: 813,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 813",
+    isExecutive: false,
+    route: "Campina Grande → Fagundes",
+    origin: "Campina Grande",
+    destination: "Fagundes",
+    date: "2026-10-19",
+    departure: "22:15",
+    arrival: "23:05",
+    duration: "50min",
+    price: 12.5,
+    seatsRemaining: 0,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "UFCG / UEPB (Pontos Universitários)",
+        time: "22:15",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Rodoviária Velha (CG)",
+        time: "22:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "22:45",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Fagundes Centro",
+        time: "23:05",
+      },
+    ],
+  },
+  {
+    id: 806,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 806",
+    isExecutive: false,
+    route: "Campina Grande → Aroeiras",
+    origin: "Campina Grande",
+    destination: "Aroeiras",
+    date: "2026-10-16",
+    departure: "15:15",
+    arrival: "17:10",
+    duration: "1h 55min",
+    price: 22.0,
+    seatsRemaining: 3,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Rodoviária Velha (CG)",
         time: "15:15",
       },
       {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "15:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "15:45",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "16:05",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Fagundes/Gado Bravo)",
+        time: "16:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "16:40",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades PB-102",
+        time: "16:55",
+      },
+      {
         type: "arrival",
         label: "Chegada",
-        location: "Campinas Centro",
-        time: "16:00",
+        location: "Aroeiras Centro",
+        time: "17:10",
       },
     ],
   },
-
   {
-    id: 102,
-
+    id: 801,
     category: "CONVENCIONAL",
-    type: "CONVENCIONAL 102",
+    type: "CONVENCIONAL 801",
     isExecutive: false,
-
-    route: "Campinas → Sorocaba",
-    origin: "Campinas",
-    destination: "Sorocaba",
-
-    date: "2026-10-16",
-    departure: "17:00",
-    arrival: "18:45",
-    duration: "1h 45min",
-
-    price: 38.5,
-
-    seatsRemaining: 7,
-
-    hasDetails: false,
-
+    route: "Campina Grande → Umbuzeiro",
+    origin: "Campina Grande",
+    destination: "Umbuzeiro",
+    date: "2026-10-15",
+    departure: "06:00",
+    arrival: "08:15",
+    duration: "2h 15min",
+    price: 28.5,
+    seatsRemaining: 12,
+    hasDetails: true,
     stops: [
       {
         type: "departure",
         label: "Partida",
-        location: "Terminal Campinas",
-        time: "17:00",
+        location: "Rodoviária Velha (CG)",
+        time: "06:00",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "06:15",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "06:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "06:50",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Fagundes/Gado Bravo)",
+        time: "07:10",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "07:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades PB-102",
+        time: "07:40",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "07:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Zonas Rurais (Aroeiras/Umbuzeiro)",
+        time: "08:10",
       },
       {
         type: "arrival",
         label: "Chegada",
-        location: "Sorocaba Rodoviária",
+        location: "Umbuzeiro Centro",
+        time: "08:15",
+      },
+    ],
+  },
+  {
+    id: 807,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 807",
+    isExecutive: false,
+    route: "Campina Grande → Umbuzeiro",
+    origin: "Campina Grande",
+    destination: "Umbuzeiro",
+    date: "2026-10-16",
+    departure: "18:30",
+    arrival: "20:45",
+    duration: "2h 15min",
+    price: 28.5,
+    seatsRemaining: 20,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Rodoviária Velha (CG)",
+        time: "18:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
         time: "18:45",
       },
-    ],
-  },
-
-  {
-    id: 221,
-
-    category: "LEITO",
-    type: "LEITO 221",
-    isExecutive: true,
-
-    route: "Recife → João Pessoa",
-    origin: "Recife",
-    destination: "João Pessoa",
-
-    date: "2026-05-28",
-    departure: "08:15",
-    arrival: "10:40",
-    duration: "2h 25min",
-
-    price: 79.9,
-
-    seatsRemaining: 2,
-
-    hasDetails: true,
-
-    stops: [
       {
-        type: "departure",
-        label: "Partida",
-        location: "TIP Recife",
-        time: "08:15",
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "19:00",
       },
       {
         type: "connection",
-        label: "Conexão",
-        location: "Goiana",
-        time: "09:10",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "19:20",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Fagundes/Gado Bravo)",
+        time: "19:40",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "19:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades PB-102",
+        time: "20:10",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "20:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Zonas Rurais (Aroeiras/Umbuzeiro)",
+        time: "20:40",
       },
       {
         type: "arrival",
         label: "Chegada",
-        location: "Rodoviária João Pessoa",
-        time: "10:40",
+        location: "Umbuzeiro Centro",
+        time: "20:45",
       },
     ],
   },
 
+  // ==========================================
+  // 2. PARTIDAS DE QUEIMADAS
+  // ==========================================
   {
-    id: 408,
-
-    category: "SEMI-LEITO",
-    type: "SEMI-LEITO 408",
-    isExecutive: true,
-
-    route: "Curitiba → Florianópolis",
-    origin: "Curitiba",
-    destination: "Florianópolis",
-
-    date: "2026-10-18",
-    departure: "06:20",
-    arrival: "10:10",
-    duration: "3h 50min",
-
-    price: 69.9,
-
-    seatsRemaining: 3,
-
-    hasDetails: true,
-
-    stops: [
-      {
-        type: "departure",
-        label: "Partida",
-        location: "Rodoferroviária Curitiba",
-        time: "06:20",
-      },
-      {
-        type: "connection",
-        label: "Conexão",
-        location: "Joinville Terminal",
-        time: "08:15",
-      },
-      {
-        type: "arrival",
-        label: "Chegada",
-        location: "Terminal Florianópolis",
-        time: "10:10",
-      },
-    ],
-  },
-
-  {
-    id: 550,
-
+    id: 809,
     category: "CONVENCIONAL",
-    type: "CONVENCIONAL 550",
+    type: "CONVENCIONAL 809",
     isExecutive: false,
-
-    route: "Fortaleza → Natal",
-    origin: "Fortaleza",
-    destination: "Natal",
-
+    route: "Queimadas → Campina Grande",
+    origin: "Queimadas",
+    destination: "Campina Grande",
     date: "2026-10-19",
-    departure: "19:45",
-    arrival: "04:30",
-    duration: "8h 45min",
-
-    price: 59.9,
-
-    seatsRemaining: 8,
-
+    departure: "05:15",
+    arrival: "05:45",
+    duration: "30min",
+    price: 8.0,
+    seatsRemaining: 2,
     hasDetails: true,
-
     stops: [
       {
         type: "departure",
         label: "Partida",
-        location: "Rodoviária Fortaleza",
-        time: "19:45",
+        location: "Praça Centenário (Queimadas)",
+        time: "05:15",
       },
       {
         type: "connection",
-        label: "Conexão",
-        location: "Mossoró Terminal",
-        time: "01:10",
+        label: "Ponto",
+        location: "Sítios Saída BR-104",
+        time: "05:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Alça Sudeste (CG)",
+        time: "05:35",
       },
       {
         type: "arrival",
         label: "Chegada",
-        location: "Rodoviária Natal",
-        time: "04:30",
+        location: "Terminal de Integração (CG)",
+        time: "05:45",
       },
     ],
   },
 
+  // ==========================================
+  // 3. PARTIDAS DE FAGUNDES
+  // ==========================================
   {
-    id: 777,
-
-    category: "EXECUTIVO",
-    type: "EXECUTIVO 777",
-    isExecutive: true,
-
-    route: "João Pessoa → Campina Grande",
-    origin: "João Pessoa",
-    destination: "Campina Grande",
-
-    date: "2026-10-20",
-    departure: "13:00",
-    arrival: "15:10",
-    duration: "2h 10min",
-
-    price: 34.9,
-
-    seatsRemaining: 5,
-
+    id: 810,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 810",
+    isExecutive: false,
+    route: "Fagundes → Gado Bravo",
+    origin: "Fagundes",
+    destination: "Gado Bravo",
+    date: "2026-10-19",
+    departure: "11:40",
+    arrival: "12:15",
+    duration: "35min",
+    price: 10.0,
+    seatsRemaining: 11,
     hasDetails: true,
-
     stops: [
       {
         type: "departure",
         label: "Partida",
-        location: "Terminal João Pessoa",
+        location: "Fagundes Centro (Próximo à Igreja)",
+        time: "11:40",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades Rurais Intermediárias",
+        time: "11:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Sítio Mãe Maria",
+        time: "12:05",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Gado Bravo Centro",
+        time: "12:15",
+      },
+    ],
+  },
+
+  // ==========================================
+  // 4. PARTIDAS DE GADO BRAVO
+  // ==========================================
+  {
+    id: 805,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 805",
+    isExecutive: false,
+    route: "Gado Bravo → Campina Grande",
+    origin: "Gado Bravo",
+    destination: "Campina Grande",
+    date: "2026-10-16",
+    departure: "08:30",
+    arrival: "09:55",
+    duration: "1h 25min",
+    price: 18.0,
+    seatsRemaining: 14,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Gado Bravo Centro",
+        time: "08:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Gado Bravo/Fagundes)",
+        time: "08:45",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "09:05",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "09:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "09:40",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Rodoviária Velha (CG)",
+        time: "09:55",
+      },
+    ],
+  },
+  {
+    id: 812,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 812",
+    isExecutive: false,
+    route: "Gado Bravo → Umbuzeiro",
+    origin: "Gado Bravo",
+    destination: "Umbuzeiro",
+    date: "2026-10-19",
+    departure: "17:30",
+    arrival: "18:20",
+    duration: "50min",
+    price: 14.0,
+    seatsRemaining: 16,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Gado Bravo Centro",
+        time: "17:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades Rurais da PB-102",
+        time: "17:40",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "17:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Sítios entre Aroeiras e Umbuzeiro",
+        time: "18:10",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Umbuzeiro Centro",
+        time: "18:20",
+      },
+    ],
+  },
+
+  // ==========================================
+  // 5. PARTIDAS DE AROEIRAS
+  // ==========================================
+  {
+    id: 811,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 811",
+    isExecutive: false,
+    route: "Aroeiras → Campina Grande",
+    origin: "Aroeiras",
+    destination: "Campina Grande",
+    date: "2026-10-19",
+    departure: "13:00",
+    arrival: "14:45",
+    duration: "1h 45min",
+    price: 22.0,
+    seatsRemaining: 7,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Rodoviária de Aroeiras",
         time: "13:00",
       },
       {
         type: "connection",
-        label: "Conexão",
-        location: "Santa Rita",
-        time: "13:40",
+        label: "Ponto",
+        location: "Comunidades da PB-102",
+        time: "13:15",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "13:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural Gado Bravo/Fagundes",
+        time: "13:45",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "14:05",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "14:25",
       },
       {
         type: "arrival",
         label: "Chegada",
-        location: "Terminal Argemiro de Figueiredo",
-        time: "15:10",
+        location: "Rodoviária Velha (CG)",
+        time: "14:45",
+      },
+    ],
+  },
+  {
+    id: 808,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 808",
+    isExecutive: false,
+    route: "Aroeiras → Umbuzeiro",
+    origin: "Aroeiras",
+    destination: "Umbuzeiro",
+    date: "2026-10-17",
+    departure: "10:00",
+    arrival: "10:20",
+    duration: "20min",
+    price: 6.5,
+    seatsRemaining: 15,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Aroeiras Centro",
+        time: "10:00",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades rurais entre Aroeiras e Umbuzeiro",
+        time: "10:15",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Umbuzeiro Centro",
+        time: "10:20",
+      },
+    ],
+  },
+
+  // ==========================================
+  // 6. PARTIDAS DE UMBUZEIRO (RETORNOS)
+  // ==========================================
+  {
+    id: 803,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 803",
+    isExecutive: false,
+    route: "Umbuzeiro → Gado Bravo",
+    origin: "Umbuzeiro",
+    destination: "Gado Bravo",
+    date: "2026-10-15",
+    departure: "14:00",
+    arrival: "14:50",
+    duration: "50min",
+    price: 14.0,
+    seatsRemaining: 9,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Umbuzeiro Centro",
+        time: "14:00",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades Rurais (Umbuzeiro/Aroeiras)",
+        time: "14:10",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "14:25",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades Rurais PB-102",
+        time: "14:40",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Gado Bravo Centro",
+        time: "14:50",
+      },
+    ],
+  },
+  {
+    id: 804,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 804",
+    isExecutive: false,
+    route: "Umbuzeiro → Campina Grande",
+    origin: "Umbuzeiro",
+    destination: "Campina Grande",
+    date: "2026-10-16",
+    departure: "05:30",
+    arrival: "07:45",
+    duration: "2h 15min",
+    price: 28.5,
+    seatsRemaining: 5,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Umbuzeiro Centro",
+        time: "05:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Zonas Rurais (Umbuzeiro/Aroeiras)",
+        time: "05:35",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "05:50",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades PB-102",
+        time: "06:05",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "06:20",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Gado Bravo/Fagundes)",
+        time: "06:35",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "06:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "07:15",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "07:30",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Rodoviária Velha (CG)",
+        time: "07:45",
+      },
+    ],
+  },
+  {
+    id: 800,
+    category: "CONVENCIONAL",
+    type: "CONVENCIONAL 800",
+    isExecutive: false,
+    route: "Umbuzeiro → Campina Grande",
+    origin: "Umbuzeiro",
+    destination: "Campina Grande",
+    date: "2026-05-28",
+    departure: "05:30",
+    arrival: "07:45",
+    duration: "2h 15min",
+    price: 28.5,
+    seatsRemaining: 5,
+    hasDetails: true,
+    stops: [
+      {
+        type: "departure",
+        label: "Partida",
+        location: "Umbuzeiro Centro",
+        time: "05:30",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Zonas Rurais (Umbuzeiro/Aroeiras)",
+        time: "05:35",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Aroeiras Centro",
+        time: "05:50",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Comunidades PB-102",
+        time: "06:05",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Gado Bravo Centro",
+        time: "06:20",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Área Rural (Gado Bravo/Fagundes)",
+        time: "06:35",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Fagundes Centro",
+        time: "06:55",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Queimadas Centro",
+        time: "07:15",
+      },
+      {
+        type: "connection",
+        label: "Ponto",
+        location: "Saída Sul (BR-104)",
+        time: "07:30",
+      },
+      {
+        type: "arrival",
+        label: "Chegada",
+        location: "Rodoviária Velha (CG)",
+        time: "07:45",
       },
     ],
   },

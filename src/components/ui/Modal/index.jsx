@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import styles from "./modal.module.css";
-import Icon from "../../../../public/favicon.svg";
+import Icon from "../../../assets/images/favicon.svg";
 import { passengersData } from "../../../data/passengers";
 import AppVersion from "../AppVersion";
 

@@ -29,6 +29,11 @@
   color: #0058bc;
 }
 
+.routePreviewItem {
+  display: flex;
+  flex-direction: column;
+}
+
 .routePreviewItem span {
   font-size: 11px;
   font-weight: 600;

@@ -1,5 +1,3 @@
-// HistoryList.jsx
-
 import styles from "./historyList.module.css";
 
 import HistoryCard from "./HistoryCard";
@@ -17,7 +15,8 @@ export default function HistoryList() {
         ...booking,
         trip,
       };
-    });
+    })
+    .filter((booking) => booking.trip !== undefined);
 
   return (
     <section className={styles.historyList}>

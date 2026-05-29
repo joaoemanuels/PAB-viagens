@@ -1,21 +1,9 @@
-// HistoryCard.jsx
-
+import { formatCurrency } from "../../../../utils/formatCurrency";
+import { formatDate } from "../../../../utils/formatDate";
 import styles from "./historyCard.module.css";
 
 export default function HistoryCard({ data }) {
   const { statusLabel, trip } = data;
-
-  const date = new Date(data.bookingDate);
-
-  const formattedDate = date.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "short",
-  });
-
-  const formattedTime = date.toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   return (
     <article className={styles.historyCard}>
@@ -24,11 +12,11 @@ export default function HistoryCard({ data }) {
           <span className={styles.badgeDone}>{statusLabel}</span>
 
           <span className={styles.dateText}>
-            {formattedDate}, {formattedTime}
+            {formatDate(data.bookingDate)}, {data.bookingTime}
           </span>
         </div>
 
-        <span className={styles.price}>R$ {trip.price.toFixed(2)}</span>
+        <span className={styles.price}>{formatCurrency(trip.price)}</span>
       </div>
 
       <div className={styles.timeline}>

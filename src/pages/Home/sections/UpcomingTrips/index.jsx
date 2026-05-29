@@ -17,7 +17,11 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
 
     let matchesTab = true;
 
-    const todayStr = new Date().toISOString().split("T")[0];
+    const today = new Date();
+
+    const todayStr = `${today.getFullYear()}-${String(
+      today.getMonth() + 1,
+    ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
     if (filterType === "hoje") {
       matchesTab = trip.date === todayStr;
@@ -32,7 +36,6 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
     <section className={styles.upcomingTrips}>
       <div className={styles.header}>
         <p>{filterType === "hoje" ? "Viagens de Hoje" : "Próximas Viagens"}</p>
-
       </div>
 
       {filteredTrips.length > 0 ? (

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./upcomingTripCard.module.css";
 
 import { BusFront, Clock3 } from "lucide-react";
+import { formatCurrency } from "../../../../../utils/formatCurrency";
 
 export default function UpcomingTripCard({
   category,
@@ -31,9 +32,7 @@ export default function UpcomingTripCard({
         </div>
 
         <div className={styles.price}>
-          <span>R$</span>
-
-          <strong>{price.toFixed(2).replace(".", ",")}</strong>
+          <strong>{formatCurrency(price)}</strong>
         </div>
       </div>
 
