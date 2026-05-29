@@ -1,0 +1,13 @@
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #002f6c;
+  margin: 0 0 0.5rem 0;
+}
+
+.header p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0 0 2rem 0;
+}
