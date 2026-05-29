@@ -1,0 +1,162 @@
+.registerContent {
+  background: #ffffff;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #002f6c;
+  margin: 0 0 0.5rem 0;
+}
+
+.header p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0 0 2rem 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #343a40;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  color: #adb5bd;
+  pointer-events: none;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding: 0.8rem 2.5rem 0.8rem 2.5rem;
+  font-size: 0.95rem;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #212529;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.inputWrapper input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #adb5bd;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eyeButton:hover {
+  color: #495057;
+}
+
+.checkboxGroup {
+  margin-top: 0.25rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  margin-top: 0.2rem;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkboxText {
+  font-size: 0.85rem;
+  color: #495057;
+  line-height: 1.4;
+}
+
+.checkboxText a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.checkboxText a:hover {
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+  background-color: #004085;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: #495057;
+  margin: 0;
+}
+
+.footer a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

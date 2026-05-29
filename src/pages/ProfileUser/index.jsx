@@ -1,7 +1,7 @@
 import styles from "./profileUser.module.css";
 
 import Header from "../../components/ui/Header";
-import ProfileHeader from "../../components/ui/ProfileHeader";
+import ProfileHeader from "../../components/common/ProfileHeader";
 import ProfileItem from "../../components/ui/ProfileItem";
 import ProfileSection from "../../components/ui/ProfileSection";
 import AppVersion from "../../components/ui/AppVersion";
@@ -17,8 +17,16 @@ import {
   User,
 } from "lucide-react";
 import { passengersData } from "../../data/passengers";
+import NotLoggedState from "../../components/common/NotLoggedState";
 
 export default function ProfileUser() {
+  // const { isLogged, user } = useAuth();
+  const isLogged = false;
+
+  if (!isLogged) {
+    return <NotLoggedState />;
+  }
+
   return (
     <section className={styles.profileUser}>
       <Header showSupportIcon={false} />

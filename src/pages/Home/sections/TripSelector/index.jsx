@@ -1,7 +1,6 @@
 import { Locate, MapPin, Search } from "lucide-react";
 import styles from "./tripSelector.module.css";
 
-// TripSelector.jsx
 export default function TripSelector({
   origin,
   setOrigin,

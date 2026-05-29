@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, CircleUserRound, Menu } from "lucide-react";
 import styles from "./header.module.css";
@@ -10,16 +10,24 @@ export default function Header({
   showSupportIcon = true,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleBackClick = () => {
-    navigate(-1);
+    if (location.key !== "default") {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
   };
 
   const handleMenuClick = () => {
     setIsModalOpen(true);
   };
 
+  function handleBooking() {
+    navigate(`/profileUser`);
+  }
   return (
     <div className={styles.header}>
       {navigationType === "menu" ? (
@@ -30,11 +38,8 @@ export default function Header({
 
       <p className={styles.headerContent}>PAB Mobilidade</p>
 
-      <div className={styles.userAvatar}>
-        <img
-          src={passengersData.avatar}
-          alt="Avatar"
-        />
+      <div className={styles.userAvatar} onClick={handleBooking}>
+        <img src={passengersData.avatar} alt="Avatar" />
       </div>
       {showSupportIcon && (
         <div className={styles.supportIcon}>

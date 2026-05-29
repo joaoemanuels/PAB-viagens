@@ -1,0 +1,93 @@
+.profileContainer {
+  padding: 16px;
+}
+
+.notLogged {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.notLoggedContent {
+  width: 100%;
+  max-width: 320px;
+}
+
+.notLoggedIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 88px;
+  height: 88px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.notLogged h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  color: #111827;
+
+  margin-bottom: 12px;
+}
+
+.notLogged p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  color: #6b7280;
+
+  margin-bottom: 24px;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+
+  height: 56px;
+  border-radius: 12px;
+  background: #0057d9;
+  margin-top: 16px;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.loginButton:hover {
+  filter: brightness(1.05);
+}
+
+.loginButton:active {
+  transform: scale(0.98);
+}
+
+.loginButton svg {
+  font-size: 1.2rem;
+}
+ 
+.signup {
+  margin-top: 25px;
+}
+
+.signup span {
+  color: blue;
+  font-weight: 700;
+}

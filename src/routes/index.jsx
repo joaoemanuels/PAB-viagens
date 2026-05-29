@@ -20,6 +20,7 @@ import ProfileUser from "../pages/ProfileUser";
 import Travels from "../pages/Travels";
 import PayMethod from "../pages/PayMethod";
 import ScrollToTop from "../components/common/ScrollToTop";
+import Register from "../pages/Register";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />} />
