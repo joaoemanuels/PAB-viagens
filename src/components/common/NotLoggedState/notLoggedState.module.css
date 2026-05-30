@@ -82,7 +82,7 @@
 .loginButton svg {
   font-size: 1.2rem;
 }
- 
+
 .signup {
   margin-top: 25px;
 }
@@ -90,4 +90,25 @@
 .signup a {
   color: blue;
   font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .profileContainer {
+    padding: 32px;
+  }
+
+  .notLoggedContent {
+    max-width: 400px;
+  }
+
+  .loginButton {
+    max-width: 320px;
+    margin: 16px auto 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .notLogged {
+    padding: 48px 32px;
+  }
 }

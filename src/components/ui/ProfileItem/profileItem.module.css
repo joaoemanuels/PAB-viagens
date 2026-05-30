@@ -73,3 +73,15 @@
 .itemDanger .itemIcon {
   color: var(--color-danger);
 }
+
+@media (min-width: 768px) {
+  .profileItem {
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .itemValue {
+    font-size: 0.95rem;
+  }
+}

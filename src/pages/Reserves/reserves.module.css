@@ -1,3 +1,20 @@
-.reserves{
-    margin-bottom: 69px;
+.reserves {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-bottom: 69px;
+}
+
+@media (min-width: 768px) {
+  .reserves {
+    padding-bottom: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reserves {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 40px;
+  }
 }

@@ -33,3 +33,26 @@
   letter-spacing: -0.24px;
   color: #0058bc;
 }
+
+@media (min-width: 768px) {
+  .checkoutFooter {
+    padding: 16px 32px 32px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .totalAmount {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .checkoutFooter {
+    padding: 16px 48px 24px;
+    max-width: 1200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 24px 24px 0 0;
+  }
+}

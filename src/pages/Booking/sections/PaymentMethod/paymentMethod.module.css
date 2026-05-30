@@ -116,3 +116,25 @@
   outline-offset: 4px;
   border-radius: 4px;
 }
+
+@media (min-width: 768px) {
+  .paymentMethod {
+    padding: 16px 32px;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .radioGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .paymentMethod {
+    padding: 16px 0;
+  }
+}

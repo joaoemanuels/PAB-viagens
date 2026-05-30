@@ -7,3 +7,20 @@
   margin: 0 auto;
   box-sizing: border-box;
 }
+
+@media (min-width: 768px) {
+  .historyList {
+    max-width: 100%;
+    padding: 16px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .historyList {
+    padding: 16px 0;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

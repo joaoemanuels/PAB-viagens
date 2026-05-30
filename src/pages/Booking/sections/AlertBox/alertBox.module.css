@@ -21,3 +21,22 @@
   letter-spacing: 0;
   font-weight: 400;
 }
+
+@media (min-width: 768px) {
+  .alertBox {
+    padding: 16px 32px;
+    margin-bottom: 160px;
+  }
+
+  .alertContent {
+    height: auto;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .alertBox {
+    padding: 16px 0;
+    margin-bottom: 160;
+  }
+}

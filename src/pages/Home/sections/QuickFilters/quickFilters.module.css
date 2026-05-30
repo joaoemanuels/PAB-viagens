@@ -1,4 +1,4 @@
-.quickFilters{
+.quickFilters {
   margin-bottom: 20px;
 }
 
@@ -68,4 +68,28 @@
 .active {
   background: #0057d9;
   color: #fff;
+}
+
+@media (min-width: 768px) {
+  .filterList {
+    padding: 0 32px 0.5rem;
+    gap: 14px;
+  }
+
+  .filter {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .filterList {
+    padding: 0 0 0.5rem;
+    flex-wrap: wrap; 
+    overflow-x: visible;
+  }
+
+  .quickFilters::-webkit-scrollbar {
+    display: none;
+  }
 }

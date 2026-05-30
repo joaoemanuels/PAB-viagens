@@ -82,3 +82,23 @@
   font-weight: 700;
   white-space: nowrap;
 }
+
+@media (min-width: 768px) {
+  .travelSummary {
+    padding: 16px 32px;
+  }
+
+  .travelSummaryContainer {
+    max-width: 100%;
+  }
+
+  .metaGrid {
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .travelSummary {
+    padding: 16px 0;
+  }
+}

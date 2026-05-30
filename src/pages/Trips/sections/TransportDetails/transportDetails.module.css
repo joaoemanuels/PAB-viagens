@@ -126,3 +126,40 @@
 .chatButton:hover {
   filter: brightness(0.96);
 }
+
+@media (min-width: 768px) {
+  .transportDetails {
+    padding: 16px 32px;
+  }
+
+  .vehicleInfo h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .transportDetails {
+    padding: 16px 0;
+  }
+
+  .transportDetailsContainer {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .vehicleCard {
+    flex: 1;
+  }
+
+  .driver {
+    flex: 1;
+    border-top: none;
+    border-left: 1px solid #ececf1;
+    padding-top: 0;
+    padding-left: 1.5rem;
+  }
+}

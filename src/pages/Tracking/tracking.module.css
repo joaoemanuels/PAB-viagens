@@ -18,7 +18,7 @@
 .tracking > :nth-child(2) {
   flex: 1;
   position: relative;
-  min-height: 0; 
+  min-height: 0;
   z-index: 5;
 }
 
@@ -32,5 +32,21 @@
 @media (max-width: 768px) {
   .tracking {
     height: 100dvh;
+  }
+}
+
+@media (min-width: 768px) {
+  .tracking > :last-child {
+    width: 420px;
+    right: 32px;
+    bottom: 32px;
+    border-radius: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tracking > :last-child {
+    width: 460px;
+    right: 48px;
   }
 }

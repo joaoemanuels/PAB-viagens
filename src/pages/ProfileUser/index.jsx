@@ -18,10 +18,14 @@ import {
 } from "lucide-react";
 import { passengersData } from "../../data/passengers";
 import NotLoggedState from "../../components/common/NotLoggedState";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ProfileUser() {
-  // const { isLogged, user } = useAuth();
-  const isLogged = false;
+  const { isLogged, loading } = useAuth();
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
 
   if (!isLogged) {
     return <NotLoggedState />;

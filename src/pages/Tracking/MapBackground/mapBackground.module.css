@@ -12,8 +12,9 @@
 
 .mapBackground :global(.leaflet-container) {
   background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -61,12 +62,12 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .mapBackground :global(.leaflet-control-zoom) {
-    margin: 12px;
+    margin: 20px;
   }
 
   .mapBackground :global(.leaflet-control-attribution) {
-    display: none;
+    display: block;
   }
 }

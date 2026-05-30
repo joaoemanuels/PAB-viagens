@@ -42,7 +42,7 @@ export default function LoginForm() {
     try {
       await authService.signIn(data.identifier, data.password);
 
-      navigate("/admin");
+      navigate("/reserves");
     } catch (err) {
       setError(err.message);
     } finally {

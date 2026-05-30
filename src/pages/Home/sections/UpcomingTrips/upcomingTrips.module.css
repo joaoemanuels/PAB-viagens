@@ -20,3 +20,26 @@
   font-weight: 700;
   color: #111827;
 }
+
+@media (min-width: 768px) {
+  .upcomingTrips {
+    padding: 16px 32px;
+    gap: 1.25rem;
+  }
+
+  .header p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .upcomingTrips {
+    padding: 16px 0;
+    margin-bottom: 40px;
+    gap: 1.5rem;
+  }
+
+  .header p {
+    font-size: 1.2rem;
+  }
+}

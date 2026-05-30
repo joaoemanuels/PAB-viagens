@@ -48,3 +48,36 @@
   color: #059669;
   flex-shrink: 0;
 }
+
+@media (min-width: 768px) {
+  .tripSelector {
+    padding: 16px 32px;
+  }
+
+  .tripSelectorContainer {
+    padding: 32px 24px 24px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+
+  .tripSelectorLocate {
+    padding: 14px 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tripSelector {
+    padding: 16px 0;
+  }
+
+  .tripSelectorContainer {
+    flex-direction: row; 
+    align-items: center;
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .tripSelectorLocate {
+    flex: 1;
+  }
+}

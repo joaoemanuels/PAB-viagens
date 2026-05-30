@@ -52,3 +52,29 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (min-width: 768px) {
+  .bookingActions {
+    padding: 16px 32px;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .secondaryRow {
+    width: auto;
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bookingActions {
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .buttonSecondary {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+}

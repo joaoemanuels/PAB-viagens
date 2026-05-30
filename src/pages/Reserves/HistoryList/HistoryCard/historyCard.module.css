@@ -42,10 +42,9 @@
 .price {
   font-size: 16px;
   font-weight: 700;
-  color: #0056b3; /* Preço azul em destaque igual ao print */
+  color: #0056b3;
 }
 
-/* Timeline */
 .timeline {
   position: relative;
   display: flex;
@@ -61,7 +60,8 @@
   z-index: 2;
 }
 
-.dotOrigin, .dotDest {
+.dotOrigin,
+.dotDest {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -70,8 +70,12 @@
   box-shadow: 0 0 0 2px currentColor;
 }
 
-.dotOrigin { color: #0284c7; }
-.dotDest { color: #64748b; }
+.dotOrigin {
+  color: #0284c7;
+}
+.dotDest {
+  color: #64748b;
+}
 
 .line {
   position: absolute;
@@ -98,7 +102,6 @@
   margin: 0;
 }
 
-/* Grupo de Ações (Botões Lado a Lado) */
 .actionGroup {
   display: flex;
   gap: 12px;
@@ -106,7 +109,7 @@
 }
 
 .actionGroup button {
-  flex: 1; /* Faz ambos os botões terem exatamente o mesmo tamanho */
+  flex: 1; 
   padding: 10px;
   border-radius: 8px;
   font-size: 13px;
@@ -116,7 +119,6 @@
   text-align: center;
 }
 
-/* Botão Ver Detalhes (Borda sutil, texto cinza) */
 .btnSecondary {
   background-color: #ffffff;
   color: #334155;
@@ -127,7 +129,6 @@
   background-color: #f8fafc;
 }
 
-/* Botão Repetir (Fundo azul bem claro, texto azul) */
 .btnAction {
   background-color: #e8f2fe;
   color: #0056b3;
@@ -136,4 +137,16 @@
 
 .btnAction:hover {
   background-color: #d2e5fc;
+}
+
+@media (min-width: 768px) {
+  .historyCard {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .historyCard {
+    padding: 20px;
+  }
 }

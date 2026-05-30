@@ -5,3 +5,19 @@
 .seatSelector img {
   border-radius: 12px;
 }
+
+@media (min-width: 768px) {
+  .seatSelector {
+    padding: 16px 32px;
+  }
+
+  .seatSelector img {
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .seatSelector {
+    padding: 16px 0;
+  }
+}

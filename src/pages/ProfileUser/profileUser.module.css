@@ -1,0 +1,30 @@
+.profileUser {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.profileContainer {
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .profileContainer {
+    padding: 24px 32px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .profileUser {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .profileContainer {
+    padding: 32px 48px;
+    max-width: 720px;
+  }
+}

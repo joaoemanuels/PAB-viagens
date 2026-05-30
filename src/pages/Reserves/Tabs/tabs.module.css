@@ -21,11 +21,13 @@
   font-weight: 600;
   color: #64748b; /* Cor cinza para o estado inativo */
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
   outline: none;
   text-align: center;
   /* Cria a borda invisível por padrão para evitar que o layout dê um "pulo" quando ativar */
-  border-bottom: 3px solid transparent; 
+  border-bottom: 3px solid transparent;
 }
 
 .tabButton:hover {
@@ -40,4 +42,26 @@
 .tabContent {
   padding: 16px 0;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tabList {
+    padding: 0 32px;
+  }
+
+  .tabButton {
+    flex: none;
+    padding: 12px 32px;
+    font-size: 15px;
+  }
+
+  .tabContent {
+    padding: 24px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tabList {
+    padding: 0;
+  }
 }

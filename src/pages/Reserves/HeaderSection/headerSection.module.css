@@ -20,3 +20,23 @@
   letter-spacing: 0;
   color: 414755;
 }
+
+@media (min-width: 768px) {
+  .headerSection {
+    padding: 24px 32px;
+  }
+
+  .headerSection h1 {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headerSection {
+    padding: 24px 0;
+  }
+
+  .headerSection h1 {
+    font-size: 32px;
+  }
+}

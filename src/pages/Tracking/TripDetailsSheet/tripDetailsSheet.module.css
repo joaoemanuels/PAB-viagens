@@ -176,3 +176,28 @@
 .secondaryActionButton:hover {
   background-color: #d8e2f3;
 }
+
+@media (min-width: 768px) {
+  .tripDetailsSheet {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 420px;
+    margin-bottom: 0;
+    border-radius: 24px; /* arredondado em todos os cantos no tablet/desktop */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .dragHandle {
+    display: none; /* não faz sentido fora do mobile */
+  }
+}
+
+@media (min-width: 1024px) {
+  .tripDetailsSheet {
+    width: 460px;
+    right: 48px;
+    bottom: 48px;
+    padding: 24px 28px 28px;
+  }
+}

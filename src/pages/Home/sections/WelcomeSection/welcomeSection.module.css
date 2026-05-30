@@ -21,3 +21,38 @@
   font-weight: 400;
   color: #414755;
 }
+
+@media (min-width: 768px) {
+  .welcomeSection {
+    padding: 24px 32px;
+  }
+
+  .welcomeSection h1 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .welcomeSection p {
+    font-size: 15px;
+    line-height: 22px;
+    max-width: 560px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .welcomeSection {
+    padding: 32px 0;
+  }
+
+  .welcomeSection h1 {
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -1px;
+  }
+
+  .welcomeSection p {
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 640px;
+  }
+}

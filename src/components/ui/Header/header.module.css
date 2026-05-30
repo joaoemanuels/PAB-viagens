@@ -41,3 +41,39 @@
   bottom: 96px;
   z-index: 999;
 }
+
+@media (min-width: 768px) {
+  .header {
+    padding: 12px 32px;
+  }
+
+  .menuHamburguer {
+    display: none; 
+  }
+
+  .headerContent {
+    font-size: 22px;
+  }
+
+  .supportIcon {
+    bottom: 40px;
+    right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 14px 48px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .headerContent {
+    font-size: 24px;
+  }
+
+  .supportIcon {
+    right: 48px;
+  }
+}

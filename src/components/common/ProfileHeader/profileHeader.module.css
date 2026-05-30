@@ -52,3 +52,26 @@
   align-items: center;
   gap: 4px;
 }
+
+@media (min-width: 768px) {
+  .profileHeader {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .avatarContainer {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .avatarImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profileName {
+    font-size: 1.5rem;
+  }
+}

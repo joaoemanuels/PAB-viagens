@@ -89,3 +89,43 @@
   font-size: 0.9rem;
 }
 
+@media (min-width: 768px) {
+  .card {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .tripInfo h3 {
+    font-size: 1.25rem;
+  }
+
+  .price strong {
+    font-size: 2rem;
+  }
+
+  .time {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    flex-direction: row; /* conteúdo principal e detalhes lado a lado */
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .top {
+    flex: 1;
+    align-items: center;
+  }
+
+  .details {
+    flex-direction: column; /* detalhes empilhados na coluna direita */
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+}

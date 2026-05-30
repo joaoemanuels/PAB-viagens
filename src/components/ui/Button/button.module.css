@@ -73,3 +73,23 @@
   border: none;
   color: #0158bc;
 }
+
+@media (min-width: 768px) {
+  .primary,
+  .secondary {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .button {
+    height: 52px;
+    font-size: 15px;
+  }
+
+  .primary,
+  .secondary {
+    min-width: 220px;
+  }
+}

@@ -49,3 +49,28 @@
   letter-spacing: 0;
   color: #151c27;
 }
+
+@media (min-width: 768px) {
+  .routePreview {
+    padding: 16px 32px;
+  }
+
+  .routePreviewContainer {
+    height: 240px;
+  }
+
+  .routePreviewItem p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .routePreview {
+    padding: 16px 0;
+  }
+
+  .routePreviewContainer {
+    height: 280px;
+    background-size: cover;
+  }
+}

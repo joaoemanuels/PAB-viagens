@@ -24,15 +24,19 @@ export const authService = {
     return newUser;
   },
 
-  signIn: async (email, password) => {
+  signIn: async (identifier, password) => {
+    // Mudamos o nome do parâmetro para clareza
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
+    // Procura por e-mail OU por CPF, e valida a senha
     const user = users.find(
-      (u) => u.email === email && u.password === password,
+      (u) =>
+        (u.email === identifier || u.cpf === identifier) &&
+        u.password === password,
     );
 
     if (!user) {
-      throw new Error("Credenciais inválidas");
+      throw new Error("E-mail/CPF ou senha incorretos");
     }
 
     localStorage.setItem("token", JSON.stringify(user));

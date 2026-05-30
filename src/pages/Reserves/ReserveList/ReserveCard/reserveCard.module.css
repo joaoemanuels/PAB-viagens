@@ -150,3 +150,15 @@
 .btnOutline:hover {
   background-color: #f0f7ff;
 }
+
+@media (min-width: 768px) {
+  .reserveCard {
+    margin-bottom: 0; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .reserveCard {
+    padding: 20px;
+  }
+}
