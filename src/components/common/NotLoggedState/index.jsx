@@ -1,9 +1,14 @@
-import { Search, User } from "lucide-react";
+import { LogIn, User } from "lucide-react";
 import styles from "./notLoggedState.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../ui/Button";
 
 export default function NotLoggedState() {
+  const navigate = useNavigate();
+  function handleLogin() {
+    navigate("/login");
+  }
+
   return (
     <div className={styles.notLogged}>
       <div className={styles.notLoggedContent}>
@@ -17,8 +22,9 @@ export default function NotLoggedState() {
         </p>
 
         <Button
-          content={<Link to="/login">Entrar na Conta</Link>}
-          btnIcon={<Search size={20} />}
+          onClick={handleLogin}
+          content="Entrar na Conta"
+          btnIcon={<LogIn size={20} />}
           className={styles.loginButton}
         />
 
