@@ -4,50 +4,6 @@
   gap: 1.25rem;
 }
 
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.inputGroup label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #343a40;
-}
-
-.inputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.inputIcon {
-  position: absolute;
-  left: 12px;
-  color: #adb5bd;
-  pointer-events: none;
-}
-
-.inputWrapper input {
-  width: 100%;
-  padding: 0.8rem 2.5rem 0.8rem 2.5rem;
-  font-size: 0.95rem;
-  border: 1px solid #dee2e6;
-  border-radius: 12px;
-  background-color: #ffffff;
-  color: #212529;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
-
-.inputWrapper input:focus {
-  outline: none;
-  border-color: #0056b3;
-  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
-}
-
 .eyeButton {
   position: absolute;
   right: 12px;
@@ -117,4 +73,24 @@
 
 .submitButton:hover {
   background-color: #004085;
+}
+
+.errorBox {
+  background: #ffe5e5;
+  border: 1px solid #ff4d4d;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.errorText {
+  color: #d10000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fieldError {
+  color: #d10000;
+  font-size: 12px;
+  margin-top: 6px;
 }

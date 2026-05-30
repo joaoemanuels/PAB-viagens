@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { authService } from "../../../services/auth";
 import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 
 import styles from "./loginForm.module.css";
@@ -15,66 +17,101 @@ const loginSchema = z.object({
 });
 
 export default function LoginForm() {
-  const { register, handleSubmit } = useForm({
-    resolver: zodResolver(loginSchema),
-  });
-
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+    mode: "onSubmit",
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  function handleLogin(data) {
-    console.log(data);
+  async function handleLogin(data) {
+    setError("");
+    setLoading(true);
+
+    try {
+      await authService.signIn(data.identifier, data.password);
+
+      navigate("/admin");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
-      <div className={styles.inputGroup}>
-        <label htmlFor="identifier">E-mail ou CPF</label>
-
-        <div className={styles.inputWrapper}>
-          <Mail className={styles.inputIcon} size={20} />
-          <input
-            type="text"
-            placeholder="Digite seu e-mail ou CPF"
-            {...register("identifier")}
-          />
+    <>
+      {error && (
+        <div className={styles.errorBox}>
+          <p className={styles.errorText}>{error}</p>
         </div>
-      </div>
+      )}
 
-      <div className={styles.inputGroup}>
-        <div className={styles.labelRow}>
-          <label htmlFor="password">Senha</label>
-          <a href="#forgot" className={styles.forgotLink}>
-            Esqueci minha senha
-          </a>
+      <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="identifier">E-mail ou CPF</label>
+
+          <div className={styles.inputWrapper}>
+            <Mail className={styles.inputIcon} size={20} />
+            <input
+              type="text"
+              placeholder="Digite seu e-mail ou CPF"
+              {...register("identifier")}
+            />
+          </div>
+          {errors.identifier && (
+            <p className={styles.fieldError}>{errors.identifier.message}</p>
+          )}
         </div>
 
-        <div className={styles.inputWrapper}>
-          <LockKeyhole className={styles.inputIcon} size={20} />
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Digite sua senha"
-            {...register("password")}
-          />
-          <button
-            type="button"
-            className={styles.eyeButton}
-            onClick={togglePasswordVisibility}
-            aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
-          >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-        </div>
-      </div>
+        <div className={styles.inputGroup}>
+          <div className={styles.labelRow}>
+            <label htmlFor="password">Senha</label>
+            <a href="#forgot" className={styles.forgotLink}>
+              Esqueci minha senha
+            </a>
+          </div>
 
-      <Button
-        type="submit"
-        content={"Entrar"}
-        className={styles.submitButton}
-      />
-    </form>
+          <div className={styles.inputWrapper}>
+            <LockKeyhole className={styles.inputIcon} size={20} />
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Digite sua senha"
+              {...register("password")}
+            />
+
+            <button
+              type="button"
+              className={styles.eyeButton}
+              onClick={togglePasswordVisibility}
+              aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
+          {errors.password && (
+            <p className={styles.fieldError}>{errors.password.message}</p>
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          content={loading ? "Entrando..." : "Entrar"}
+          className={styles.submitButton}
+          disabled={loading}
+        />
+      </form>
+    </>
   );
 }

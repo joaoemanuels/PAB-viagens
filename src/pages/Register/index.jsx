@@ -10,7 +10,6 @@ export default function Register() {
       <Header navigationType="back" showSupportIcon={false} />
 
       <div className={styles.registerContent}>
-        
         <RegisterHeader />
         <RegisterForm />
 

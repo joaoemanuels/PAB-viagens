@@ -1,80 +1,121 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Mail, LockKeyhole, Eye, EyeOff, User, Phone } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { isValidCPF } from "../../../utils/isValidCPF";
+import { authService } from "../../../services/auth";
+import { Mail, User, Phone, IdCardLanyard } from "lucide-react";
 
 import styles from "./registerForm.module.css";
 
 import Button from "../../../components/ui/Button";
+import FormField from "../../../components/ui/FormField";
+import PasswordField from "../../../components/ui/PasswordField";
+
+const registerSchema = z.object({
+  fullName: z.string().min(1, "Informe seu nome"),
+
+  cpf: z.string().refine(isValidCPF, {
+    message: "CPF inválido",
+  }),
+
+  email: z.string().email("Email inválido"),
+
+  phone: z.string().min(10, "Telefone inválido"),
+
+  password: z.string().min(6, "Senha muito curta"),
+
+  terms: z.boolean().refine((val) => val === true, {
+    message: "Você precisa aceitar os termos",
+  }),
+});
 
 export default function RegisterForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+    mode: "onSubmit",
+  });
+
+  async function handleRegister(data) {
+    setError("");
+    setLoading(true);
+
+    try {
+      await authService.signIn(data.identifier, data.password);
+
+      navigate("/admin");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-      <div className={styles.inputGroup}>
-        <label htmlFor="fullName">Nome Completo</label>
-        <div className={styles.inputWrapper}>
-          <User className={styles.inputIcon} size={20} />
-          <input type="text" id="fullName" placeholder="Ex: João Silva" />
+    <>
+      {error && (
+        <div className={styles.errorBox}>
+          <p className={styles.errorText}>{error}</p>
         </div>
-      </div>
+      )}
 
-      <div className={styles.inputGroup}>
-        <label htmlFor="email">E-mail</label>
-        <div className={styles.inputWrapper}>
-          <Mail className={styles.inputIcon} size={20} />
-          <input type="email" id="email" placeholder="email@exemplo.com" />
-        </div>
-      </div>
+      <form className={styles.form} onSubmit={handleSubmit(handleRegister)}>
+        <FormField
+          label="Nome Completo"
+          icon={<User size={20} />}
+          placeholder="Ex: João Silva"
+          register={register("fullName")}
+          error={errors.fullName}
+        />
 
-      <div className={styles.inputGroup}>
-        <label htmlFor="phone">Telefone</label>
-        <div className={styles.inputWrapper}>
-          <Phone className={styles.inputIcon} size={20} />
-          <input type="tel" id="phone" placeholder="(00) 00000-0000" />
-        </div>
-      </div>
+        <FormField
+          label="CPF"
+          icon={<IdCardLanyard size={20} />}
+          placeholder="123.456.789-00"
+          register={register("cpf")}
+          error={errors.cpf}
+        />
 
-      <div className={styles.inputGroup}>
-        <label htmlFor="password">Senha</label>
-        <div className={styles.inputWrapper}>
-          <LockKeyhole className={styles.inputIcon} size={20} />
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            placeholder="Mínimo 8 caracteres"
-          />
-          <button
-            type="button"
-            className={styles.eyeButton}
-            onClick={togglePasswordVisibility}
-            aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
-          >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-        </div>
-      </div>
+        <FormField
+          label="E-mail"
+          icon={<Mail size={20} />}
+          placeholder="email@exemplo.com"
+          register={register("email")}
+          error={errors.email}
+        />
 
-      <div className={styles.checkboxGroup}>
-        <label className={styles.checkboxLabel}>
-          <input
-            type="checkbox"
-            checked={agreeTerms}
-            onChange={(e) => setAgreeTerms(e.target.checked)}
-            className={styles.checkboxInput}
-          />
-          <span className={styles.checkboxText}>
-            Concordo com os <a href="#terms">Termos de Uso</a> e{" "}
-            <a href="#privacy">Política de Privacidade</a>.
-          </span>
-        </label>
-      </div>
+        <FormField
+          label="Telefone"
+          icon={<Phone size={20} />}
+          placeholder="(00) 00000-0000"
+          register={register("phone")}
+          error={errors.phone}
+        />
 
-      <Button content={"Criar conta"} className={styles.submitButton} />
-    </form>
+        <PasswordField
+          label="Senha"
+          placeholder="Mínimo 6 caracteres"
+          register={register("password")}
+          error={errors.password}
+        />
+
+        <Button
+          type="submit"
+          content={loading ? "Entrando..." : "Entrar"}
+          className={styles.submitButton}
+          disabled={loading}
+        />
+      </form>
+    </>
   );
 }
