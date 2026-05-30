@@ -1,23 +1,25 @@
 // import { supabase } from "/supabase/";
 
 export const authService = {
-  signUp: async (email, password, userType) => {
+  signUp: async (userData) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const userExists = users.find((u) => u.email === email);
+    const userExists = users.find(
+      (u) => u.email === userData.email || u.cpf === userData.cpf,
+    );
     if (userExists) {
-      throw new Error("Usuário já existe");
+      throw new Error("Usuário ou CPF já cadastrado");
     }
 
     const newUser = {
       id: Date.now(),
-      email,
-      password,
-      userType,
+      ...userData,
     };
 
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
+
+    localStorage.setItem("token", JSON.stringify(newUser));
 
     return newUser;
   },

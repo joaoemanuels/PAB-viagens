@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -51,7 +51,14 @@ export default function RegisterForm() {
     setLoading(true);
 
     try {
-      await authService.signIn(data.identifier, data.password);
+      await authService.signUp({
+        fullName: data.fullName,
+        cpf: data.cpf,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+        userType: "client",
+      });
 
       navigate("/admin");
     } catch (err) {
@@ -108,10 +115,31 @@ export default function RegisterForm() {
           register={register("password")}
           error={errors.password}
         />
+        <div className={styles.checkboxGroup}>
+          <label className={styles.checkboxLabel}>
+            <input
+              type="checkbox"
+              className={styles.checkboxInput}
+              {...register("terms")}
+            />
+            <span className={styles.checkboxText}>
+              Concordo com os <a href="#terms">Termos de Uso</a> e{" "}
+              <Link to="#privacy">Política de Privacidade</Link>.
+            </span>
+          </label>
+          {errors.terms && (
+            <p
+              className={styles.errorText}
+              style={{ color: "red", fontSize: "12px", marginTop: "4px" }}
+            >
+              {errors.terms.message}
+            </p>
+          )}
+        </div>
 
         <Button
           type="submit"
-          content={loading ? "Entrando..." : "Entrar"}
+          content={loading ? "Cadastrando..." : "Cadastrar"}
           className={styles.submitButton}
           disabled={loading}
         />

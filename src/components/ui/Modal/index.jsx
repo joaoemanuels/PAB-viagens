@@ -6,17 +6,31 @@ import {
   Ticket,
   User,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./modal.module.css";
 import Icon from "../../../assets/images/favicon.svg";
 import { passengersData } from "../../../data/passengers";
 import AppVersion from "../AppVersion";
+import { authService } from "../../../services/auth";
 
 export default function Modal({ isOpen, onClose }) {
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
   const getNavLinkClass = ({ isActive }) =>
     `${styles.menuItem} ${isActive ? styles.activeItem : ""}`;
+
+  const handleLogout = async () => {
+    try {
+      await authService.signOut();
+
+      onClose();
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Erro ao tentar deslogar:", error);
+    }
+  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -93,7 +107,9 @@ export default function Modal({ isOpen, onClose }) {
               <span className={styles.icon}>
                 <LogOut />
               </span>
-              <span className={styles.itemText}>Sair</span>
+              <span className={styles.itemText} onClick={handleLogout}>
+                Sair
+              </span>
             </li>
           </ul>
         </nav>
