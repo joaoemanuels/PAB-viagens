@@ -1,6 +1,5 @@
 import styles from "./seatSelector.module.css";
-import TripsImage from "../../../../../assets/images/trips.png";
-
+import TripsImage from "@/assets/images/trips.webp";
 
 export default function SeatSelector() {
   return (

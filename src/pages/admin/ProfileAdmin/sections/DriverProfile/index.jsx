@@ -8,7 +8,7 @@ export default function DriverProfile({
   avatarUrl = "https://4kwallpapers.com/images/walls/thumbs_2t/26355.jpg", // URL padrão ou mock
 }) {
   return (
-    <section className={styles.driverProfile}>
+    <section className={styles.profileAdmin}>
       <div className={styles.profileCard}>
         <div className={styles.avatarWrapper}>
           <img

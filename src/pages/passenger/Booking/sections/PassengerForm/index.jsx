@@ -7,7 +7,7 @@ export default function PassengerForm() {
 
   const handleIncrement = (e) => {
     e.preventDefault();
-    if (seats < 4) setSeats((prev) => prev + 1);
+    if (seats < 12) setSeats((prev) => prev + 1);
   };
 
   const handleDecrement = (e) => {
@@ -62,7 +62,7 @@ export default function PassengerForm() {
               <div className={styles.seatTexts}>
                 <span className={styles.seatTitle}>Quantidade de Assentos</span>
                 <span className={styles.seatSubtitle}>
-                  Máximo 4 por reserva
+                  Máximo de 12
                 </span>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function PassengerForm() {
               <span className={styles.stepperValue}>{seats}</span>
               <button
                 onClick={handleIncrement}
-                disabled={seats >= 4}
+                disabled={seats >= 12}
                 className={`${styles.stepperButton} ${styles.stepperButtonPrimary}`}
                 aria-label="Aumentar assentos"
               >

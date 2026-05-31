@@ -1,4 +1,4 @@
-import Header from "../../../components/ui/Header";
+import HeaderAdmin from "../../../components/ui/HeaderAdmin";
 import styles from "./liveTrip.module.css";
 import TripHeader from "./TripHeader";
 import TripMapCard from "./TripMapCard";
@@ -6,7 +6,7 @@ import TripMapCard from "./TripMapCard";
 export default function LiveTrip() {
   return (
     <section className={styles.liveTrip}>
-      <Header />
+      <HeaderAdmin/>
       <TripHeader />
       <TripMapCard />
     </section>

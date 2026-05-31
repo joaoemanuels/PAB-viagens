@@ -19,10 +19,10 @@ const Booking = lazy(() => import("../pages/passenger/Booking"));
 const Reserves = lazy(() => import("../pages/passenger/Reserves"));
 const ProfileUser = lazy(() => import("../pages/passenger/ProfileUser"));
 const PayMethod = lazy(() => import("../pages/passenger/PayMethod"));
-const Travels = lazy(() => import("../pages/passenger/Travels"));
 
 const Admin = lazy(() => import("../pages/admin/Admin"));
 const LiveTrip = lazy(() => import("../pages/admin/LiveTrip"));
+const Travels = lazy(() => import("../pages/admin/Travels"));
 const ProfileAdmin = lazy(() => import("../pages/admin/ProfileAdmin"));
 
 function AppRoutes() {
@@ -64,6 +64,9 @@ function AppRoutes() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/liveTrip" element={<LiveTrip />} />
           <Route path="/travelsAdmin" element={<Travels />} />
+          {/* <Route path="/reserveAdmin" element={<ReserveAdmin />} /> */}
+          {/* <Route path="/mapAdmin" element={<MapAdmin />} /> */}
+
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>
 

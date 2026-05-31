@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img
-            src="/404.png"
+            src="/404.webp"
             alt="Ilustração de um ônibus e um carro em um cruzamento com uma placa escrito 404"
           />
         </div>
