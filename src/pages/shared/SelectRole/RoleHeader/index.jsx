@@ -1,5 +1,5 @@
 import styles from "./roleHeader.module.css";
-import SelectRole from "../../../../assets/images/selectRole.png";
+import SelectRole from "@/assets/images/selectRole.png";
 
 export default function RoleHeader() {
   return (
