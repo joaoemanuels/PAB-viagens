@@ -8,7 +8,7 @@ export default function FooterAuth() {
   return (
     <nav className={styles.footer}>
       <NavLink
-        to="/"
+        to="/home"
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }

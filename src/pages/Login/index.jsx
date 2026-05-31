@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./login.module.css";
 
@@ -7,8 +7,16 @@ import LoginHeader from "./LoginHeader";
 import LoginForm from "./LoginForm";
 import PromoBanner from "./PromoBanner";
 import GoogleLogin from "./GoogleLogin";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
+  const { isLogged } = useAuth();
+  const navigate = useNavigate();
+
+  if (isLogged) {
+    navigate("/home");
+  }
+
   return (
     <section>
       <Header navigationType="back" showSupportIcon={false} />

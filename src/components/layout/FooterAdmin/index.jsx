@@ -8,21 +8,26 @@ export default function FooterAdmin() {
 
   return (
     <nav className={styles.footer}>
-      <NavLink to="/travels" className={checkActive}>
+      <NavLink to="/travelsAdmin" className={checkActive}>
         <BusFront />
         <span>Viagens</span>
       </NavLink>
 
-      <NavLink to="/admin" className={checkActive}>
+      <NavLink to="/reserveAdmin" className={checkActive}>
         <div className={styles.iconWrapper}>
           <UserSearch />
         </div>
-        <span>Passageiros</span>
+        <span>Reservas</span>
+      </NavLink>
+
+      <NavLink to="/mapAdmin" className={checkActive}>
+        <User />
+        <span>Mapa</span>
       </NavLink>
 
       <NavLink to="/profileAdmin" className={checkActive}>
         <User />
-        <span>Perfil</span>
+        <span>Configuração</span>
       </NavLink>
     </nav>
   );
