@@ -1,32 +1,35 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/common/ScrollToTop";
-import SelectRole from "../pages/shared/SelectRole";
-import Login from "../pages/shared/Login";
-import Register from "../pages/shared/Register";
 import AuthLayout from "../components/layout/AuthLayout";
-import Home from "../pages/passenger/Home";
-import Trips from "../pages/passenger/Trips";
-import Tracking from "../pages/passenger/Tracking";
-import Booking from "../pages/passenger/Booking";
-import Reserves from "../pages/passenger/Reserves";
-import ProfileUser from "../pages/passenger/ProfileUser";
-import PayMethod from "../pages/passenger/PayMethod";
 import AdminLayout from "../components/layout/AdminLayout";
-import Admin from "../pages/admin/Admin";
-import Travels from "../pages/passenger/Travels";
-import ProfileAdmin from "../pages/admin/ProfileAdmin";
-import NotFound from "../pages/shared/NotFound";
+
+const SelectRole = lazy(() => import("../pages/shared/SelectRole"));
+const Login = lazy(() => import("../pages/shared/Login"));
+const Register = lazy(() => import("../pages/shared/Register"));
+const NotFound = lazy(() => import("../pages/shared/NotFound"));
+
+const Home = lazy(() => import("../pages/passenger/Home"));
+const Trips = lazy(() => import("../pages/passenger/Trips"));
+const Tracking = lazy(() => import("../pages/passenger/Tracking"));
+const Booking = lazy(() => import("../pages/passenger/Booking"));
+const Reserves = lazy(() => import("../pages/passenger/Reserves"));
+const ProfileUser = lazy(() => import("../pages/passenger/ProfileUser"));
+const PayMethod = lazy(() => import("../pages/passenger/PayMethod"));
+const Travels = lazy(() => import("../pages/passenger/Travels"));
+
+const Admin = lazy(() => import("../pages/admin/Admin"));
+const ProfileAdmin = lazy(() => import("../pages/admin/ProfileAdmin"));
 
 function AppRoutes() {
   return (
-    <>
+    <Suspense fallback={<div>Carregando...</div>}>
       <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<SelectRole />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -64,7 +67,7 @@ function AppRoutes() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </Suspense>
   );
 }
 

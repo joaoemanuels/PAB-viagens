@@ -1,7 +1,6 @@
 import { Bus, User, ChevronRight } from "lucide-react";
 import styles from "./upcomingTravels.module.css";
 
-// Dados mockados simulando uma resposta de API
 const MOCK_TRAVELS = [
   {
     id: 1,
@@ -35,7 +34,6 @@ export default function UpcomingTravels() {
       <div className={styles.listContainer}>
         {MOCK_TRAVELS.map((travel) => (
           <div key={travel.id} className={styles.tripCard}>
-            {/* Linha Superior: Ícone, Rota, Placa e Horário */}
             <div className={styles.cardHeader}>
               <div className={styles.headerLeft}>
                 <div className={styles.iconContainer}>
@@ -55,10 +53,8 @@ export default function UpcomingTravels() {
               </div>
             </div>
 
-            {/* Linha Separadora Discreta */}
             <hr className={styles.divider} />
 
-            {/* Linha Inferior: Badge de Passageiros e Link de Detalhes */}
             <div className={styles.cardFooter}>
               <div
                 className={`${styles.passengerBadge} ${
