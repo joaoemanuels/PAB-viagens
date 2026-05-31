@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { UserSearch, User, BusFront } from "lucide-react";
+import { UserSearch, User, BusFront, House } from "lucide-react";
 import styles from "./footerAdmin.module.css";
 
 export default function FooterAdmin() {
@@ -8,6 +8,11 @@ export default function FooterAdmin() {
 
   return (
     <nav className={styles.footer}>
+      <NavLink to="/admin" className={checkActive}>
+        <House />
+        <span>Home</span>
+      </NavLink>
+
       <NavLink to="/travelsAdmin" className={checkActive}>
         <BusFront />
         <span>Viagens</span>

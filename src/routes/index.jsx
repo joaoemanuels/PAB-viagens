@@ -1,30 +1,23 @@
 import { Routes, Route } from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
-
-import AuthLayout from "../components/layout/AuthLayout";
-import AdminLayout from "../components/layout/AdminLayout";
-
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import SelectRole from "../pages/SelectRole";
-
-import Home from "../pages/Home";
-import Trips from "../pages/Trips";
-import Tracking from "../pages/Tracking";
-import Booking from "../pages/Booking";
-
-import Reserves from "../pages/Reserves";
-import ProfileUser from "../pages/ProfileUser";
-import PayMethod from "../pages/PayMethod";
-
-import Admin from "../pages/Admin";
-import Travels from "../pages/Travels";
-import ProfileAdmin from "../pages/ProfileAdmin";
-
-import NotFound from "../pages/NotFound";
-
 import ScrollToTop from "../components/common/ScrollToTop";
+import SelectRole from "../pages/shared/SelectRole";
+import Login from "../pages/shared/Login";
+import Register from "../pages/shared/Register";
+import AuthLayout from "../components/layout/AuthLayout";
+import Home from "../pages/passenger/Home";
+import Trips from "../pages/passenger/Trips";
+import Tracking from "../pages/passenger/Tracking";
+import Booking from "../pages/passenger/Booking";
+import Reserves from "../pages/passenger/Reserves";
+import ProfileUser from "../pages/passenger/ProfileUser";
+import PayMethod from "../pages/passenger/PayMethod";
+import AdminLayout from "../components/layout/AdminLayout";
+import Admin from "../pages/admin/Admin";
+import Travels from "../pages/passenger/Travels";
+import ProfileAdmin from "../pages/admin/ProfileAdmin";
+import NotFound from "../pages/shared/NotFound";
 
 function AppRoutes() {
   return (
@@ -65,7 +58,7 @@ function AppRoutes() {
           }
         >
           <Route path="/admin" element={<Admin />} />
-          <Route path="/travels" element={<Travels />} />
+          <Route path="/travelsAdmin" element={<Travels />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>
 
