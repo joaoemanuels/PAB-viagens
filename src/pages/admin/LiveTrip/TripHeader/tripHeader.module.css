@@ -1,0 +1,12 @@
+.tripHeader {
+  padding: 16px;
+}
+
+.tripHeaderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+}

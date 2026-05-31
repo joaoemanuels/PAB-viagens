@@ -1,0 +1,75 @@
+.tripControls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.btnPause {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  background-color: #0056c6;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnPause:hover {
+  background-color: #0043a0;
+}
+
+.secondaryRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btnEnd,
+.btnBroadcast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btnEnd:hover,
+.btnBroadcast:hover {
+  opacity: 0.9;
+}
+
+.btnEnd {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.btnBroadcast {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.iconSecondary {
+  width: 18px;
+  height: 18px;
+}

@@ -1,0 +1,95 @@
+.tripRoute {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Badge de Status */
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background-color: #0f766e; /* Verde escuro do status */
+  border-radius: 50%;
+}
+
+.statusText {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f766e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Título da Rota */
+.routeTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a; /* Slate 900 */
+  margin: 0 0 14px 0;
+}
+
+.arrow {
+  color: #475569; /* Slate 600 */
+  font-weight: 400;
+  padding: 0 4px;
+}
+
+/* Linha de Meta Informações (Linha e Veículo) */
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #64748b; /* Cor suave para os ícones técnicos */
+}
+
+.dotDivider {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* Linha de Chegada Estimada */
+.etaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.etaIcon {
+  width: 16px;
+  height: 16px;
+  color: #0252c5; /* Azul do destaque */
+}
+
+.etaText {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0252c5;
+  margin: 0;
+}
+
+.etaTime {
+  font-weight: 700;
+}

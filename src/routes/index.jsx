@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/common/ScrollToTop";
 import AuthLayout from "../components/layout/AuthLayout";
 import AdminLayout from "../components/layout/AdminLayout";
+import { Loading } from "../components/common/Loading";
 
 const SelectRole = lazy(() => import("../pages/shared/SelectRole"));
 const Login = lazy(() => import("../pages/shared/Login"));
@@ -21,11 +22,12 @@ const PayMethod = lazy(() => import("../pages/passenger/PayMethod"));
 const Travels = lazy(() => import("../pages/passenger/Travels"));
 
 const Admin = lazy(() => import("../pages/admin/Admin"));
+const LiveTrip = lazy(() => import("../pages/admin/LiveTrip"));
 const ProfileAdmin = lazy(() => import("../pages/admin/ProfileAdmin"));
 
 function AppRoutes() {
   return (
-    <Suspense fallback={<div>Carregando...</div>}>
+    <Suspense fallback={<Loading />}>
       <ScrollToTop />
 
       <Routes>
@@ -39,8 +41,6 @@ function AppRoutes() {
           <Route path="/tracking" element={<Tracking />} />
         </Route>
 
-        <Route path="/trips/:tripId/booking" element={<Booking />} />
-
         <Route
           element={
             <PrivateRoute>
@@ -48,6 +48,7 @@ function AppRoutes() {
             </PrivateRoute>
           }
         >
+          <Route path="/trips/:tripId/booking" element={<Booking />} />
           <Route path="/reserves" element={<Reserves />} />
           <Route path="/profileUser" element={<ProfileUser />} />
           <Route path="/payMethod" element={<PayMethod />} />
@@ -61,6 +62,7 @@ function AppRoutes() {
           }
         >
           <Route path="/admin" element={<Admin />} />
+          <Route path="/liveTrip" element={<LiveTrip />} />
           <Route path="/travelsAdmin" element={<Travels />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>
