@@ -15,7 +15,7 @@ const loginSchema = z.object({
   password: z.string().min(6, "Senha inválida"),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ role }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -39,11 +39,15 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      await authService.signIn(data.identifier, data.password);
+      await authService.signIn(data.identifier, data.password, role);
 
-      navigate("/reserves");
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Ocorreu um erro ao fazer login.");
     } finally {
       setLoading(false);
     }

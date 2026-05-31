@@ -5,8 +5,9 @@ import Button from "../../ui/Button";
 
 export default function NotLoggedState() {
   const navigate = useNavigate();
+
   function handleLogin() {
-    navigate("/login");
+    navigate("/login/passenger");
   }
 
   return (
@@ -29,7 +30,7 @@ export default function NotLoggedState() {
         />
 
         <p className={styles.signup}>
-          Ainda não tem conta? <Link to="/register">Criar Agora</Link>
+          Ainda não tem conta? <Link to="/register/passenger">Criar Agora</Link>
         </p>
       </div>
     </div>

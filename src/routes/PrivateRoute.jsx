@@ -1,9 +1,24 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { Loading } from "../components/common/Loading";
+import NotLoggedState from "../components/common/NotLoggedState";
 
-function PrivateRoute({ children }) {
-  const isAuthenticated = true;
+function PrivateRoute({ children, allowedRole = "passenger" }) {
+  const { isLogged, loading } = useAuth();
 
-  return isAuthenticated ? children : <Navigate to="/Login" />;
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!isLogged) {
+    if (allowedRole === "passenger") {
+      return <NotLoggedState />;
+    }
+
+    return <Navigate to="/login/admin" replace />;
+  }
+
+  return children;
 }
 
 export default PrivateRoute;

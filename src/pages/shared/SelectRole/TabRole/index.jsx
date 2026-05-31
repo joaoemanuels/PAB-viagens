@@ -18,7 +18,7 @@ export default function TabRole() {
       description: "Quero gerenciar minhas rotas e passageiros.",
       icon: <BellIcon className={styles.iconDriver} />,
       wrapperClass: styles.iconWrapperDriver,
-      path: "/admin",
+      path: "/login/admin",
     },
   ];
 

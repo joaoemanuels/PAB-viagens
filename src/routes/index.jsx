@@ -32,8 +32,8 @@ function AppRoutes() {
 
       <Routes>
         <Route path="/" element={<SelectRole />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login/:role" element={<Login />} />
+        <Route path="/register/:role" element={<Register />} />
 
         <Route element={<AuthLayout />}>
           <Route path="/home" element={<Home />} />
@@ -56,7 +56,7 @@ function AppRoutes() {
 
         <Route
           element={
-            <PrivateRoute>
+            <PrivateRoute allowedRole="admin">
               <AdminLayout />
             </PrivateRoute>
           }
