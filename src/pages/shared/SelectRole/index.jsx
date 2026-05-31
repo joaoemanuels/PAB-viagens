@@ -1,6 +1,7 @@
+import styles from "./selectRole.module.css";
+
 import RoleFooter from "./RoleFooter";
 import RoleHeader from "./RoleHeader";
-import styles from "./selectRole.module.css";
 import TabRole from "./TabRole";
 
 export default function SelectRole() {
