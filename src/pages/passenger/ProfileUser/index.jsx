@@ -20,8 +20,11 @@ import {
   Phone,
   User,
 } from "lucide-react";
+import { authService } from "../../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileUser() {
+  const navigate = useNavigate();
   const { isLogged, loading } = useAuth();
 
   if (loading) {
@@ -31,6 +34,16 @@ export default function ProfileUser() {
   if (!isLogged) {
     return <NotLoggedState />;
   }
+
+  const handleLogout = async () => {
+    try {
+      await authService.signOut();
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Erro ao tentar deslogar:", error);
+    }
+  };
 
   return (
     <section className={styles.profileUser}>
@@ -83,6 +96,7 @@ export default function ProfileUser() {
             icon={<LogOut />}
             label="Sair da Conta"
             variant="danger"
+            onClick={handleLogout}
           />
         </ProfileSection>
 

@@ -85,7 +85,7 @@
 @media (min-width: 1024px) {
   .filterList {
     padding: 0 0 0.5rem;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     overflow-x: visible;
   }
 

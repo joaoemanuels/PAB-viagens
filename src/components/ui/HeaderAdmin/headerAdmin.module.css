@@ -42,13 +42,18 @@
   z-index: 999;
 }
 
+.supportIcon:hover {
+  background-color: #005837;
+  scale: 1.05;
+}
+
 @media (min-width: 768px) {
   .header {
     padding: 12px 32px;
   }
 
   .menuHamburguer {
-    display: none; 
+    display: none;
   }
 
   .headerContent {

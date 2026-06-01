@@ -1,9 +1,10 @@
 import { useState } from "react";
-
 import { CalendarDays, Clock3 } from "lucide-react";
-import styles from "./quickFilters.module.css";
+
 import UpcomingTrips from "../UpcomingTrips";
 import TimeTravels from "../TimeTravels";
+
+import styles from "./quickFilters.module.css";
 
 const Filters = {
   HOJE: "hoje",

@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import { tripsData } from "../../../data/trips";
 
 import Header from "../../../components/ui/Header";
-import styles from "./booking.module.css";
 import AlertBox from "./sections/AlertBox";
 import CheckoutFooter from "./sections/CheckoutFooter";
 import PassengerForm from "./sections/PassengerForm";
 import PaymentMethod from "./sections/PaymentMethod";
 import TravelSummary from "./sections/TravelSummary";
+
+import styles from "./booking.module.css";
 
 export default function Booking() {
   const { tripId } = useParams();
