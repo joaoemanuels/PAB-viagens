@@ -170,3 +170,42 @@
 .detailsButton:hover {
   background-color: #f0f7ff;
 }
+@media (min-width: 768px) {
+  .container {
+    max-width: 600px;
+    padding: 24px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .routeTitle {
+    font-size: 1.2rem;
+  }
+
+  .stopLocation {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 800px;
+    padding: 32px;
+  }
+
+  .cardsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header h2 {
+    font-size: 1.4rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+}

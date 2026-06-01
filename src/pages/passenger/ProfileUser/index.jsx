@@ -1,7 +1,7 @@
 import { passengersData } from "../../../data/passengers";
 import { useAuth } from "../../../hooks/useAuth";
-
-import styles from "./profileUser.module.css";
+import { authService } from "../../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../../../components/ui/Header";
 import ProfileItem from "../../../components/ui/ProfileItem";
@@ -9,6 +9,8 @@ import ProfileSection from "../../../components/ui/ProfileSection";
 import AppVersion from "../../../components/ui/AppVersion";
 import ProfileHeader from "../../../components/common/ProfileHeader";
 import NotLoggedState from "../../../components/common/NotLoggedState";
+
+import styles from "./profileUser.module.css";
 
 import {
   BadgeQuestionMark,
@@ -20,8 +22,6 @@ import {
   Phone,
   User,
 } from "lucide-react";
-import { authService } from "../../../services/auth";
-import { useNavigate } from "react-router-dom";
 
 export default function ProfileUser() {
   const navigate = useNavigate();

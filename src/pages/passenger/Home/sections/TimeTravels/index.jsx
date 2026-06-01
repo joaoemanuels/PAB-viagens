@@ -1,7 +1,8 @@
 import { tripsData } from "../../../../../data/trips";
-import styles from "./timeTravels.module.css";
+
 import TravelCard from "./TravelCard";
 
+import styles from "./timeTravels.module.css";
 
 export default function TimeTravels() {
   return (
