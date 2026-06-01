@@ -1,19 +1,30 @@
-import { Bell, CircleCheck, CircleX, LogOut, UserX } from "lucide-react";
+import { supabase } from "../../../services/supabase/supabase.js";
+import { CircleCheck, CircleX, LogOut, UserX } from "lucide-react";
+
 import styles from "./passengerCard.module.css";
 
 const STATUS_CONFIG = {
-  CONFIRMADO: { label: "CONFIRMADO", class: styles.statusConfirmed },
-  AGUARDANDO: { label: "AGUARDANDO", class: styles.statusWaiting },
-  EMBARCADO: { label: "EMBARCADO", class: styles.statusBoarded },
+  CONFIRMED: { label: "CONFIRMADO", class: styles.statusConfirmed },
+  PENDING: { label: "AGUARDANDO", class: styles.statusWaiting },
+  CHECKED_IN: { label: "EMBARCADO", class: styles.statusBoarded },
+  CANCELLED: { label: "CANCELADO", class: styles.statusWaiting },
 };
 
 export default function PassengerCard({ passenger }) {
-  const { name, seat, status, avatar } = passenger;
+  const { id, name, seat, status, avatar } = passenger;
+
+  const updateStatus = async (newStatus) => {
+    await supabase.from("bookings").update({ status: newStatus }).eq("id", id);
+  };
 
   const renderActions = () => {
-    if (status === "EMBARCADO") {
+    if (status === "CHECKED_IN") {
       return (
-        <button className={styles.btnDisembark} type="button">
+        <button
+          className={styles.btnDisembark}
+          type="button"
+          onClick={() => updateStatus("confirmed")}
+        >
           <LogOut /> Desembarcar
         </button>
       );
@@ -24,18 +35,21 @@ export default function PassengerCard({ passenger }) {
         <button
           className={`${styles.btnAction} ${styles.btnCheckin}`}
           type="button"
+          onClick={() => updateStatus("checked_in")}
         >
           <CircleCheck /> Check-in
         </button>
         <button
           className={`${styles.btnAction} ${styles.btnNoShow}`}
           type="button"
+          onClick={() => updateStatus("cancelled")}
         >
           <UserX /> Falta
         </button>
         <button
           className={`${styles.btnAction} ${styles.btnCancel}`}
           type="button"
+          onClick={() => updateStatus("cancelled")}
         >
           <CircleX /> Cancelar
         </button>
@@ -43,19 +57,16 @@ export default function PassengerCard({ passenger }) {
     );
   };
 
-  const cardClassName = `${styles.passengerCard} ${
-    status === "EMBARCADO" ? styles.cardBoarded : ""
-  }`;
+  const statusKey = status in STATUS_CONFIG ? status : "PENDING";
 
   return (
-    <article className={cardClassName}>
+    <article
+      className={`${styles.passengerCard} ${status === "CHECKED_IN" ? styles.cardBoarded : ""}`}
+    >
       <div className={styles.infoRow}>
         <div className={styles.profileGroup}>
           <div className={styles.avatarWrapper}>
             <img src={avatar} alt={name} className={styles.avatar} />
-            {passenger.id === 1 && (
-              <span className={styles.avatarBadge}>🧳</span>
-            )}
           </div>
 
           <div className={styles.metaData}>
@@ -67,9 +78,9 @@ export default function PassengerCard({ passenger }) {
         </div>
 
         <span
-          className={`${styles.statusBadge} ${STATUS_CONFIG[status].class}`}
+          className={`${styles.statusBadge} ${STATUS_CONFIG[statusKey].class}`}
         >
-          {STATUS_CONFIG[status].label}
+          {STATUS_CONFIG[statusKey].label}
         </span>
       </div>
 

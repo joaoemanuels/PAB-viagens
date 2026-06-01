@@ -2,10 +2,10 @@ import { Star } from "lucide-react";
 import styles from "./driverProfile.module.css";
 
 export default function DriverProfile({
-  name = "Ricardo Oliveira",
-  rating = 4.9,
-  tripsCount = "1.240",
-  avatarUrl = "https://4kwallpapers.com/images/walls/thumbs_2t/26355.jpg", // URL padrão ou mock
+  name = "Motorista",
+  rating = 0,
+  tripsCount = "0",
+  avatarUrl = "",
 }) {
   return (
     <section className={styles.profileAdmin}>

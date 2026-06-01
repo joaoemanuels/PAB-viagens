@@ -1,4 +1,4 @@
-import { passengersData } from "../../../data/passengers";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { authService } from "../../../services/auth";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import ProfileSection from "../../../components/ui/ProfileSection";
 import AppVersion from "../../../components/ui/AppVersion";
 import ProfileHeader from "../../../components/common/ProfileHeader";
 import NotLoggedState from "../../../components/common/NotLoggedState";
+import Loading from "../../../components/ui/Loading";
 
 import styles from "./profileUser.module.css";
 
@@ -26,19 +27,29 @@ import {
 export default function ProfileUser() {
   const navigate = useNavigate();
   const { isLogged, loading } = useAuth();
+  const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
+  useEffect(() => {
+    async function fetchProfile() {
+      if (!isLogged) return;
 
-  if (!isLogged) {
-    return <NotLoggedState />;
-  }
+      setProfileLoading(true);
+      const data = await authService.getCurrentUser();
+      setProfile(data);
+      setProfileLoading(false);
+    }
+
+    fetchProfile();
+  }, [isLogged]);
+
+  if (loading || profileLoading) return <Loading />;
+
+  if (!isLogged) return <NotLoggedState />;
 
   const handleLogout = async () => {
     try {
       await authService.signOut();
-
       navigate("/home");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
@@ -49,25 +60,25 @@ export default function ProfileUser() {
     <section className={styles.profileUser}>
       <Header showSupportIcon={false} />
       <div className={styles.profileContainer}>
-        <ProfileHeader name={passengersData.firstName} />
+        <ProfileHeader name={profile?.full_name} />
 
         <ProfileSection title="Dados Pessoais">
           <ProfileItem
             icon={<User />}
             label="Nome Completo"
-            value={passengersData.fullName}
+            value={profile?.full_name}
             isLink
           />
           <ProfileItem
             icon={<Mail />}
             label="E-mail"
-            value={passengersData.email}
+            value={profile?.email}
             isLink
           />
           <ProfileItem
             icon={<Phone />}
             label="Telefone"
-            value={passengersData.phone}
+            value={profile?.phone}
             isLink
           />
         </ProfileSection>
@@ -81,7 +92,7 @@ export default function ProfileUser() {
           <ProfileItem
             icon={<Globe />}
             label="Idioma"
-            value={passengersData.settings.language}
+            value={profile?.settings?.language}
             isLink
           />
         </ProfileSection>

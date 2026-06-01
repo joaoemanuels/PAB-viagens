@@ -1,14 +1,14 @@
 import { BusIcon, ClockIcon, RouteIcon } from "lucide-react";
 import styles from "./tripRoute.module.css";
 
-export default function TripRoute({
-  status = "EM ANDAMENTO",
-  origin = "São Paulo",
-  destination = "Rio de Janeiro",
-  line = "Linha Expressa 101",
-  vehicle = "VOL-2024",
-  eta = "14:45",
-}) {
+export default function TripRoute({ trip }) {
+  const status = trip?.status === "in_progress" ? "EM ANDAMENTO" : "AGENDADA";
+  const origin = trip?.routes?.origin ?? "—";
+  const destination = trip?.routes?.destination ?? "—";
+  const line = trip?.routes?.type ?? "—";
+  const vehicle = trip?.routes?.vehicle_plate ?? "—";
+  const eta = trip?.arrival_time ?? "—";
+
   return (
     <section className={styles.tripRoute}>
       <div className={styles.statusBadge}>

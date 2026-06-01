@@ -567,9 +567,9 @@ pab-viagens/
 - [x] Info de contato
 
 #### ErrorBoundary.jsx
-- [ ] Capturar erros de componentes
-- [ ] Mostrar UI amigável
-- [ ] Log de erros
+- [x] Capturar erros de componentes
+- [x] Mostrar UI amigável
+- [x] Log de erros
 
 ### Layouts
 

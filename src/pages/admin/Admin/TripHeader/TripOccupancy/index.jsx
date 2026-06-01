@@ -1,7 +1,8 @@
 import styles from "./tripOccupancy.module.css";
 
-export default function TripOccupancy({ current = 5, total = 12 }) {
-  const percentage = Math.min(Math.max((current / total) * 100, 0), 100);
+export default function TripOccupancy({ current = 0, total = 0 }) {
+  const percentage =
+    total > 0 ? Math.min(Math.max((current / total) * 100, 0), 100) : 0;
 
   return (
     <section className={styles.tripOccupancy}>

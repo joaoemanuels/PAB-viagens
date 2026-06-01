@@ -1,12 +1,13 @@
 import { MapPinIcon } from "lucide-react";
 import styles from "./tripMapCard.module.css";
 
-export default function TripMapCard({
-  currentLocation = "BR-116, km 42",
-  nextStop = "Posto Graal, Resende",
-  timeRemaining = "em 12 min",
-  progressPercentage = 75,
-}) {
+export default function TripMapCard({ trip }) {
+  const currentLocation = trip?.driver_current_lat
+    ? `${trip.driver_current_lat}, ${trip.driver_current_lng}`
+    : "Localização não disponível";
+
+  const progressPercentage = 0; // implementar cálculo real depois
+
   return (
     <section className={styles.tripMapCard}>
       <div className={styles.tripMapCardContainer}>
@@ -25,10 +26,14 @@ export default function TripMapCard({
         <div className={styles.infoContainer}>
           <div className={styles.rowTop}>
             <span className={styles.label}>Próxima Parada</span>
-            <span className={styles.time}>{timeRemaining}</span>
+            <span className={styles.time}>
+              {trip?.estimated_arrival ?? "—"}
+            </span>
           </div>
 
-          <h3 className={styles.stopName}>{nextStop}</h3>
+          <h3 className={styles.stopName}>
+            {trip?.routes?.destination ?? "—"}
+          </h3>
 
           <div className={styles.progressContainer}>
             <div

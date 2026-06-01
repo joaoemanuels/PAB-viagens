@@ -1,73 +1,81 @@
-// import { supabase } from "/supabase/";
+import { supabase } from "../services/supabase/supabase.js";
 
 export const authService = {
   signUp: async (userData) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const { data, error } = await supabase.auth.signUp({
+      email: userData.email,
+      password: userData.password,
+    });
 
-    const userExists = users.find(
-      (u) => u.email === userData.email || u.cpf === userData.cpf,
-    );
-    if (userExists) {
-      throw new Error("Usuário ou CPF já cadastrado");
-    }
+    if (error) throw new Error(error.message);
 
-    const newUser = {
-      id: Date.now(),
-      ...userData,
-    };
+    const { error: profileError } = await supabase.from("users").insert({
+      auth_id: data.user.id,
+      full_name: userData.fullName,
+      first_name: userData.firstName,
+      last_name: userData.lastName,
+      email: userData.email,
+      phone: userData.phone,
+      role: "passenger",
+    });
 
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
+    if (profileError) throw new Error(profileError.message);
 
-    localStorage.setItem("token", JSON.stringify(newUser));
-
-    return newUser;
+    return data.user;
   },
 
   signIn: async (identifier, password) => {
-    // Mudamos o nome do parâmetro para clareza
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    let email = identifier;
 
-    // Procura por e-mail OU por CPF, e valida a senha
-    const user = users.find(
-      (u) =>
-        (u.email === identifier || u.cpf === identifier) &&
-        u.password === password,
-    );
+    if (!identifier.includes("@")) {
+      const { data: userFound } = await supabase
+        .from("users")
+        .select("email")
+        .eq("document_id", identifier)
+        .single();
 
-    if (!user) {
-      throw new Error("E-mail/CPF ou senha incorretos");
+      if (!userFound) throw new Error("Usuário não encontrado");
+      email = userFound.email;
     }
 
-    localStorage.setItem("token", JSON.stringify(user));
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    return user;
+    if (error) throw new Error("E-mail/CPF ou senha incorretos");
+
+    return data.user;
   },
 
   signOut: async () => {
-    localStorage.removeItem("token");
+    const { error } = await supabase.auth.signOut();
+    if (error) throw new Error(error.message);
   },
 
   getCurrentUser: async () => {
-    const user = localStorage.getItem("token");
-    return user ? JSON.parse(user) : null;
+    const { data } = await supabase.auth.getUser();
+    if (!data.user) return null;
+
+    const { data: profile } = await supabase
+      .from("users")
+      .select("*")
+      .eq("auth_id", data.user.id)
+      .single();
+
+    return profile;
   },
 
   updateProfile: async (userId, data) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const { error } = await supabase
+      .from("users")
+      .update({
+        ...data,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", userId);
 
-    const updatedUsers = users.map((user) =>
-      user.id === userId ? { ...user, ...data } : user,
-    );
-
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    const current = JSON.parse(localStorage.getItem("token"));
-
-    if (current?.id === userId) {
-      const updated = { ...current, ...data };
-      localStorage.setItem("token", JSON.stringify(updated));
-    }
+    if (error) throw new Error(error.message);
 
     return true;
   },

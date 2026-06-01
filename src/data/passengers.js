@@ -12,9 +12,6 @@ export const passengersData = {
   email: "ricardo.santos@email.com",
   phone: "+55 (11) 98765-4321",
 
-  // Documento
-  cpf: "123.456.789-00",
-
   // Perfil
   avatar:
     "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg",

@@ -1,5 +1,6 @@
 import NotLoggedState from "../../../components/common/NotLoggedState";
 import Header from "../../../components/ui/Header";
+import Loading from "../../../components/ui/Loading";
 import { useAuth } from "../../../hooks/useAuth";
 import HeaderSection from "./HeaderSection";
 import Tabs from "./Tabs";
@@ -10,13 +11,13 @@ export default function Reserves() {
   const { isLogged, loading } = useAuth();
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <Loading />;
   }
 
   if (!isLogged) {
     return <NotLoggedState />;
   }
-  
+
   return (
     <section className={styles.reserves}>
       <Header showSupportIcon={false} />

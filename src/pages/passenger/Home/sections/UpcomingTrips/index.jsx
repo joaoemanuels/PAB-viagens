@@ -1,35 +1,64 @@
-import { tripsData } from "../../../../../data/trips";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../../../services/supabase/supabase.js";
+
 import UpcomingTripCard from "./UpcomingTripCard";
+import Loading from "../../../../../components/ui/Loading";
+
 import styles from "./upcomingTrips.module.css";
 
 export default function UpcomingTrips({ filterType, origin, destination }) {
-  const filteredTrips = tripsData.filter((trip) => {
-    const matchesOrigin = trip.origin
-      ? trip.origin.toLowerCase().includes(origin.toLowerCase().trim())
-      : true;
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const matchesDestination = trip.destination
-      ? trip.destination
-          .toLowerCase()
-          .includes(destination.toLowerCase().trim())
-      : true;
+  useEffect(() => {
+    async function fetchTrips() {
+      setLoading(true);
+      setError(null);
 
-    let matchesTab = true;
+      const today = new Date().toISOString().split("T")[0];
 
-    const today = new Date();
+      let query = supabase.from("trips").select(`
+          id,
+          departure_time,
+          available_seats,
+          departure_date,
+          routes (
+            origin,
+            destination,
+            category,
+            type,
+            price_per_seat
+          )
+        `);
 
-    const todayStr = `${today.getFullYear()}-${String(
-      today.getMonth() + 1,
-    ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+      if (filterType === "hoje") {
+        query = query.eq("departure_date", today);
+      } else if (filterType === "proximas") {
+        query = query.gt("departure_date", today);
+      }
 
-    if (filterType === "hoje") {
-      matchesTab = trip.date === todayStr;
-    } else if (filterType === "proximas") {
-      matchesTab = trip.date > todayStr;
+      if (origin.trim()) {
+        query = query.ilike("routes.origin", `%${origin.trim()}%`);
+      }
+
+      if (destination.trim()) {
+        query = query.ilike("routes.destination", `%${destination.trim()}%`);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setTrips(data);
+      }
+
+      setLoading(false);
     }
 
-    return matchesOrigin && matchesDestination && matchesTab;
-  });
+    fetchTrips();
+  }, [filterType, origin, destination]);
 
   return (
     <section className={styles.upcomingTrips}>
@@ -37,18 +66,24 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
         <p>{filterType === "hoje" ? "Viagens de Hoje" : "Próximas Viagens"}</p>
       </div>
 
-      {filteredTrips.length > 0 ? (
-        filteredTrips.map((trip) => (
-          <UpcomingTripCard
-            key={trip.id}
-            tripId={trip.id}
-            category={trip.category}
-            route={trip.route}
-            price={trip.price}
-            departure={trip.departure}
-            seatsRemaining={trip.seatsRemaining}
-          />
-        ))
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <p>Erro ao carregar viagens: {error}</p>
+      ) : trips.length > 0 ? (
+        trips
+          .filter((trip) => trip.routes !== null)
+          .map((trip) => (
+            <UpcomingTripCard
+              key={trip.id}
+              tripId={trip.id}
+              category={trip.routes.category}
+              route={`${trip.routes.origin} → ${trip.routes.destination}`}
+              price={trip.routes.price_per_seat}
+              departure={trip.departure_time}
+              seatsRemaining={trip.available_seats}
+            />
+          ))
       ) : (
         <p className={styles.noResults}>
           Nenhuma viagem encontrada para essa rota.

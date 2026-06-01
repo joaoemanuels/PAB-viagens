@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { authService } from "../../../services/auth";
+
 import {
   BadgeQuestionMark,
   CreditCard,
@@ -6,15 +10,25 @@ import {
   Ticket,
   User,
 } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
-import styles from "./modal.module.css";
 import Icon from "../../../assets/images/favicon.svg";
-import { passengersData } from "../../../data/passengers";
 import AppVersion from "../AppVersion";
-import { authService } from "../../../services/auth";
+
+import styles from "./modal.module.css";
 
 export default function Modal({ isOpen, onClose }) {
   const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      if (!isOpen) return;
+      const data = await authService.getCurrentUser();
+      setProfile(data);
+    }
+
+    fetchProfile();
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const getNavLinkClass = ({ isActive }) =>
@@ -23,9 +37,7 @@ export default function Modal({ isOpen, onClose }) {
   const handleLogout = async () => {
     try {
       await authService.signOut();
-
       onClose();
-
       navigate("/login/passenger");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
@@ -37,15 +49,15 @@ export default function Modal({ isOpen, onClose }) {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.profileHeader}>
           <div className={styles.avatarWrapper}>
-            <img src={passengersData.avatar} alt="Ricardo de Oliveira" />
+            <img src={profile?.avatar_url} alt={profile?.full_name} />
             <span>
               <Star fill={"#fff"} size={12} />
             </span>
           </div>
 
           <div className={styles.profileTextInfo}>
-            <h2>{passengersData.fullName}</h2>
-            <p>{passengersData.email}</p>
+            <h2>{profile?.full_name}</h2>
+            <p>{profile?.email}</p>
             <div className={styles.premiumTagWrapper}>
               <span>Premium Member</span>
             </div>
@@ -123,7 +135,7 @@ export default function Modal({ isOpen, onClose }) {
           </div>
 
           <p className={styles.versionText}>
-            <AppVersion version={passengersData.appVersion} />
+            <AppVersion version={profile?.app_version} />
           </p>
         </div>
       </div>

@@ -19,49 +19,53 @@ import AppVersion from "../../../../../components/ui/AppVersion";
 
 import styles from "./driverSettings.module.css";
 
-export default function DriverSettings() {
+export default function DriverSettings({ profile }) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await authService.signOut();
-
       navigate("/");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
     }
   };
+
   return (
     <section className={styles.profileAdmin}>
-      <ProfileSection title="meus Dados">
+      <ProfileSection title="Meus Dados">
         <ProfileItem
           icon={<User />}
           label="NOME COMPLETO"
-          value="Ricardo de Oliveira Santos"
+          value={profile?.full_name}
           isLink
         />
         <ProfileItem
           icon={<Mail />}
           label="E-MAIL"
-          value="ricardo.santos@email.com"
+          value={profile?.email}
           isLink
         />
         <ProfileItem
           icon={<Phone />}
           label="TELEFONE"
-          value="+55 (11) 98765-4321"
+          value={profile?.phone}
           isLink
         />
         <ProfileItem
           icon={<Contact />}
           label="CNH"
-          value="123456789-10"
+          value={profile?.document_id}
           isLink
         />
         <ProfileItem
           icon={<CarFront />}
           label="VEÍCULO"
-          value="Toyota Corolla • ABC-1234"
+          value={
+            profile?.vehicle_model && profile?.vehicle_plate
+              ? `${profile.vehicle_model} • ${profile.vehicle_plate}`
+              : null
+          }
           isLink
         />
       </ProfileSection>
