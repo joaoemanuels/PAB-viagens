@@ -1,4 +1,4 @@
-import { supabase } from "../../../services/supabase/supabase.js";
+import { supabase } from "../../../../../services/supabase/supabase.js";
 import { CircleCheck, CircleX, LogOut, UserX } from "lucide-react";
 
 import styles from "./passengerCard.module.css";
