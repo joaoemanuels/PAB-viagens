@@ -1,0 +1,39 @@
+.passengerList {
+  padding: 16px;
+  background-color: #f8fafc;
+  max-width: 450px;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleGroup h2 {
+  font-size: 18px;
+  color: #1e293b;
+  margin: 0;
+}
+
+.totalBadge {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

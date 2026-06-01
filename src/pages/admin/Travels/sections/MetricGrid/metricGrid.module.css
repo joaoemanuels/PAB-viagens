@@ -1,0 +1,29 @@
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.iconBlue {
+  color: #0252b3;
+  font-size: 20px;
+}
+
+.badgeTrend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #10b981;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badgeStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #065f46;
+  font-size: 13px;
+  font-weight: 500;
+}

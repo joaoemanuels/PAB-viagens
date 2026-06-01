@@ -1,0 +1,151 @@
+.pendingReservations {
+  padding: 0 16px;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border: 1px solid #f1f5f9;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerIcon {
+  color: #0252b3;
+  font-size: 20px;
+}
+
+.header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.alertBadge {
+  background-color: #fce8e6;
+  color: #a51d24;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background-color: #f4f6fa;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.profileRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.metaData h3 {
+  font-size: 15px;
+  color: #1e293b;
+  margin: 0 0 2px 0;
+}
+
+.metaData p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.btnAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s;
+}
+
+.btnApprove {
+  background-color: #047857;
+  color: #ffffff;
+}
+
+.btnApprove:hover {
+  background-color: #035e43;
+}
+
+.btnWait {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.btnWait:hover {
+  background-color: #cbd5e1;
+}
+
+.btnReject {
+  background-color: #ffffff;
+  border-color: #b91c1c;
+  color: #b91c1c;
+}
+
+.btnReject:hover {
+  background-color: #fef2f2;
+}
+
+.viewFullQueueButton {
+  width: 100%;
+  background: none;
+  border: 1.5px dashed #cbd5e1;
+  padding: 12px;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewFullQueueButton:hover {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+  color: #1e293b;
+}

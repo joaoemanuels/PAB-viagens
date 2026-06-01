@@ -1,0 +1,60 @@
+.container {
+  font-family: sans-serif; /* Use a fonte do seu projeto */
+  padding: 16px;
+  background-color: #f8fafc; /* Fundo ligeiramente azulado/claro da imagem */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.headerIcon {
+  color: #0056b3; /* Azul do ícone de alerta */
+  font-size: 20px;
+}
+
+.title {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.chipGrid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto; /* Permite scroll horizontal se a tela for pequena, igual ao corte da imagem */
+  padding-bottom: 8px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 100px; /* Garante o formato de pílula */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.chipIcon {
+  color: #5c4016; /* Tom marrom/escuro dos ícones da imagem */
+  display: flex;
+  align-items: center;
+}
+
+.chipLabel {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+}

@@ -1,10 +1,10 @@
 import styles from "./travelsHeader.module.css";
 
-export default function TravelsHeader({ nome }) {
+export default function TravelsHeader() {
   return (
     <section className={styles.travelsHeader}>
-      <h1>Olá, {nome}</h1>
-      <p>Confira suas viagens atribuídas para hoje.</p>
+      <h1>Gestão de Reservas e Avisos</h1>
+      <p>Controle total sobre a ocupação e comunicações da frota.</p>
     </section>
   );
 }

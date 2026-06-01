@@ -1,0 +1,133 @@
+.passengerCard {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.cardBoarded {
+  border-color: #cbd5e1;
+  background-color: #f1f5f9;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.profileGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.avatarWrapper {
+  position: relative;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.cardBoarded .avatar {
+  border: 2px solid #10b981;
+  padding: 2px;
+}
+
+.avatarBadge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #0284c7;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.metaData h3 {
+  font-size: 16px;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+}
+
+.seatGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.seatBadge {
+  background-color: #e0e7ff;
+  color: #4338ca;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.statusConfirmed { background-color: #0284c7; color: white; }
+.statusWaiting { background-color: #cbd5e1; color: #475569; }
+.statusBoarded { background-color: #d1fae5; color: #065f46; }
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.btnAction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btnCheckin {
+  background-color: #047857;
+  color: white;
+}
+
+.btnNoShow {
+  background-color: #e0e7ff;
+  color: #475569;
+}
+
+.btnCancel {
+  background-color: white;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+
+.btnDisembark {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background-color: white;
+  border: 1.5px solid #047857;
+  color: #047857;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
