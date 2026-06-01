@@ -26,7 +26,7 @@ export default function Modal({ isOpen, onClose }) {
 
       onClose();
 
-      navigate("/login");
+      navigate("/login/passenger");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
     }

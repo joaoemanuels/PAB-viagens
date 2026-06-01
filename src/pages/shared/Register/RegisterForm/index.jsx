@@ -32,7 +32,7 @@ const registerSchema = z.object({
   }),
 });
 
-export default function RegisterForm() {
+export default function RegisterForm({ role }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -58,11 +58,16 @@ export default function RegisterForm() {
         phone: data.phone,
         password: data.password,
         userType: "client",
+        role,
       });
 
-      navigate("/admin");
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Ocorreu um erro ao fazer o registro.");
     } finally {
       setLoading(false);
     }

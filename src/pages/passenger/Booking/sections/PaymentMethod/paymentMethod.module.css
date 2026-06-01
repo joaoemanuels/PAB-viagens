@@ -7,7 +7,7 @@
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   max-width: 400px;
   width: 100%;
-  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .sectionTitle {
@@ -35,14 +35,12 @@
   transition: all 0.2s ease;
 }
 
-/* Estado ativo/selecionado do card */
 .activeCard {
   border-color: #0056c6;
   border-width: 1.5px;
   background-color: #ffffff;
 }
 
-/* Esconde o input radio padrão mas mantém acessível via teclado */
 .hiddenRadio {
   position: absolute;
   opacity: 0;
@@ -85,7 +83,6 @@
   font-size: 0.8rem;
 }
 
-/* Indicadores de Seleção à direita */
 .statusIndicator {
   display: flex;
   align-items: center;
@@ -110,7 +107,6 @@
   box-sizing: border-box;
 }
 
-/* Feedback visual quando o usuário navega com o Tab do teclado */
 .hiddenRadio:focus-visible + .cardContent {
   outline: 2px solid #1a73e8;
   outline-offset: 4px;
