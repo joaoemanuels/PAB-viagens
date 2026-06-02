@@ -11,7 +11,7 @@ import {
   useWatchDriver,
 } from "../../../../hooks/useDriverLocation";
 
-export default function MapBackground({ role, driverId, isMinimised }) {
+export default function MapBackground({ role, tripId, isMinimised }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef({});
@@ -22,7 +22,7 @@ export default function MapBackground({ role, driverId, isMinimised }) {
 
   const { isSharing, start, stop } = useShareLocation();
   const liveDriverLocation = useWatchDriver(
-    role === "passenger" ? driverId : null,
+    role === "passenger" ? tripId : null,
   );
 
   const [staticDriverLocation] = useState({ lat: -7.2273, lng: -35.8812 });

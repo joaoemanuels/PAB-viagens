@@ -13,7 +13,7 @@ export default function Register() {
 
       <div className={styles.registerContent}>
         <RegisterHeader />
-        <RegisterForm />
+        <RegisterForm role="passenger"/>
 
         <footer className={styles.footer}>
           <p>

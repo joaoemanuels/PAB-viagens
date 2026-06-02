@@ -1,30 +1,33 @@
 import { supabase } from "../services/supabase/supabase.js";
 
 export const authService = {
-  signUp: async (userData) => {
+  signUp: async ({ fullName, email, phone, password, role }) => {
     const { data, error } = await supabase.auth.signUp({
-      email: userData.email,
-      password: userData.password,
+      email,
+      password,
+      options: {
+        data: { full_name: fullName, phone, role },
+      },
     });
+    console.log("auth.signUp resultado:", { data, error });
 
     if (error) throw new Error(error.message);
 
-    const { error: profileError } = await supabase.from("users").insert({
+    const { error: dbError } = await supabase.from("users").insert({
+      id: data.user.id,
       auth_id: data.user.id,
-      full_name: userData.fullName,
-      first_name: userData.firstName,
-      last_name: userData.lastName,
-      email: userData.email,
-      phone: userData.phone,
-      role: "passenger",
+      full_name: fullName,
+      email,
+      phone,
+      role,
     });
 
-    if (profileError) throw new Error(profileError.message);
+    if (dbError) throw new Error(dbError.message);
 
     return data.user;
   },
 
-  signIn: async (identifier, password) => {
+  signIn: async (identifier, password, role) => {
     let email = identifier;
 
     if (!identifier.includes("@")) {
@@ -44,6 +47,18 @@ export const authService = {
     });
 
     if (error) throw new Error("E-mail/CPF ou senha incorretos");
+
+    // ← busca o perfil e valida o role
+    const { data: profile } = await supabase
+      .from("users")
+      .select("role")
+      .eq("auth_id", data.user.id)
+      .single();
+
+    if (role && profile?.role !== role) {
+      await supabase.auth.signOut();
+      throw new Error("Acesso não autorizado para este perfil");
+    }
 
     return data.user;
   },

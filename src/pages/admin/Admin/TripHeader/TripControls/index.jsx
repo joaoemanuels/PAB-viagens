@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { PlayIcon, PauseIcon, RadioIcon, StopCircleIcon } from "lucide-react";
 import styles from "./tripControls.module.css";
 import { useShareLocation } from "../../../../../hooks/useDriverLocation";
@@ -9,24 +8,9 @@ export default function TripControls({
   currentStatus,
   onStatusChange,
 }) {
-  const navigate = useNavigate();
-  const isOngoing = currentStatus === "ongoing";
+  const isOngoing = currentStatus === "in_progress";
 
-  const { start, stop } = useShareLocation(tripId);
-
-  const handleToggleTrip = async () => {
-    const nextStatus = isOngoing ? "scheduled" : "ongoing";
-
-    const { error } = await supabase
-      .from("trips")
-      .update({ status: nextStatus })
-      .eq("id", tripId);
-
-    if (!error) {
-      isOngoing ? stop() : start(); // ← inicia ou para o compartilhamento
-      onStatusChange?.(nextStatus);
-    }
-  };
+  const { isSharing, start, stop } = useShareLocation(tripId);
 
   const handleEnd = async () => {
     const { error } = await supabase
@@ -35,8 +19,9 @@ export default function TripControls({
       .eq("id", tripId);
 
     if (!error) {
-      stop(); // ← garante que para ao encerrar
-      navigate("/admin/home");
+      stop();
+
+      console.log("Viagem encerrada com sucesso");
     }
   };
 
@@ -44,6 +29,26 @@ export default function TripControls({
     // implementar depois
   };
 
+  const handleToggleTrip = async () => {
+    const nextStatus = isOngoing ? "scheduled" : "in_progress";
+
+    console.log("handleToggleTrip chamado");
+    console.log("tripId:", tripId);
+    console.log("isOngoing:", isOngoing);
+    console.log("nextStatus:", nextStatus);
+
+    const { error } = await supabase
+      .from("trips")
+      .update({ status: nextStatus })
+      .eq("id", tripId);
+
+    console.log("update resultado:", { error });
+
+    if (!error) {
+      isOngoing ? stop() : start();
+      onStatusChange?.(nextStatus);
+    }
+  };
   return (
     <section className={styles.tripControls}>
       <button
@@ -55,7 +60,9 @@ export default function TripControls({
           <>
             <PauseIcon className={styles.icon} />
 
-            <span>Pausar Viagem</span>
+            <span>
+              {isSharing ? "Pausar Viagem (ao vivo)" : "Pausar Viagem"}
+            </span>
           </>
         ) : (
           <>

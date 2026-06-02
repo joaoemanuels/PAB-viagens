@@ -40,7 +40,7 @@ export function useShareLocation(tripId) {
           console.log("upsert resultado:", { data, error }); // ← erro aparece aqui
         },
         (err) => console.error("geolocation erro:", err), // ← erro de GPS aparece aqui
-        { enableHighAccuracy: true, timeout: 5000 },
+        { enableHighAccuracy: true, timeout: 10000 },
       );
     };
 
@@ -60,22 +60,23 @@ export function useShareLocation(tripId) {
 }
 
 export function useWatchDriver(tripId) {
-  // ← tripId, não driverId
   const [driverLocation, setDriverLocation] = useState(null);
 
   useEffect(() => {
     if (!tripId) return;
 
+    // Busca posição inicial
     supabase
       .from("driver_locations")
-      .select("latitude, longitude") // ← nomes corretos
-      .eq("trip_id", tripId) // ← filtro por trip_id
+      .select("latitude, longitude")
+      .eq("trip_id", tripId)
       .single()
       .then(({ data }) => {
         if (data)
           setDriverLocation({ lat: data.latitude, lng: data.longitude });
       });
 
+    // Escuta atualizações em tempo real
     const channel = supabase
       .channel("driver-location-" + tripId)
       .on(
@@ -84,10 +85,10 @@ export function useWatchDriver(tripId) {
           event: "*",
           schema: "public",
           table: "driver_locations",
-          filter: `trip_id=eq.${tripId}`, // ← filtro correto
+          filter: `trip_id=eq.${tripId}`,
         },
         (payload) => {
-          const { latitude, longitude } = payload.new; // ← nomes corretos
+          const { latitude, longitude } = payload.new;
           setDriverLocation({ lat: latitude, lng: longitude });
         },
       )

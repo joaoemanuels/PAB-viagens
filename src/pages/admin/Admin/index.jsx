@@ -18,36 +18,43 @@ export default function Admin() {
   useEffect(() => {
     async function fetchActiveTrip() {
       const profile = await authService.getCurrentUser();
+      console.log("profile:", profile);
+
       if (!profile) return;
 
       const { data } = await supabase
         .from("trips")
         .select(
           `
-          id,
-          status,
-          departure_time,
-          arrival_time,
-          available_seats,
-          driver_current_lat,
-          driver_current_lng,
-          estimated_arrival,
-          routes (
-            origin,
-            destination,
-            type,
-            total_seats,
-            vehicle_plate,
-            vehicle_model
-          )
-        `,
+    id,
+    status,
+    departure_time,
+    arrival_time,
+    available_seats,
+    driver_current_lat,
+    driver_current_lng,
+    estimated_arrival,
+    routes (
+      origin,
+      destination,
+      type,
+      total_seats,
+      vehicle_plate,
+      vehicle_model,
+      driver_id
+    )
+  `,
         )
         .eq("status", "in_progress")
-        .eq("routes.driver_id", profile.id)
         .single();
 
-      setTrip(data);
+      const driverTrip = data?.routes?.driver_id === profile.id ? data : null;
+      setTrip(driverTrip);
       setLoading(false);
+
+      console.log("data:", data);
+      console.log("driver_id da rota:", data?.routes?.driver_id);
+      console.log("profile.id:", profile?.id);
     }
 
     fetchActiveTrip();

@@ -29,9 +29,9 @@ export default function Login() {
       <div className={styles.loginContent}>
         <LoginHeader />
 
-        <LoginForm role={role} />
+        <LoginForm role="driver" />
 
-        <GoogleLogin/>
+        <GoogleLogin />
 
         {role === "passenger" && <PromoBanner />}
 
