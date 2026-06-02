@@ -29,22 +29,12 @@ function getNextDays(count = 7) {
   });
 }
 
-function formatPhone(value) {
-  const digits = value.replace(/\D/g, "").slice(0, 11);
-  if (digits.length <= 2) return `(${digits}`;
-  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-  if (digits.length <= 10)
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-}
-
 export default function PassengerForm({
   selectedDate,
   onDateChange,
   name,
   onNameChange,
   phone,
-  onPhoneChange,
   seats,
   onSeatsChange,
 }) {
@@ -75,17 +65,16 @@ export default function PassengerForm({
 
           <div className={styles.inputGroup}>
             <label htmlFor="phone" className={styles.label}>
-              Telefone (WhatsApp)
+              Endereço
             </label>
             <div className={styles.inputWrapper}>
               <MessageCircle className={styles.inputIcon} />
               <input
                 type="tel"
                 id="phone"
-                placeholder="(11) 99999-9999"
+                placeholder="Ex: rua, número, bairro"
                 className={styles.input}
                 value={phone}
-                onChange={(e) => onPhoneChange(formatPhone(e.target.value))}
               />
             </div>
             <p className={styles.helperText}>

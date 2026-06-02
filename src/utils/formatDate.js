@@ -2,6 +2,7 @@ const longDateFormatter = new Intl.DateTimeFormat("pt-BR", {
   weekday: "short",
   day: "2-digit",
   month: "short",
+  timeZone: "UTC", // <--- Força o formatador a usar o mesmo fuso da criação
 });
 
 export function formatDate(dateString) {
