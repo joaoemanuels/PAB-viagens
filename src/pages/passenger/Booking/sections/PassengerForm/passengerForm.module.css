@@ -158,6 +158,63 @@
   text-align: center;
 }
 
+.dateGroup {
+  grid-column: span 2;
+}
+
+.datePicker {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.datePicker::-webkit-scrollbar {
+  display: none;
+}
+
+.dayChip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  border: 1px solid #d2d6dc;
+  border-radius: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  min-width: 64px;
+}
+
+.dayChip:hover {
+  border-color: #1a73e8;
+  background: #f0f4fa;
+}
+
+.dayChipActive {
+  background: #0056c6;
+  border-color: #0056c6;
+}
+
+.dayChipActive .dayLabel,
+.dayChipActive .dayDate {
+  color: #ffffff;
+}
+
+.dayLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1c2434;
+}
+
+.dayDate {
+  font-size: 0.75rem;
+  color: #7a828a;
+}
+
 @media (min-width: 768px) {
   .passengerForm {
     padding: 16px 32px;

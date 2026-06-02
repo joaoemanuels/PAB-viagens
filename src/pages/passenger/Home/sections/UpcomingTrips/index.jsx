@@ -6,7 +6,7 @@ import Loading from "../../../../../components/ui/Loading";
 
 import styles from "./upcomingTrips.module.css";
 
-export default function UpcomingTrips({ filterType, origin, destination }) {
+export default function UpcomingTrips({ origin, destination }) {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,31 +16,18 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
       setLoading(true);
       setError(null);
 
-      const today = new Date().toISOString().split("T")[0];
-
       let query = supabase.from("trips").select(`
-          id,
-          departure_time,
-          available_seats,
-          departure_date,
-          routes (
-            origin,
-            destination,
-            category,
-            type,
-            price_per_seat
-          )
-        `);
-
-      if (filterType === "amanha") {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const tomorrowStr = tomorrow.toISOString().split("T")[0];
-        query = query.eq("departure_date", tomorrowStr);
-        
-      } else if (filterType === "proximas") {
-        query = query.gt("departure_date", today);
-      }
+        id,
+        departure_time,
+        available_seats,
+        routes (
+          origin,
+          destination,
+          category,
+          type,
+          price_per_seat
+        )
+      `);
 
       if (origin.trim()) {
         query = query.ilike("routes.origin", `%${origin.trim()}%`);
@@ -55,19 +42,19 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
       if (error) {
         setError(error.message);
       } else {
-        setTrips(data);
+        setTrips(data.filter((t) => t.routes !== null));
       }
 
       setLoading(false);
     }
 
     fetchTrips();
-  }, [filterType, origin, destination]);
+  }, [origin, destination]);
 
   return (
     <section className={styles.upcomingTrips}>
       <div className={styles.header}>
-        <p>{filterType === "amanha" ? "Viagens de Amanhã" : "Próximas Viagens"}</p>
+        <p>Viagens Disponíveis</p>
       </div>
 
       {loading ? (
@@ -75,23 +62,19 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
       ) : error ? (
         <p>Erro ao carregar viagens: {error}</p>
       ) : trips.length > 0 ? (
-        trips
-          .filter((trip) => trip.routes !== null)
-          .map((trip) => (
-            <UpcomingTripCard
-              key={trip.id}
-              tripId={trip.id}
-              category={trip.routes.category}
-              route={`${trip.routes.origin} → ${trip.routes.destination}`}
-              price={trip.routes.price_per_seat}
-              departure={trip.departure_time}
-              seatsRemaining={trip.available_seats}
-            />
-          ))
+        trips.map((trip) => (
+          <UpcomingTripCard
+            key={trip.id}
+            tripId={trip.id}
+            category={trip.routes.category}
+            route={`${trip.routes.origin} → ${trip.routes.destination}`}
+            price={trip.routes.price_per_seat}
+            departure={trip.departure_time}
+            seatsRemaining={trip.available_seats}
+          />
+        ))
       ) : (
-        <p className={styles.noResults}>
-          Nenhuma viagem encontrada.
-        </p>
+        <p className={styles.noResults}>Nenhuma viagem encontrada.</p>
       )}
     </section>
   );

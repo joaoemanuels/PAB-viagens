@@ -1,20 +1,23 @@
-import Button from "../../../../../components/ui/Button";
 import { formatCurrency } from "../../../../../utils/formatCurrency";
+
+import Button from "../../../../../components/ui/Button";
+
 import styles from "./checkoutFooter.module.css";
 
-export default function CheckoutFooter({ price }) {
+export default function CheckoutFooter({ price, seats, onConfirm, isValid }) {
   return (
     <section className={styles.checkoutFooter}>
       <div className={styles.totalAmount}>
         <span>Total a pagar: </span>
-        <p>{formatCurrency(price)}</p>
+        <p>{formatCurrency(price * seats)}</p>
       </div>
       <Button
-        type="submit"
-        className={styles.confirmButton}
+        type="button"
+        className={`${styles.confirmButton} ${!isValid ? styles.confirmButtonDisabled : ""}`}
         variant="primary"
-        onClick={""}
+        onClick={isValid ? onConfirm : undefined}
         content={"Confirmar Reserva"}
+        disabled={!isValid}
       />
     </section>
   );

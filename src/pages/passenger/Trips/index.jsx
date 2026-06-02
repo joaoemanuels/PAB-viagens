@@ -27,19 +27,18 @@ export default function Trips() {
         .from("trips")
         .select(
           `
-          id,
-          departure_time,
-          arrival_time,
-          available_seats,
-          departure_date,
-          routes (
-            origin,
-            destination,
-            category,
-            type,
-            price_per_seat
-          )
-        `,
+    id,
+    departure_time,
+    arrival_time,
+    available_seats,
+    routes (
+      origin,
+      destination,
+      category,
+      type,
+      price_per_seat
+    )
+  `,
         )
         .eq("id", tripId)
         .single();

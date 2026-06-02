@@ -7,34 +7,24 @@ import TimeTravels from "../TimeTravels";
 import styles from "./quickFilters.module.css";
 
 const Filters = {
-  AMANHA: "Amanhã",
-  PROXIMAS: "proximas",
+  TODAS: "todas",
   HORARIOS: "horarios",
 };
 
 export default function QuickFilters({ origin, destination }) {
-  const [activeFilters, setActiveFilters] = useState(Filters.AMANHA);
+  const [activeFilters, setActiveFilters] = useState(Filters.TODAS);
+
   return (
     <section className={styles.quickFilters}>
       <div className={styles.filterList} role="filterlist">
         <button
           role="tab"
-          aria-selected={activeFilters === Filters.AMANHA}
-          className={`${styles.filter} ${activeFilters === Filters.AMANHA ? styles.active : ""}`}
-          onClick={() => setActiveFilters(Filters.AMANHA)}
+          aria-selected={activeFilters === Filters.TODAS}
+          className={`${styles.filter} ${activeFilters === Filters.TODAS ? styles.active : ""}`}
+          onClick={() => setActiveFilters(Filters.TODAS)}
         >
           <CalendarDays size={18} />
-          Amanhã
-        </button>
-
-        <button
-          role="tab"
-          aria-selected={activeFilters === Filters.PROXIMAS}
-          className={`${styles.filter} ${activeFilters === Filters.PROXIMAS ? styles.active : ""}`}
-          onClick={() => setActiveFilters(Filters.PROXIMAS)}
-        >
-          <CalendarDays size={18} />
-          Próximas
+          Viagens
         </button>
 
         <button
@@ -49,20 +39,8 @@ export default function QuickFilters({ origin, destination }) {
       </div>
 
       <div className={styles.tabContent}>
-        {activeFilters === Filters.AMANHA && (
-          <UpcomingTrips
-            filterType="amanha"
-            origin={origin}
-            destination={destination}
-          />
-        )}
-
-        {activeFilters === Filters.PROXIMAS && (
-          <UpcomingTrips
-            filterType="proximas"
-            origin={origin}
-            destination={destination}
-          />
+        {activeFilters === Filters.TODAS && (
+          <UpcomingTrips origin={origin} destination={destination} />
         )}
 
         {activeFilters === Filters.HORARIOS && (

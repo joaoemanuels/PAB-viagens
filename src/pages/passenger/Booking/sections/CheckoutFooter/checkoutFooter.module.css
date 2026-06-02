@@ -34,6 +34,11 @@
   color: #0058bc;
 }
 
+.confirmButtonDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (min-width: 768px) {
   .checkoutFooter {
     padding: 16px 32px 32px;
