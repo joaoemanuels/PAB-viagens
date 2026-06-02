@@ -11,8 +11,7 @@ import {
   useWatchDriver,
 } from "../../../../hooks/useDriverLocation";
 
-// Recebe: role ("driver" | "passenger"), driverId (UUID do motorista, necessário para passageiro)
-export default function MapBackground({ role, driverId }) {
+export default function MapBackground({ role, driverId, isMinimised }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef({});
@@ -21,13 +20,11 @@ export default function MapBackground({ role, driverId }) {
   const [userLocation, setUserLocation] = useState(null);
   const [mapReady, setMapReady] = useState(false);
 
-  // Hooks de localização
   const { isSharing, start, stop } = useShareLocation();
   const liveDriverLocation = useWatchDriver(
     role === "passenger" ? driverId : null,
   );
 
-  // Localização estática fallback (quando não há Realtime ainda)
   const [staticDriverLocation] = useState({ lat: -7.2273, lng: -35.8812 });
   const driverLocation = liveDriverLocation ?? staticDriverLocation;
 
@@ -51,6 +48,17 @@ export default function MapBackground({ role, driverId }) {
     mapInstanceRef.current = map;
     setMapReady(true);
   }, []);
+
+  // Avisar o Leaflet que o container mudou de tamanho após a animação do sheet
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+
+    const timer = setTimeout(() => {
+      mapInstanceRef.current.invalidateSize();
+    }, 350);
+
+    return () => clearTimeout(timer);
+  }, [isMinimised]);
 
   // Localização do usuário
   useEffect(() => {
@@ -113,21 +121,27 @@ export default function MapBackground({ role, driverId }) {
         { color: "#007AFF", weight: 2, opacity: 0.6, dashArray: "5, 5" },
       ).addTo(map);
 
+      const isMobile = window.innerWidth < 768;
+      const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
+
       map.fitBounds(
         L.latLngBounds(
           [userLocation.lat, userLocation.lng],
           [driverLocation.lat, driverLocation.lng],
         ),
-        { padding: [80, 80], maxZoom: 15 },
+        {
+          paddingTopLeft: [80, 80],
+          paddingBottomRight: [80, bottomPadding],
+          maxZoom: 15,
+        },
       );
     }
-  }, [userLocation, driverLocation, mapReady]);
+  }, [userLocation, driverLocation, mapReady, isMinimised]);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+    <div style={{ position: "relative", width: "100%", flex: 1, minHeight: 0 }}>
       <section className={styles.mapBackground} ref={mapRef} />
 
-      {/* Botão apenas para o motorista */}
       {role === "driver" && (
         <button
           onClick={isSharing ? stop : start}
@@ -154,7 +168,6 @@ export default function MapBackground({ role, driverId }) {
         </button>
       )}
 
-      {/* Indicador de rastreamento para o passageiro */}
       {role === "passenger" && liveDriverLocation && (
         <div
           style={{

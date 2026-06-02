@@ -1,7 +1,7 @@
 .tracking {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background: #fff;
   position: relative;
@@ -23,21 +23,18 @@
 }
 
 .tracking > :last-child {
-  flex-shrink: 0;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 15;
   width: 100%;
-}
-
-@media (max-width: 768px) {
-  .tracking {
-    height: 100dvh;
-  }
 }
 
 @media (min-width: 768px) {
   .tracking > :last-child {
     width: 420px;
+    left: auto;
     right: 32px;
     bottom: 32px;
     border-radius: 24px;
