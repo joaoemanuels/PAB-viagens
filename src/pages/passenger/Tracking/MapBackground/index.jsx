@@ -19,8 +19,10 @@ export default function MapBackground({ role, tripId, isMinimised }) {
 
   const [userLocation, setUserLocation] = useState(null);
   const [mapReady, setMapReady] = useState(false);
+  const hasCenteredRef = useRef(false);
 
   const { isSharing, start, stop } = useShareLocation();
+
   const liveDriverLocation = useWatchDriver(
     role === "passenger" ? tripId : null,
   );
@@ -79,65 +81,99 @@ export default function MapBackground({ role, tripId, isMinimised }) {
     if (!mapReady || !mapInstanceRef.current) return;
     const map = mapInstanceRef.current;
 
-    Object.values(markersRef.current).forEach((m) => m?.remove?.());
-    markersRef.current = {};
-    polylineRef.current?.remove();
-
+    // 1. CONTROLAR O MARCADOR DO USUÁRIO
     if (userLocation) {
-      markersRef.current.user = L.circleMarker(
-        [userLocation.lat, userLocation.lng],
-        {
-          radius: 6,
-          fillColor: "#007AFF",
-          color: "#fff",
-          weight: 2,
-          fillOpacity: 0.9,
-        },
-      ).addTo(map);
+      if (!markersRef.current.user) {
+        // Cria se não existir
+        markersRef.current.user = L.circleMarker(
+          [userLocation.lat, userLocation.lng],
+          {
+            radius: 6,
+            fillColor: "#007AFF",
+            color: "#fff",
+            weight: 2,
+            fillOpacity: 0.9,
+          },
+        ).addTo(map);
+      } else {
+        // Apenas move se já existir
+        markersRef.current.user.setLatLng([userLocation.lat, userLocation.lng]);
+      }
     }
 
-    markersRef.current.driver = L.marker(
-      [driverLocation.lat, driverLocation.lng],
-      {
-        icon: L.icon({
-          iconUrl: markerIcon,
-          iconRetinaUrl: markerIconRetina,
-          shadowUrl: markerShadow,
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41],
-        }),
-        title: "Sua van",
-      },
-    ).addTo(map);
-
-    if (userLocation) {
-      polylineRef.current = L.polyline(
-        [
-          [userLocation.lat, userLocation.lng],
-          [driverLocation.lat, driverLocation.lng],
-        ],
-        { color: "#007AFF", weight: 2, opacity: 0.6, dashArray: "5, 5" },
-      ).addTo(map);
-
-      const isMobile = window.innerWidth < 768;
-      const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
-
-      map.fitBounds(
-        L.latLngBounds(
-          [userLocation.lat, userLocation.lng],
-          [driverLocation.lat, driverLocation.lng],
-        ),
+    // 2. CONTROLAR O MARCADOR DO MOTORISTA
+    if (!markersRef.current.driver) {
+      // Cria se não existir
+      markersRef.current.driver = L.marker(
+        [driverLocation.lat, driverLocation.lng],
         {
+          icon: L.icon({
+            iconUrl: markerIcon,
+            iconRetinaUrl: markerIconRetina,
+            shadowUrl: markerShadow,
+            boxShadow: "none",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41],
+          }),
+          title: "Sua van",
+        },
+      ).addTo(map);
+    } else {
+      // Apenas move suavemente se já existir
+      markersRef.current.driver.setLatLng([
+        driverLocation.lat,
+        driverLocation.lng,
+      ]);
+    }
+
+    // 3. CONTROLAR A LINHA (POLYLINE)
+    if (userLocation) {
+      const newCoords = [
+        [userLocation.lat, userLocation.lng],
+        [driverLocation.lat, driverLocation.lng],
+      ];
+
+      if (!polylineRef.current) {
+        polylineRef.current = L.polyline(newCoords, {
+          color: "#007AFF",
+          weight: 2,
+          opacity: 0.6,
+          dashArray: "5, 5",
+        }).addTo(map);
+      } else {
+        polylineRef.current.setLatLngs(newCoords);
+      }
+      if (!hasCenteredRef.current) {
+        const isMobile = window.innerWidth < 768;
+        const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
+
+        map.fitBounds(L.latLngBounds(newCoords), {
           paddingTopLeft: [80, 80],
           paddingBottomRight: [80, bottomPadding],
           maxZoom: 15,
-        },
-      );
+        });
+
+        hasCenteredRef.current = true; // Trava para não centralizar mais automaticamente
+      }
+
+      // Ajusta o enquadramento do mapa
+      const isMobile = window.innerWidth < 768;
+      const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
+
+      map.fitBounds(L.latLngBounds(newCoords), {
+        paddingTopLeft: [80, 80],
+        paddingBottomRight: [80, bottomPadding],
+        maxZoom: 15,
+      });
     }
   }, [userLocation, driverLocation, mapReady, isMinimised]);
 
+  console.log("=== DEBUG PASSEGER ===");
+  console.log("tripId recebido no mapa:", tripId);
+  console.log("liveDriverLocation do Supabase:", liveDriverLocation);
+  console.log("driverLocation calculado:", driverLocation);
   return (
     <div style={{ position: "relative", width: "100%", flex: 1, minHeight: 0 }}>
       <section className={styles.mapBackground} ref={mapRef} />

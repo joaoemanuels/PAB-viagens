@@ -15,6 +15,10 @@ export default function Admin() {
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleStatusChange = (nextStatus) => {
+    setTrip((prev) => (prev ? { ...prev, status: nextStatus } : null));
+  };
+
   useEffect(() => {
     async function fetchActiveTrip() {
       const profile = await authService.getCurrentUser();
@@ -22,6 +26,7 @@ export default function Admin() {
 
       if (!profile) return;
 
+      // No useEffect do Admin:
       const { data } = await supabase
         .from("trips")
         .select(
@@ -34,8 +39,7 @@ export default function Admin() {
     driver_current_lat,
     driver_current_lng,
     estimated_arrival,
-    routes (
-      origin,
+    routes!inner (  origin,
       destination,
       type,
       total_seats,
@@ -45,11 +49,12 @@ export default function Admin() {
     )
   `,
         )
-        .eq("status", "in_progress")
-        .single();
+        .in("status", ["in_progress", "scheduled"])
+        .eq("routes.driver_id", profile.id)
+        .order("departure_time", { ascending: true })
+        .maybeSingle();
 
-      const driverTrip = data?.routes?.driver_id === profile.id ? data : null;
-      setTrip(driverTrip);
+      setTrip(data);
       setLoading(false);
 
       console.log("data:", data);
@@ -62,10 +67,25 @@ export default function Admin() {
 
   if (loading) return <Loading />;
 
+  if (!trip) {
+    return (
+      <section className={styles.admin}>
+        <HeaderAdmin />
+        <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+          <h3>Nenhuma viagem localizada</h3>
+          <p>
+            Você não possui viagens agendadas ou em andamento vinculadas ao seu
+            perfil.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.admin}>
       <HeaderAdmin />
-      <TripHeader trip={trip} />
+      <TripHeader trip={trip} onStatusChange={handleStatusChange} />
       <TripMapCard trip={trip} />
       <QuickIncidents tripId={trip?.id} />
       <PassengerList tripId={trip?.id} />

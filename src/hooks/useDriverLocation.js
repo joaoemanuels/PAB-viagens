@@ -65,36 +65,49 @@ export function useWatchDriver(tripId) {
   useEffect(() => {
     if (!tripId) return;
 
-    // Busca posição inicial
+    // 1. Busca posição inicial
     supabase
       .from("driver_locations")
       .select("latitude, longitude")
       .eq("trip_id", tripId)
-      .single()
+      .maybeSingle() // maybeSingle evita estourar erro no console se a linha ainda não existir
       .then(({ data }) => {
-        if (data)
+        if (data && data.latitude && data.longitude) {
           setDriverLocation({ lat: data.latitude, lng: data.longitude });
+        }
       });
 
-    // Escuta atualizações em tempo real
+    // 2. Escuta atualizações em tempo real (Formato corrigido)
     const channel = supabase
       .channel("driver-location-" + tripId)
       .on(
         "postgres_changes",
         {
-          event: "*",
+          event: "*", // Ouve INSERT e UPDATE
           schema: "public",
           table: "driver_locations",
           filter: `trip_id=eq.${tripId}`,
         },
         (payload) => {
-          const { latitude, longitude } = payload.new;
-          setDriverLocation({ lat: latitude, lng: longitude });
+          console.log("Realtime recebido do motorista:", payload);
+
+          // Segurança: garante que há dados novos na tabela antes de ler
+          if (payload.new && payload.new.latitude && payload.new.longitude) {
+            setDriverLocation({
+              lat: payload.new.latitude,
+              lng: payload.new.longitude,
+            });
+          }
         },
       )
-      .subscribe();
+      .subscribe((status) => {
+        // Log para você ter certeza na aba do navegador se o realtime conectou
+        console.log(`Status da conexão Realtime (${tripId}):`, status);
+      });
 
-    return () => supabase.removeChannel(channel);
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [tripId]);
 
   return driverLocation;

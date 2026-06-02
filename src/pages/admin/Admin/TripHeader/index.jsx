@@ -3,7 +3,7 @@ import styles from "./tripHeader.module.css";
 import TripOccupancy from "./TripOccupancy";
 import TripRoute from "./TripRoute";
 
-export default function TripHeader({ trip }) {
+export default function TripHeader({ trip, onStatusChange }) {
   return (
     <section className={styles.tripHeader}>
       <div className={styles.tripHeaderContainer}>
@@ -12,7 +12,11 @@ export default function TripHeader({ trip }) {
           current={trip?.routes?.total_seats - trip?.available_seats}
           total={trip?.routes?.total_seats}
         />
-        <TripControls tripId={trip?.id} />
+        <TripControls
+          tripId={trip?.id}
+          currentStatus={trip?.status}
+          onStatusChange={onStatusChange}
+        />
       </div>
     </section>
   );

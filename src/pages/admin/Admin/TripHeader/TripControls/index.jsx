@@ -30,6 +30,11 @@ export default function TripControls({
   };
 
   const handleToggleTrip = async () => {
+    if (!tripId) {
+      console.error("Não é possível alterar o status: tripId está indefinido.");
+      return;
+    }
+
     const nextStatus = isOngoing ? "scheduled" : "in_progress";
 
     console.log("handleToggleTrip chamado");

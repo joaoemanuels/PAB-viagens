@@ -17,7 +17,7 @@ export default function Tracking() {
       <MapBackground
         isMinimised={isMinimised}
         role="passenger"
-        driverId={tripId}
+        tripId={tripId}
       />
       <TripDetailsSheet
         isMinimised={isMinimised}

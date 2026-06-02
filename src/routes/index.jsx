@@ -37,7 +37,7 @@ function AppRoutes() {
         <Route element={<AuthLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/trips/:tripId" element={<Trips />} />
-          <Route path="/tracking" element={<Tracking />} />
+          <Route path="/tracking/:tripId" element={<Tracking />} />
         </Route>
 
         <Route
