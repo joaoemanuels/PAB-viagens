@@ -44,7 +44,7 @@ export default function MapBackground({ role, tripId, isMinimised }) {
       attribution:
         '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19,
-      minZoom: 10,
+      minZoom: 0,
     }).addTo(map);
 
     mapInstanceRef.current = map;
@@ -72,7 +72,7 @@ export default function MapBackground({ role, tripId, isMinimised }) {
           lng: pos.coords.longitude,
         }),
       () => setUserLocation({ lat: -7.23, lng: -35.885 }),
-      { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 }, // Cache de apenas 10 segundos
     );
   }, []);
 
