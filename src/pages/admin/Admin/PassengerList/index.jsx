@@ -37,7 +37,21 @@ export default function PassengerList({ tripId }) {
     fetchPassengers();
   }, [tripId]);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading />
+  
+  if (passengers.length === 0) {
+    return (
+      <section className={styles.passengerList}>
+        <header className={styles.listHeader}>
+          <div className={styles.titleGroup}>
+            <h2>Passageiros</h2>
+            <span className={styles.totalBadge}>0 TOTAL</span>
+          </div>
+        </header>
+        <p className={styles.noResults}>Nenhum passageiro encontrado.</p>
+      </section>
+    );
+  }
 
   return (
     <section className={styles.passengerList}>

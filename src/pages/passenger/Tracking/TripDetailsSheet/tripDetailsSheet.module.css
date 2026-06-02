@@ -5,14 +5,35 @@
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 24px 24px 0 0;
-  padding: 16px 24px 24px 24px;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 12px 20px 20px 20px;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
-
   width: 100%;
   margin-bottom: 74px;
   z-index: 9999;
+  touch-action: none;
+}
+
+.dragHandleWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 14px 0;
+  cursor: grab;
+}
+
+.dragHandleWrapper:active {
+  cursor: grabbing;
+}
+
+.collapsibleContent {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.collapsibleContent.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .dragHandle {
@@ -20,18 +41,21 @@
   height: 4px;
   background-color: #e2e8f0;
   border-radius: 2px;
-  margin: 0 auto 20px auto;
+}
+
+.toggleIcon {
+  color: #a0aec0;
 }
 
 .destinationSection {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .destinationSection h2 {
   color: #1c2434;
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
 }
 
 .locationWrapper {
@@ -54,12 +78,12 @@
 
 .driverCard {
   background-color: #f4f7fc;
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .avatarWrapper {
@@ -69,8 +93,8 @@
 }
 
 .avatarWrapper img {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -79,21 +103,21 @@
   position: absolute;
   bottom: -2px;
   right: -2px;
-  background-color: #0b8a5a; /* Verde escuro idêntico à imagem */
+  background-color: #0b8a5a;
   color: #ffffff;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #f4f7fc; /* Borda da cor do card para dar o efeito de recorte */
+  border: 2px solid #f4f7fc;
 }
 
 .driverInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   flex: 1;
 }
 
@@ -105,7 +129,7 @@
 
 .driverName {
   color: #1c2434;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
 }
@@ -125,7 +149,7 @@
 
 .vehicleDetails {
   color: #7a828a;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin: 0;
 }
 
@@ -142,19 +166,16 @@
 
 .primaryActionButton,
 .secondaryActionButton {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  letter-spacing: 0;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
   text-align: center;
-  color: #fff;
-  padding: 12px;
-
+  padding: 8px;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
+  height: 46px;
   border-radius: 12px;
   transition: all 0.2s ease;
 }
@@ -177,6 +198,15 @@
   background-color: #d8e2f3;
 }
 
+@media (max-width: 767px) {
+  .tripDetailsSheet.minimised {
+    padding-bottom: 12px;
+  }
+  .tripDetailsSheet.minimised .destinationSection {
+    margin-bottom: 0;
+  }
+}
+
 @media (min-width: 768px) {
   .tripDetailsSheet {
     position: fixed;
@@ -184,12 +214,18 @@
     right: 32px;
     width: 420px;
     margin-bottom: 0;
-    border-radius: 24px; /* arredondado em todos os cantos no tablet/desktop */
+    border-radius: 24px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    touch-action: auto;
   }
 
-  .dragHandle {
-    display: none; /* não faz sentido fora do mobile */
+  .dragHandleWrapper {
+    display: none;
+  }
+
+  .collapsibleContent {
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }
 

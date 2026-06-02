@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isValidCPF } from "../../../../utils/isValidCPF";
 import { authService } from "../../../../services/auth";
-import { Mail, User, Phone, IdCardLanyard } from "lucide-react";
+import { Mail, User, Phone } from "lucide-react";
 
 import styles from "./registerForm.module.css";
 
@@ -16,10 +15,6 @@ import PasswordField from "../../../../components/ui/PasswordField";
 
 const registerSchema = z.object({
   fullName: z.string().min(1, "Informe seu nome"),
-
-  cpf: z.string().refine(isValidCPF, {
-    message: "CPF inválido",
-  }),
 
   email: z.string().email("Email inválido"),
 
@@ -53,7 +48,6 @@ export default function RegisterForm({ role }) {
     try {
       await authService.signUp({
         fullName: data.fullName,
-        cpf: data.cpf,
         email: data.email,
         phone: data.phone,
         password: data.password,
@@ -88,14 +82,6 @@ export default function RegisterForm({ role }) {
           placeholder="Ex: João Silva"
           register={register("fullName")}
           error={errors.fullName}
-        />
-
-        <FormField
-          label="CPF"
-          icon={<IdCardLanyard size={20} />}
-          placeholder="123.456.789-00"
-          register={register("cpf")}
-          error={errors.cpf}
         />
 
         <FormField

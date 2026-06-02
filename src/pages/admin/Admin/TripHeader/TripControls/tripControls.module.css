@@ -6,7 +6,7 @@
   background-color: #ffffff;
 }
 
-.btnPause {
+.btnToggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@
   transition: background-color 0.2s ease;
 }
 
-.btnPause:hover {
+.btnToggle:hover {
   background-color: #0043a0;
 }
 

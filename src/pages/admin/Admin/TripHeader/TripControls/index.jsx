@@ -1,25 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../../../services/supabase/supabase.js";
-import { PauseIcon, RadioIcon, StopCircleIcon } from "lucide-react";
+import { PlayIcon, PauseIcon, RadioIcon, StopCircleIcon } from "lucide-react";
 import styles from "./tripControls.module.css";
 
-export default function TripControls({ tripId }) {
+export default function TripControls({
+  tripId,
+  currentStatus,
+  onStatusChange,
+}) {
   const navigate = useNavigate();
 
-  const handlePause = async () => {
-    await supabase
+  const isOngoing = currentStatus === "ongoing";
+
+  const handleToggleTrip = async () => {
+    const nextStatus = isOngoing ? "scheduled" : "ongoing";
+
+    const { error } = await supabase
       .from("trips")
-      .update({ status: "scheduled" })
+      .update({ status: nextStatus })
       .eq("id", tripId);
+
+    if (!error && onStatusChange) {
+      onStatusChange(nextStatus);
+    }
   };
 
   const handleEnd = async () => {
-    await supabase
+    const { error } = await supabase
       .from("trips")
       .update({ status: "completed", actual_arrival: new Date().toISOString() })
       .eq("id", tripId);
 
-    navigate("/admin/home");
+    if (!error) {
+      navigate("/admin/home");
+    }
   };
 
   const handleBroadcast = () => {
@@ -28,9 +42,22 @@ export default function TripControls({ tripId }) {
 
   return (
     <section className={styles.tripControls}>
-      <button type="button" className={styles.btnPause} onClick={handlePause}>
-        <PauseIcon className={styles.icon} />
-        <span>Pausar Viagem</span>
+      <button
+        type="button"
+        className={`${styles.btnToggle} ${isOngoing ? styles.active : styles.paused}`}
+        onClick={handleToggleTrip}
+      >
+        {isOngoing ? (
+          <>
+            <PauseIcon className={styles.icon} />
+            <span>Pausar Viagem</span>
+          </>
+        ) : (
+          <>
+            <PlayIcon className={styles.icon} />
+            <span>Iniciar Viagem</span>
+          </>
+        )}
       </button>
 
       <div className={styles.secondaryRow}>

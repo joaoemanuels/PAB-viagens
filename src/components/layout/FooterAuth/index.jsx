@@ -1,10 +1,12 @@
 import { User, BusFront, Navigation, House } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import styles from "./footerAuth.module.css";
 
 export default function FooterAuth() {
+  const { tripId } = useParams();
+
   return (
     <nav className={styles.footer}>
       <NavLink
@@ -34,7 +36,7 @@ export default function FooterAuth() {
       </NavLink>
 
       <NavLink
-        to="/tracking"
+        to={`/tracking/${tripId}`}
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
