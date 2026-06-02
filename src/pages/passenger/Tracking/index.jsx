@@ -16,7 +16,6 @@ export default function Tracking() {
       <Header showSupportIcon={false} />
       <MapBackground
         isMinimised={isMinimised}
-        isMinimised={isMinimised}
         role="passenger"
         tripId={tripId}
       />

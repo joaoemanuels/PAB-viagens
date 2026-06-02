@@ -7,24 +7,24 @@ import TimeTravels from "../TimeTravels";
 import styles from "./quickFilters.module.css";
 
 const Filters = {
-  HOJE: "hoje",
+  AMANHA: "Amanhã",
   PROXIMAS: "proximas",
   HORARIOS: "horarios",
 };
 
 export default function QuickFilters({ origin, destination }) {
-  const [activeFilters, setActiveFilters] = useState(Filters.HOJE);
+  const [activeFilters, setActiveFilters] = useState(Filters.AMANHA);
   return (
     <section className={styles.quickFilters}>
       <div className={styles.filterList} role="filterlist">
         <button
           role="tab"
-          aria-selected={activeFilters === Filters.HOJE}
-          className={`${styles.filter} ${activeFilters === Filters.HOJE ? styles.active : ""}`}
-          onClick={() => setActiveFilters(Filters.HOJE)}
+          aria-selected={activeFilters === Filters.AMANHA}
+          className={`${styles.filter} ${activeFilters === Filters.AMANHA ? styles.active : ""}`}
+          onClick={() => setActiveFilters(Filters.AMANHA)}
         >
           <CalendarDays size={18} />
-          Hoje
+          Amanhã
         </button>
 
         <button
@@ -49,9 +49,9 @@ export default function QuickFilters({ origin, destination }) {
       </div>
 
       <div className={styles.tabContent}>
-        {activeFilters === Filters.HOJE && (
+        {activeFilters === Filters.AMANHA && (
           <UpcomingTrips
-            filterType="hoje"
+            filterType="amanha"
             origin={origin}
             destination={destination}
           />

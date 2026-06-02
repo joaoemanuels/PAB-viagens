@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../../../../services/supabase/supabase.js";
 import { PlayIcon, PauseIcon, RadioIcon, StopCircleIcon } from "lucide-react";
 import styles from "./tripControls.module.css";
+import { useShareLocation } from "../../../../../hooks/useDriverLocation";
+import { supabase } from "../../../../../services/supabase/supabase.js";
 
 export default function TripControls({
   tripId,
@@ -9,8 +10,9 @@ export default function TripControls({
   onStatusChange,
 }) {
   const navigate = useNavigate();
-
   const isOngoing = currentStatus === "ongoing";
+
+  const { start, stop } = useShareLocation(tripId);
 
   const handleToggleTrip = async () => {
     const nextStatus = isOngoing ? "scheduled" : "ongoing";
@@ -20,8 +22,9 @@ export default function TripControls({
       .update({ status: nextStatus })
       .eq("id", tripId);
 
-    if (!error && onStatusChange) {
-      onStatusChange(nextStatus);
+    if (!error) {
+      isOngoing ? stop() : start(); // ← inicia ou para o compartilhamento
+      onStatusChange?.(nextStatus);
     }
   };
 
@@ -32,6 +35,7 @@ export default function TripControls({
       .eq("id", tripId);
 
     if (!error) {
+      stop(); // ← garante que para ao encerrar
       navigate("/admin/home");
     }
   };
@@ -50,11 +54,13 @@ export default function TripControls({
         {isOngoing ? (
           <>
             <PauseIcon className={styles.icon} />
+
             <span>Pausar Viagem</span>
           </>
         ) : (
           <>
             <PlayIcon className={styles.icon} />
+
             <span>Iniciar Viagem</span>
           </>
         )}
@@ -63,6 +69,7 @@ export default function TripControls({
       <div className={styles.secondaryRow}>
         <button type="button" className={styles.btnEnd} onClick={handleEnd}>
           <StopCircleIcon className={styles.iconSecondary} />
+
           <span>Encerrar</span>
         </button>
 
@@ -72,6 +79,7 @@ export default function TripControls({
           onClick={handleBroadcast}
         >
           <RadioIcon className={styles.iconSecondary} />
+
           <span>Broadcast</span>
         </button>
       </div>

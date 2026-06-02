@@ -32,8 +32,12 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
           )
         `);
 
-      if (filterType === "hoje") {
-        query = query.eq("departure_date", today);
+      if (filterType === "amanha") {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowStr = tomorrow.toISOString().split("T")[0];
+        query = query.eq("departure_date", tomorrowStr);
+        
       } else if (filterType === "proximas") {
         query = query.gt("departure_date", today);
       }
@@ -63,7 +67,7 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
   return (
     <section className={styles.upcomingTrips}>
       <div className={styles.header}>
-        <p>{filterType === "hoje" ? "Viagens de Hoje" : "Próximas Viagens"}</p>
+        <p>{filterType === "amanha" ? "Viagens de Amanhã" : "Próximas Viagens"}</p>
       </div>
 
       {loading ? (
@@ -86,7 +90,7 @@ export default function UpcomingTrips({ filterType, origin, destination }) {
           ))
       ) : (
         <p className={styles.noResults}>
-          Nenhuma viagem encontrada para essa rota.
+          Nenhuma viagem encontrada.
         </p>
       )}
     </section>

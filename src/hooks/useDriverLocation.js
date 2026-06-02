@@ -1,30 +1,45 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { supabase } from "../services/supabase/supabase.js";
+import { supabase } from "../services/supabase/supabase.js"; // caminho correto
 
 const INTERVAL_MS = 4000;
 
 export function useShareLocation(tripId) {
+  // ← recebe tripId, não driver_id
   const [isSharing, setIsSharing] = useState(false);
   const intervalRef = useRef(null);
 
   const start = useCallback(() => {
-    if (!tripId) return;
+    console.log("start chamado, tripId:", tripId);
+    if (!tripId) {
+      console.warn("tripId ausente, abortando");
+      return;
+    }
 
     const share = () => {
       navigator.geolocation.getCurrentPosition(
         async (pos) => {
-          await supabase.from("driver_locations").upsert(
-            {
-              trip_id: tripId,
-              latitude: pos.coords.latitude,
-              longitude: pos.coords.longitude,
-              accuracy: pos.coords.accuracy,
-              timestamp: new Date().toISOString(),
-            },
-            { onConflict: "trip_id" },
+          console.log(
+            "posição obtida:",
+            pos.coords.latitude,
+            pos.coords.longitude,
           );
+
+          const { data, error } = await supabase
+            .from("driver_locations")
+            .upsert(
+              {
+                trip_id: tripId,
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude,
+                accuracy: pos.coords.accuracy,
+                timestamp: new Date().toISOString(),
+              },
+              { onConflict: "trip_id" },
+            );
+
+          console.log("upsert resultado:", { data, error }); // ← erro aparece aqui
         },
-        null,
+        (err) => console.error("geolocation erro:", err), // ← erro de GPS aparece aqui
         { enableHighAccuracy: true, timeout: 5000 },
       );
     };
@@ -45,23 +60,22 @@ export function useShareLocation(tripId) {
 }
 
 export function useWatchDriver(tripId) {
+  // ← tripId, não driverId
   const [driverLocation, setDriverLocation] = useState(null);
 
   useEffect(() => {
     if (!tripId) return;
 
-    // Busca posição inicial
     supabase
       .from("driver_locations")
-      .select("latitude, longitude")
-      .eq("trip_id", tripId)
+      .select("latitude, longitude") // ← nomes corretos
+      .eq("trip_id", tripId) // ← filtro por trip_id
       .single()
       .then(({ data }) => {
         if (data)
           setDriverLocation({ lat: data.latitude, lng: data.longitude });
       });
 
-    // Subscribe em tempo real
     const channel = supabase
       .channel("driver-location-" + tripId)
       .on(
@@ -70,10 +84,10 @@ export function useWatchDriver(tripId) {
           event: "*",
           schema: "public",
           table: "driver_locations",
-          filter: `trip_id=eq.${tripId}`,
+          filter: `trip_id=eq.${tripId}`, // ← filtro correto
         },
         (payload) => {
-          const { latitude, longitude } = payload.new;
+          const { latitude, longitude } = payload.new; // ← nomes corretos
           setDriverLocation({ lat: latitude, lng: longitude });
         },
       )

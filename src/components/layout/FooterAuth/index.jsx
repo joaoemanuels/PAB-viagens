@@ -1,11 +1,11 @@
-import { User, BusFront, Navigation, House } from "lucide-react";
+import { User, Navigation, House } from "lucide-react";
 
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import styles from "./footerAuth.module.css";
 
 export default function FooterAuth() {
-  const { tripId } = useParams();
+  // const { tripId } = useParams();
 
   return (
     <nav className={styles.footer}>
@@ -22,7 +22,7 @@ export default function FooterAuth() {
         </div>
       </NavLink>
 
-      <NavLink
+      {/* <NavLink
         to="/reserves"
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
@@ -33,10 +33,10 @@ export default function FooterAuth() {
 
           <span>Reservas</span>
         </div>
-      </NavLink>
+      </NavLink> */}
 
       <NavLink
-        to={`/tracking/${tripId}`}
+        to={`/tracking/`}
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
