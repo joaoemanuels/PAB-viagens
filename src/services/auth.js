@@ -6,6 +6,11 @@ export const authService = {
     const isRestricted = role === "driver";
     const expectedToken = import.meta.env.VITE_SECURITY_TOKEN || "";
 
+    console.log("DEBUG REGISTRO:");
+    console.log("Role recebida:", role);
+    console.log("Token digitado pelo usuário:", securityToken);
+    console.log("Token esperado que veio do .env da Vercel:", expectedToken);
+    
     if (isRestricted && securityToken !== expectedToken) {
       throw new Error("Código de autenticação inválido ou não fornecido.");
     }

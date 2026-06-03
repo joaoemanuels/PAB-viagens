@@ -79,32 +79,32 @@ export function useWatchDriver(tripId) {
 
     // 2. Escuta atualizações em tempo real (Formato corrigido)
     const channel = supabase
-  .channel("driver-location-channel") // Nome genérico para o canal
-  .on(
-    "postgres_changes",
-    {
-      event: "*", 
-      schema: "public",
-      table: "driver_locations"
-      // Removido o parâmetro 'filter' daqui
-    },
-    (payload) => {
-      console.log("Realtime recebido do motorista (Sem filtro):", payload);
+      .channel("driver-location-channel") // Nome genérico para o canal
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "driver_locations",
+          // Removido o parâmetro 'filter' daqui
+        },
+        (payload) => {
+          console.log("Realtime recebido do motorista (Sem filtro):", payload);
 
-      // Filtramos diretamente no código para garantir que pertence a esta viagem
-      if (
-        payload.new && 
-        payload.new.trip_id === tripId && 
-        payload.new.latitude && 
-        payload.new.longitude
-      ) {
-        setDriverLocation({
-          lat: payload.new.latitude,
-          lng: payload.new.longitude,
-        });
-      }
-    }
-  )
+          // Filtramos diretamente no código para garantir que pertence a esta viagem
+          if (
+            payload.new &&
+            payload.new.trip_id === tripId &&
+            payload.new.latitude &&
+            payload.new.longitude
+          ) {
+            setDriverLocation({
+              lat: payload.new.latitude,
+              lng: payload.new.longitude,
+            });
+          }
+        },
+      )
       .subscribe((status) => {
         // Log para você ter certeza na aba do navegador se o realtime conectou
         console.log(`Status da conexão Realtime (${tripId}):`, status);
