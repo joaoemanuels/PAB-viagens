@@ -36,7 +36,7 @@ export default function FooterAuth() {
       </NavLink> */}
 
       <NavLink
-        to={`/tracking/`}
+        to={`/tracking/b1000000-0000-0000-0000-000000000003`}
         className={({ isActive }) =>
           `${styles.navButton} ${isActive ? styles.active : ""}`
         }
