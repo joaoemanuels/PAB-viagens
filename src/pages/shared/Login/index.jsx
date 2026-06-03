@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import { useEffect } from "react";
 
 import styles from "./login.module.css";
 
@@ -8,20 +9,21 @@ import LoginForm from "./LoginForm";
 import PromoBanner from "./PromoBanner";
 import GoogleLogin from "./GoogleLogin";
 import Header from "../../../components/ui/Header";
-import { useEffect } from "react";
 
 export default function Login() {
   const { role } = useParams();
-  const { isLogged } = useAuth();
+  const { isLogged, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLogged) {
-      const targetPath =
-        role === "driver" || role === "admin" ? "/admin" : "/home";
-      navigate(targetPath, { replace: true });
+    if (isLogged && user) {
+      if (user.role === "driver") {
+        navigate("/driver", { replace: true });
+      } else {
+        navigate("/home", { replace: true });
+      }
     }
-  }, [isLogged, role, navigate]);
+  }, [isLogged, user, navigate]);
 
   return (
     <section>
@@ -29,7 +31,7 @@ export default function Login() {
       <div className={styles.loginContent}>
         <LoginHeader />
 
-        <LoginForm role="driver" />
+        <LoginForm role={role} />
 
         <GoogleLogin />
 

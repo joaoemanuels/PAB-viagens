@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "../../../../services/auth";
 import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 
-import styles from "./loginForm.module.css";
 import Button from "../../../../components/ui/Button";
+
+import styles from "./loginForm.module.css";
 
 const loginSchema = z.object({
   identifier: z.string().min(1, "Informe e-mail ou CPF"),
@@ -16,7 +15,6 @@ const loginSchema = z.object({
 });
 
 export default function LoginForm({ role }) {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -40,12 +38,6 @@ export default function LoginForm({ role }) {
 
     try {
       await authService.signIn(data.identifier, data.password, role);
-
-      if (role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/home");
-      }
     } catch (err) {
       setError(err.message || "Ocorreu um erro ao fazer login.");
     } finally {

@@ -57,12 +57,12 @@ function AppRoutes() {
 
         <Route
           element={
-            <PrivateRoute allowedRole="admin">
+            <PrivateRoute allowedRole="driver">
               <AdminLayout />
             </PrivateRoute>
           }
         >
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/driver" element={<Admin />} />
           <Route path="/travelsAdmin" element={<Travels />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>

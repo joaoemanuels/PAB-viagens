@@ -8,7 +8,7 @@ export default function FooterAdmin() {
 
   return (
     <nav className={styles.footer}>
-      <NavLink to="/admin" className={checkActive}>
+      <NavLink to="/driver" className={checkActive}>
         <House />
         <span>Home</span>
       </NavLink>

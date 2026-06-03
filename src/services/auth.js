@@ -1,25 +1,40 @@
 import { supabase } from "../services/supabase/supabase.js";
 
 export const authService = {
-  signUp: async ({ fullName, email, phone, password, role }) => {
+  signUp: async ({ fullName, email, phone, password, role, securityToken }) => {
+    // 1. Agora a única role restrita que exige o token é "driver"
+    const isRestricted = role === "driver";
+    const expectedToken = import.meta.env.VITE_SECURITY_TOKEN || "";
+
+    if (isRestricted && securityToken !== expectedToken) {
+      throw new Error("Código de autenticação inválido ou não fornecido.");
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { full_name: fullName, phone, role },
+        data: {
+          full_name: fullName,
+          phone,
+          role, // Aqui vai ser "passenger" ou "driver"
+          security_token: securityToken || null,
+        },
       },
     });
+
     console.log("auth.signUp resultado:", { data, error });
 
     if (error) throw new Error(error.message);
 
+    // 2. Inserção na tabela pública (Sincronizado com o banco de dados)
     const { error: dbError } = await supabase.from("users").insert({
       id: data.user.id,
       auth_id: data.user.id,
       full_name: fullName,
       email,
       phone,
-      role,
+      role, // O banco aceitará lindamente porque limpamos a constraint antiga
     });
 
     if (dbError) throw new Error(dbError.message);
@@ -48,7 +63,6 @@ export const authService = {
 
     if (error) throw new Error("E-mail/CPF ou senha incorretos");
 
-    // ← busca o perfil e valida o role
     const { data: profile } = await supabase
       .from("users")
       .select("role")

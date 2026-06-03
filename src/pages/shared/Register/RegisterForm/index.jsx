@@ -2,10 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "../../../../services/auth";
-import { Mail, User, Phone } from "lucide-react";
+import { Mail, User, Phone, ShieldCheck } from "lucide-react";
+import {
+  baseRegisterSchema,
+  restrictedRegisterSchema,
+  formatPhone,
+} from "../../../../utils/authSchemas";
 
 import styles from "./registerForm.module.css";
 
@@ -13,24 +17,16 @@ import Button from "../../../../components/ui/Button";
 import FormField from "../../../../components/ui/FormField";
 import PasswordField from "../../../../components/ui/PasswordField";
 
-const registerSchema = z.object({
-  fullName: z.string().min(1, "Informe seu nome"),
-
-  email: z.string().email("Email inválido"),
-
-  phone: z.string().min(10, "Telefone inválido"),
-
-  password: z.string().min(6, "Senha muito curta"),
-
-  terms: z.boolean().refine((val) => val === true, {
-    message: "Você precisa aceitar os termos",
-  }),
-});
-
-export default function RegisterForm({ role }) {
+export default function RegisterForm({ role, securityToken }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const isRestrictedRole = role === "driver";
+
+  const registerSchema = isRestrictedRole
+    ? restrictedRegisterSchema
+    : baseRegisterSchema;
 
   const {
     register,
@@ -38,8 +34,13 @@ export default function RegisterForm({ role }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(registerSchema),
-    mode: "onSubmit",
+    mode: "onChange",
+    defaultValues: {
+      securityToken: securityToken || "",
+    },
   });
+
+  const { onChange, ...rest } = register("phone");
 
   async function handleRegister(data) {
     setError("");
@@ -51,12 +52,12 @@ export default function RegisterForm({ role }) {
         email: data.email,
         phone: data.phone,
         password: data.password,
-        userType: "client",
         role,
+        securityToken: data.securityToken || null,
       });
 
-      if (role === "admin") {
-        navigate("/admin");
+      if (role === "driver") {
+        navigate("/driver");
       } else {
         navigate("/home");
       }
@@ -95,8 +96,14 @@ export default function RegisterForm({ role }) {
         <FormField
           label="Telefone"
           icon={<Phone size={20} />}
-          placeholder="(00) 00000-0000"
-          register={register("phone")}
+          placeholder="(99) 99999-9999"
+          register={{
+            ...rest,
+            onChange: (e) => {
+              e.target.value = formatPhone(e.target.value);
+              return onChange(e);
+            },
+          }}
           error={errors.phone}
         />
 
@@ -106,6 +113,17 @@ export default function RegisterForm({ role }) {
           register={register("password")}
           error={errors.password}
         />
+
+        {isRestrictedRole && (
+          <FormField
+            label="Código de Autenticação / Convite"
+            icon={<ShieldCheck size={20} color="#e11d48" />}
+            placeholder="Digite o código fornecido pela empresa"
+            register={register("securityToken")}
+            error={errors.securityToken}
+          />
+        )}
+
         <div className={styles.checkboxGroup}>
           <label className={styles.checkboxLabel}>
             <input
