@@ -21,7 +21,7 @@ export default function MapBackground({ role, tripId, isMinimised }) {
   const [mapReady, setMapReady] = useState(false);
   const hasCenteredRef = useRef(false);
 
-  const { isSharing, start, stop } = useShareLocation();
+  const { isSharing, start, stop } = useShareLocation(tripId);
 
   const liveDriverLocation = useWatchDriver(
     role === "passenger" ? tripId : null,
