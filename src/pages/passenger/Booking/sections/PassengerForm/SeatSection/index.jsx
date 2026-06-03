@@ -1,10 +1,10 @@
 import { Armchair, Minus, Plus } from "lucide-react";
 
-import styles from "./seatCard.module.css";
+import styles from "./seatSection.module.css";
 
-export default function SeatCard({ seats, onSeatsChange }) {
+export default function SeatSection({ seats, onSeatsChange }) {
   return (
-    <div className={styles.seatCard}>
+    <div className={styles.seatSection}>
       <div className={styles.seatInfo}>
         <div className={styles.seatIconWrapper}>
           <Armchair />

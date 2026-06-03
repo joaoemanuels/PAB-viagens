@@ -4,8 +4,8 @@ import { MessageCircle, User } from "lucide-react";
 import { authService } from "../../../../../services/auth";
 
 import Loading from "../../../../../components/ui/Loading";
-import SeatCard from "./seatCard";
 import DateGroup from "./DateGroup";
+import SeatSection from "./SeatSection";
 
 import styles from "./passengerForm.module.css";
 
@@ -83,7 +83,7 @@ export default function PassengerForm({
 
           <DateGroup selectedDate={selectedDate} onDateChange={onDateChange} />
 
-          <SeatCard seats={seats} onSeatsChange={onSeatsChange} />
+          <SeatSection seats={seats} onSeatsChange={onSeatsChange} />
         </form>
       </section>
     </section>
