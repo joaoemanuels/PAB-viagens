@@ -13,56 +13,11 @@
     sans-serif;
 }
 
-.secondaryRow {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
-.buttonSecondary {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-
-.buttonSecondary:hover {
-  opacity: 0.9;
-}
-
-.pix {
-  background-color: #e8ecf8;
-  color: #1c2434;
-}
-
-.whatsapp {
-  background-color: #25d366;
-  color: #ffffff;
-}
-
-.icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @media (min-width: 768px) {
   .bookingActions {
     padding: 16px 32px;
     flex-direction: row;
     align-items: stretch;
-  }
-
-  .secondaryRow {
-    width: auto;
-    flex: 1;
   }
 }
 
@@ -70,11 +25,5 @@
   .bookingActions {
     padding: 16px 0;
     gap: 16px;
-  }
-
-  .buttonSecondary {
-    padding: 16px;
-    font-size: 16px;
-    border-radius: 14px;
   }
 }

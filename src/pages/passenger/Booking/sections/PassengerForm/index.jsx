@@ -1,44 +1,42 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../../../hooks/useAuth";
+import { MessageCircle, User } from "lucide-react";
+import { authService } from "../../../../../services/auth";
+
+import Loading from "../../../../../components/ui/Loading";
+import SeatCard from "./seatCard";
+import DateGroup from "./DateGroup";
+
 import styles from "./passengerForm.module.css";
-import { Armchair, MessageCircle, Minus, Plus, User } from "lucide-react";
-
-const DAYS_SHORT = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-const MONTHS_SHORT = [
-  "Jan",
-  "Fev",
-  "Mar",
-  "Abr",
-  "Mai",
-  "Jun",
-  "Jul",
-  "Ago",
-  "Set",
-  "Out",
-  "Nov",
-  "Dez",
-];
-
-function getNextDays(count = 7) {
-  return Array.from({ length: count }, (_, i) => {
-    const d = new Date();
-    d.setDate(d.getDate() + i);
-    return {
-      label: i === 0 ? "Hoje" : i === 1 ? "Amanhã" : DAYS_SHORT[d.getDay()],
-      sub: `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`,
-      value: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`,
-    };
-  });
-}
 
 export default function PassengerForm({
   selectedDate,
   onDateChange,
   name,
   onNameChange,
-  phone,
+  address,
+  onAddressChange,
   seats,
   onSeatsChange,
 }) {
-  const days = getNextDays(7);
+  const { isLogged, loading } = useAuth();
+  const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      if (!isLogged) return;
+
+      setProfileLoading(true);
+      const data = await authService.getCurrentUser();
+      setProfile(data);
+      setProfileLoading(false);
+    }
+
+    fetchProfile();
+  }, [isLogged]);
+
+  if (loading || profileLoading) return <Loading />;
 
   return (
     <section className={styles.passengerForm}>
@@ -55,7 +53,7 @@ export default function PassengerForm({
               <input
                 type="text"
                 id="name"
-                placeholder="Ex: João Silva"
+                placeholder={profile?.full_name || "Nome Completo"}
                 className={styles.input}
                 value={name}
                 onChange={(e) => onNameChange(e.target.value)}
@@ -64,74 +62,28 @@ export default function PassengerForm({
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="phone" className={styles.label}>
-              Endereço
+            <label htmlFor="address" className={styles.label}>
+              Endereço e Ponto de referência
             </label>
             <div className={styles.inputWrapper}>
               <MessageCircle className={styles.inputIcon} />
               <input
-                type="tel"
-                id="phone"
+                type="text"
+                id="address"
                 placeholder="Ex: rua, número, bairro"
                 className={styles.input}
-                value={phone}
+                value={address}
+                onChange={(e) => onAddressChange(e.target.value)}
               />
             </div>
             <p className={styles.helperText}>
-              Enviaremos a confirmação por aqui.
+              Enviaremos a confirmação por WhatsApp
             </p>
           </div>
 
-          <div className={`${styles.inputGroup} ${styles.dateGroup}`}>
-            <span className={styles.label}>Data da Viagem</span>
-            <div className={styles.datePicker}>
-              {days.map((day) => (
-                <button
-                  key={day.value}
-                  type="button"
-                  onClick={() => onDateChange(day.value)}
-                  className={`${styles.dayChip} ${selectedDate === day.value ? styles.dayChipActive : ""}`}
-                >
-                  <span className={styles.dayLabel}>{day.label}</span>
-                  <span className={styles.dayDate}>{day.sub}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+          <DateGroup selectedDate={selectedDate} onDateChange={onDateChange} />
 
-          <div className={styles.seatCard}>
-            <div className={styles.seatInfo}>
-              <div className={styles.seatIconWrapper}>
-                <Armchair />
-              </div>
-              <div className={styles.seatTexts}>
-                <span className={styles.seatTitle}>Quantidade de Assentos</span>
-                <span className={styles.seatSubtitle}>Máximo de 12</span>
-              </div>
-            </div>
-
-            <div className={styles.stepper}>
-              <button
-                type="button"
-                onClick={() => seats > 1 && onSeatsChange(seats - 1)}
-                disabled={seats <= 1}
-                className={styles.stepperButton}
-                aria-label="Diminuir assentos"
-              >
-                <Minus />
-              </button>
-              <span className={styles.stepperValue}>{seats}</span>
-              <button
-                type="button"
-                onClick={() => seats < 12 && onSeatsChange(seats + 1)}
-                disabled={seats >= 12}
-                className={`${styles.stepperButton} ${styles.stepperButtonPrimary}`}
-                aria-label="Aumentar assentos"
-              >
-                <Plus />
-              </button>
-            </div>
-          </div>
+          <SeatCard seats={seats} onSeatsChange={onSeatsChange} />
         </form>
       </section>
     </section>

@@ -24,23 +24,11 @@ export default function Booking() {
 
   const [selectedDate, setSelectedDate] = useState("");
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [seats, setSeats] = useState(1);
 
-  function isValidPhone(raw) {
-    const digits = raw.replace(/\D/g, ""); // remove tudo que não é número
-    if (digits.length < 10 || digits.length > 11) return false;
-
-    const ddd = parseInt(digits.substring(0, 2));
-    if (ddd < 11 || ddd > 99) return false;
-
-    if (digits.length === 11 && digits[2] !== "9") return false;
-
-    return true;
-  }
-
   const isValid =
-    name.trim() !== "" && isValidPhone(phone) && selectedDate !== "";
+    name.trim() !== "" && address.trim() !== "" && selectedDate !== "";
 
   useEffect(() => {
     async function fetchTrip() {
@@ -89,7 +77,7 @@ export default function Booking() {
       `💺 Assentos: ${seats}\n` +
       `💰 Total: R$ ${formatCurrency(price_per_seat * seats)}\n\n` +
       `👤 Nome: ${name}\n` +
-      `📱 Telefone: ${phone}`;
+      `🏠 Endereço: ${address}`;
 
     const url = `https://wa.me/${OPERATOR_PHONE}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -113,8 +101,8 @@ export default function Booking() {
         onDateChange={setSelectedDate}
         name={name}
         onNameChange={setName}
-        phone={phone}
-        onPhoneChange={setPhone}
+        address={address}
+        onAddressChange={setAddress}
         seats={seats}
         onSeatsChange={setSeats}
       />

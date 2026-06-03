@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from "./notFound.module.css";
 import { House } from "lucide-react";
+
+import styles from "./notFound.module.css";
 
 export default function NotFound() {
   return (
@@ -25,7 +26,7 @@ export default function NotFound() {
           Voltar para o Início
         </Link>
 
-        <Link href="/suporte" className={styles.secondaryLink}>
+        <Link to="/faq" className={styles.secondaryLink}>
           Precisa de ajuda? Fale conosco
         </Link>
       </div>

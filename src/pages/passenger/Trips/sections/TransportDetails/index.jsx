@@ -4,6 +4,9 @@ import styles from "./transportDetails.module.css";
 import { Star, MessageSquareText, Car } from "lucide-react";
 
 export default function TransportDetails() {
+  const message = encodeURIComponent(
+    "Olá Paulo, vim do site Pab Viagens e preciso de ajuda.",
+  );
   return (
     <section className={styles.transportDetails}>
       <div className={styles.transportDetailsContainer}>
@@ -40,9 +43,14 @@ export default function TransportDetails() {
             </div>
           </div>
 
-          <button className={styles.chatButton}>
+          <a
+            href={`https://wa.me/5583981922611?text=${message}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.chatButton}
+          >
             <MessageSquareText size={20} />
-          </button>
+          </a>
         </div>
       </div>
     </section>

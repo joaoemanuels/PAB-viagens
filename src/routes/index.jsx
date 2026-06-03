@@ -1,11 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Loading } from "../components/common/Loading";
 
 import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/common/ScrollToTop";
 import AuthLayout from "../components/layout/AuthLayout";
 import AdminLayout from "../components/layout/AdminLayout";
-import { Loading } from "../components/common/Loading";
 
 const SelectRole = lazy(() => import("../pages/shared/SelectRole"));
 const Login = lazy(() => import("../pages/shared/Login"));
@@ -23,6 +23,8 @@ const PayMethod = lazy(() => import("../pages/passenger/PayMethod"));
 const Admin = lazy(() => import("../pages/admin/Admin"));
 const Travels = lazy(() => import("../pages/admin/Travels"));
 const ProfileAdmin = lazy(() => import("../pages/admin/ProfileAdmin"));
+
+import FAQ from "../pages/shared/FAQ";
 
 function AppRoutes() {
   return (
@@ -64,6 +66,8 @@ function AppRoutes() {
           <Route path="/travelsAdmin" element={<Travels />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>
+
+        <Route path="/faq" element={<FAQ />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

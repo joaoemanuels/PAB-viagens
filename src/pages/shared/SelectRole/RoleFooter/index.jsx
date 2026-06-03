@@ -7,9 +7,9 @@ export default function RoleFooter() {
     <footer className={styles.roleFooter}>
       <hr className={styles.divider} />
 
-      <Link to="/ajuda" className={styles.helpLink}>
+      <Link to="/faq" className={styles.helpLink}>
         <HelpCircleIcon className={styles.helpIcon} />
-        <span>Precisa de ajuda?</span>
+        Precisa de ajuda? Fale conosco
       </Link>
     </footer>
   );

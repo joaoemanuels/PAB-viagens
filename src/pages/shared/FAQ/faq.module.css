@@ -1,0 +1,437 @@
+/* ===========================
+   HelpPage.module.css
+   PAB Viagens – Central de Ajuda
+   =========================== */
+
+/* ---- Page shell ---- */
+.page {
+  min-height: 100vh;
+  background: #f4f5f7;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header / Hero ---- */
+.header {
+  background: #1a1f3c;
+  padding-bottom: 32px;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 0;
+}
+
+.backBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.headerTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.headerAvatarPlaceholder {
+  width: 40px;
+}
+
+.heroArea {
+  padding: 20px 20px 0;
+}
+
+.heroTagline {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 14px;
+}
+
+/* ---- Search ---- */
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: #8a90a8;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 13px 40px 13px 42px;
+  border-radius: 14px;
+  border: none;
+  background: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1a1f3c;
+  outline: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+}
+
+.searchInput::placeholder {
+  color: #aab0c6;
+}
+
+.searchInput:focus {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+}
+
+.searchClear {
+  position: absolute;
+  right: 14px;
+  background: #e0e2ec;
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.searchClear:hover {
+  background: #c8cad6;
+}
+
+/* ---- Support Cards ---- */
+.supportCards {
+  display: flex;
+  gap: 10px;
+  padding: 20px 20px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.supportCards::-webkit-scrollbar {
+  display: none;
+}
+
+.supportCard {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #1a1f3c;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  min-width: 155px;
+  transition:
+    box-shadow 0.2s,
+    transform 0.15s;
+  border: 1.5px solid #ebebf0;
+}
+
+.supportCard:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.supportCardIcon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.supportCard div strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1f3c;
+}
+
+.supportCard div p {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: #7a80a0;
+}
+
+/* ---- Main ---- */
+.main {
+  flex: 1;
+  padding: 24px 20px 40px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1f3c;
+  margin: 0 0 14px;
+  letter-spacing: 0.1px;
+}
+
+/* ---- Category Pills ---- */
+.categoryScroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+}
+
+.categoryScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryPill {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 50px;
+  border: 1.5px solid #dde0ec;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a6080;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.categoryPill:hover {
+  border-color: #3b5bdb;
+  color: #3b5bdb;
+}
+
+.categoryPill.active {
+  background: #1a1f3c;
+  border-color: #1a1f3c;
+  color: #fff;
+}
+
+/* ---- Accordion ---- */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordionItem {
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px solid #ebebf0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
+}
+
+.accordionItem.open {
+  border-color: #c5cdf0;
+  box-shadow: 0 2px 10px rgba(59, 91, 219, 0.1);
+}
+
+.accordionTrigger {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.accordionTrigger span:first-child {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1a1f3c;
+  line-height: 1.4;
+}
+
+.accordionIcon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #f0f2fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 300;
+  color: #3b5bdb;
+  line-height: 1;
+}
+
+.open .accordionIcon {
+  background: #3b5bdb;
+  color: #fff;
+}
+
+.accordionBody {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.3s ease,
+    padding 0.3s ease;
+}
+
+.open .accordionBody {
+  max-height: 400px;
+  padding: 0 18px 18px;
+}
+
+.accordionBody p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #545870;
+  padding-top: 2px;
+  border-top: 1px solid #f0f2fb;
+  padding-top: 14px;
+}
+
+/* ---- Empty State ---- */
+.emptyState {
+  text-align: center;
+  padding: 48px 20px;
+  color: #8a90a8;
+}
+
+.emptyState span {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.emptyState p {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3a4060;
+  margin: 0 0 4px;
+}
+
+.emptyState small {
+  font-size: 13px;
+  color: #9096b2;
+}
+
+/* ---- Search results header ---- */
+.searchResultsHeader {
+  margin-bottom: 4px;
+}
+
+/* ---- Bottom CTA ---- */
+.ctaBox {
+  margin-top: 32px;
+  background: #1a1f3c;
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.ctaText {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ctaButton {
+  background: #3b5bdb;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 28px;
+  font-size: 14.5px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.ctaButton:hover {
+  background: #2f4bbf;
+  transform: translateY(-1px);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 768px) {
+  .heroTagline {
+    font-size: 28px;
+  }
+
+  .supportCards {
+    padding: 24px 32px 0;
+  }
+
+  .supportCard {
+    min-width: 175px;
+  }
+
+  .main {
+    padding: 28px 32px 48px;
+  }
+
+  .accordionTrigger span:first-child {
+    font-size: 15px;
+  }
+
+  .ctaBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 28px 28px;
+  }
+
+  .ctaText {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+  }
+}
