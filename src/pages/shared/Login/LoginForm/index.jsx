@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "../../../../services/auth";
@@ -15,6 +16,7 @@ const loginSchema = z.object({
 });
 
 export default function LoginForm({ role }) {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +39,17 @@ export default function LoginForm({ role }) {
     setLoading(true);
 
     try {
-      await authService.signIn(data.identifier, data.password, role);
+      const loggedUser = await authService.signIn(
+        data.identifier,
+        data.password,
+        role,
+      );
+
+      if (role === "driver") {
+        navigate("/driver", { replace: true });
+      } else {
+        navigate("/home", { replace: true });
+      }
     } catch (err) {
       setError(err.message || "Ocorreu um erro ao fazer login.");
     } finally {

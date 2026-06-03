@@ -2,7 +2,6 @@ import { supabase } from "../services/supabase/supabase.js";
 
 export const authService = {
   signUp: async ({ fullName, email, phone, password, role, securityToken }) => {
-    // 1. Agora a única role restrita que exige o token é "driver"
     const isRestricted = role === "driver";
     const expectedToken = import.meta.env.VITE_SECURITY_TOKEN || "";
 
@@ -10,7 +9,7 @@ export const authService = {
     console.log("Role recebida:", role);
     console.log("Token digitado pelo usuário:", securityToken);
     console.log("Token esperado que veio do .env da Vercel:", expectedToken);
-    
+
     if (isRestricted && securityToken !== expectedToken) {
       throw new Error("Código de autenticação inválido ou não fornecido.");
     }
@@ -32,14 +31,13 @@ export const authService = {
 
     if (error) throw new Error(error.message);
 
-    // 2. Inserção na tabela pública (Sincronizado com o banco de dados)
     const { error: dbError } = await supabase.from("users").insert({
       id: data.user.id,
       auth_id: data.user.id,
       full_name: fullName,
       email,
       phone,
-      role, // O banco aceitará lindamente porque limpamos a constraint antiga
+      role,
     });
 
     if (dbError) throw new Error(dbError.message);
@@ -50,12 +48,11 @@ export const authService = {
   signIn: async (identifier, password, role) => {
     let email = identifier;
 
-    // 1. Se não for e-mail, assume que é o telefone/CPF e busca o e-mail correspondente
     if (!identifier.includes("@")) {
       const { data: userFound } = await supabase
         .from("users")
         .select("email")
-        .eq("phone", identifier) // Filtra pelo telefone fornecido
+        .eq("phone", identifier)
         .maybeSingle();
 
       if (!userFound)
@@ -71,7 +68,6 @@ export const authService = {
 
     if (error) throw new Error("E-mail/Telefone ou senha incorretos");
 
-    // 3. Busca o perfil usando o ID do usuário autenticado (Garante consistência)
     const { data: profile } = await supabase
       .from("users")
       .select("role") // Traz a role para validação
@@ -90,7 +86,6 @@ export const authService = {
       );
     }
 
-    // 4. Valida se a role bate com o contexto do app (driver ou passenger)
     if (role && profile.role !== role) {
       await supabase.auth.signOut();
       throw new Error("Acesso não autorizado para este perfil.");
