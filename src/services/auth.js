@@ -17,7 +17,7 @@ export const authService = {
         data: {
           full_name: fullName,
           phone,
-          role, // Aqui vai ser "passenger" ou "driver"
+          role,
           security_token: securityToken || null,
         },
       },
@@ -45,33 +45,50 @@ export const authService = {
   signIn: async (identifier, password, role) => {
     let email = identifier;
 
+    // 1. Se não for e-mail, assume que é o telefone/CPF e busca o e-mail correspondente
     if (!identifier.includes("@")) {
       const { data: userFound } = await supabase
         .from("users")
         .select("email")
-        .eq("document_id", identifier)
-        .single();
+        .eq("phone", identifier) // Filtra pelo telefone fornecido
+        .maybeSingle();
 
-      if (!userFound) throw new Error("Usuário não encontrado");
+      if (!userFound)
+        throw new Error("Usuário não encontrado com este telefone.");
       email = userFound.email;
     }
 
+    // 2. Realiza a autenticação no Supabase Auth
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    if (error) throw new Error("E-mail/CPF ou senha incorretos");
+    if (error) throw new Error("E-mail/Telefone ou senha incorretos");
 
+    // 3. Busca o perfil usando o ID do usuário autenticado (Garante consistência)
     const { data: profile } = await supabase
       .from("users")
-      .select("role")
+      .select("role") // Traz a role para validação
       .eq("auth_id", data.user.id)
-      .single();
+      .maybeSingle();
 
-    if (role && profile?.role !== role) {
+    console.log("Perfil encontrado para validação de role:", {
+      identifier,
+      profile,
+    });
+
+    if (!profile) {
       await supabase.auth.signOut();
-      throw new Error("Acesso não autorizado para este perfil");
+      throw new Error(
+        "Perfil não encontrado na base de dados. Contate o suporte.",
+      );
+    }
+
+    // 4. Valida se a role bate com o contexto do app (driver ou passenger)
+    if (role && profile.role !== role) {
+      await supabase.auth.signOut();
+      throw new Error("Acesso não autorizado para este perfil.");
     }
 
     return data.user;

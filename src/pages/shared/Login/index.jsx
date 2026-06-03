@@ -13,6 +13,7 @@ import Header from "../../../components/ui/Header";
 export default function Login() {
   const { role } = useParams();
   const { isLogged, user } = useAuth();
+  
   const navigate = useNavigate();
 
   useEffect(() => {

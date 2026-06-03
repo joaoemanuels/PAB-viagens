@@ -10,7 +10,7 @@ import Button from "../../../../components/ui/Button";
 import styles from "./loginForm.module.css";
 
 const loginSchema = z.object({
-  identifier: z.string().min(1, "Informe e-mail ou CPF"),
+  identifier: z.string().min(1, "Informe e-mail"),
   password: z.string().min(6, "Senha inválida"),
 });
 
