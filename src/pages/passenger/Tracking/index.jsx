@@ -21,7 +21,6 @@ export default function Tracking() {
         tripId={tripId}
       />
 
-      {/* Adicionado a prop tripId aqui */}
       <TripDetailsSheet
         isMinimised={isMinimised}
         setIsMinimised={setIsMinimised}

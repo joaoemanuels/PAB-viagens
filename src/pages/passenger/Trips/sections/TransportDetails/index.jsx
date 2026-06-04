@@ -30,7 +30,10 @@ export default function TransportDetails() {
 
         <div className={styles.driver}>
           <div className={styles.driverInfo}>
-            <img src="https://i.pravatar.cc/100?img=12" alt="Motorista" />
+            <img
+              src="https://scontent.cdninstagram.com/v/t51.82787-19/642493145_18055397795454507_6225200326203174088_n.jpg?_nc_cat=104&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=Dpodp99Q7dwQ7kNvwEEcMQh&_nc_oc=AdoQBXN96OBCVZQMNyNb5pbILUHNin48VTmlVUW-J1xxMC8wyY2buZETYmZZU4PKy14&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=Sw9E_SW1qModOoZShzqo0g&_nc_ss=7c6a8&oh=00_Af_RIlSBabvhO4QcPsHKSH8bFI_UkbJ6DleLpsSQd0eIZA&oe=6A26D3D2"
+              alt="Motorista"
+            />
 
             <div>
               <h3>Paulo Aguiar</h3>

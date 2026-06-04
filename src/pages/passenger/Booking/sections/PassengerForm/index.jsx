@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../../hooks/useAuth";
-import { MessageCircle, User } from "lucide-react";
+import { MessageCircle, MessageSquareQuote, User } from "lucide-react";
 import { authService } from "../../../../../services/auth";
 
 import Loading from "../../../../../components/ui/Loading";
@@ -18,6 +18,8 @@ export default function PassengerForm({
   onAddressChange,
   seats,
   onSeatsChange,
+  obs,
+  onObsChange,
 }) {
   const { isLogged, loading } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -46,7 +48,7 @@ export default function PassengerForm({
         <form className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="name" className={styles.label}>
-              Nome Completo
+              Nome e Sobrenome *
             </label>
             <div className={styles.inputWrapper}>
               <User className={styles.inputIcon} />
@@ -63,7 +65,7 @@ export default function PassengerForm({
 
           <div className={styles.inputGroup}>
             <label htmlFor="address" className={styles.label}>
-              Endereço e Ponto de referência
+              Endereço e Ponto de referência de embarque *
             </label>
             <div className={styles.inputWrapper}>
               <MessageCircle className={styles.inputIcon} />
@@ -76,9 +78,24 @@ export default function PassengerForm({
                 onChange={(e) => onAddressChange(e.target.value)}
               />
             </div>
-            <p className={styles.helperText}>
-              Enviaremos a confirmação por WhatsApp
-            </p>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="obs" className={styles.label}>
+              Observação
+            </label>
+            <div className={styles.inputWrapper}>
+              <MessageSquareQuote className={styles.inputIcon} />
+              <input
+                type="text"
+                id="obs"
+                placeholder="Ex: Tenho bagagem extra, preciso embarcar mais cedo..."
+                className={styles.input}
+                value={obs}
+                onChange={(e) => onObsChange(e.target.value)}
+              />
+            </div>
+            <p className={styles.helperText}>Confirmação via WhatsApp</p>
           </div>
 
           <DateGroup selectedDate={selectedDate} onDateChange={onDateChange} />

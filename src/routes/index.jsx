@@ -40,6 +40,7 @@ function AppRoutes() {
           <Route path="/home" element={<Home />} />
           <Route path="/trips/:tripId" element={<Trips />} />
           <Route path="/tracking/:tripId" element={<Tracking />} />
+          <Route path="/payMethod" element={<PayMethod />} />
         </Route>
 
         <Route
@@ -52,7 +53,6 @@ function AppRoutes() {
           <Route path="/trips/:tripId/booking" element={<Booking />} />
           <Route path="/reserves" element={<Reserves />} />
           <Route path="/profileUser" element={<ProfileUser />} />
-          <Route path="/payMethod" element={<PayMethod />} />
         </Route>
 
         <Route

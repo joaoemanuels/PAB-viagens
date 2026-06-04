@@ -8,13 +8,13 @@ export default function TripStatsGrid({ price, departure, arrival }) {
       <div className={styles.tripStatsGridCard}>
         <Clock />
         <p>Saída</p>
-        <span>{departure} </span>
+        <span>{departure || "A confirmar"} </span>
       </div>
 
       <div className={styles.tripStatsGridCard}>
         <Hourglass />
         <p>Chegada</p>
-        <span>{arrival}</span>
+        <span>{arrival || "--"}</span>
       </div>
 
       <div

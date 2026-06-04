@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
-import { MapPin, Phone, Share, Star } from "lucide-react";
+import { MapPin, MessageCircle, Share, Star } from "lucide-react";
 import { supabase } from "../../../../services/supabase/supabase.js";
 import styles from "./tripDetailsSheet.module.css";
 import Button from "../../../../components/ui/Button";
@@ -159,16 +159,31 @@ export default function TripDetailsSheet({
           <Button
             content={`Falar com ${trip.driver.name.split(" ")[0]}`}
             className={styles.primaryActionButton}
-            btnIcon={<Phone />}
-            onClick={() =>
-              trip.driver.phone && window.open(`tel:${trip.driver.phone}`)
-            }
+            btnIcon={<MessageCircle />}
+            onClick={() => {
+              const msg = encodeURIComponent(
+                "Olá, estou acompanhando a viagem e preciso falar com você.",
+              );
+              window.open(`https://wa.me/5583999999999?text=${msg}`, "_blank");
+            }}
           />
-          
+
           <Button
             content={"Compartilhar"}
             className={styles.secondaryActionButton}
             btnIcon={<Share />}
+            onClick={() => {
+              if (navigator.share) {
+                navigator.share({
+                  title: "Acompanhe minha viagem",
+                  text: "Estou a caminho! Acompanhe minha localização:",
+                  url: window.location.href,
+                });
+              } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Link copiado!");
+              }
+            }}
           />
         </div>
       </div>

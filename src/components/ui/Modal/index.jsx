@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { authService } from "../../../services/auth";
 
+import avatar from "../../../assets/images/profile.png";
+
 import {
   BadgeQuestionMark,
   CreditCard,
@@ -49,7 +51,7 @@ export default function Modal({ isOpen, onClose }) {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.profileHeader}>
           <div className={styles.avatarWrapper}>
-            <img src={profile?.avatar_url} alt={profile?.full_name} />
+            <img src={avatar} alt={profile?.full_name} />
             <span>
               <Star fill={"#fff"} size={12} />
             </span>
@@ -105,7 +107,7 @@ export default function Modal({ isOpen, onClose }) {
           <div className={styles.divider} />
 
           <ul className={styles.menuList}>
-            <NavLink to="/ajuda" className={getNavLinkClass} onClick={onClose}>
+            <NavLink to="/faq" className={getNavLinkClass} onClick={onClose}>
               <span className={styles.icon}>
                 <BadgeQuestionMark />
               </span>
@@ -131,7 +133,7 @@ export default function Modal({ isOpen, onClose }) {
             <span className={styles.brandIcon}>
               <img src={Icon} alt="" />
             </span>
-            <span className={styles.brandName}>PAB Viagens</span>
+            <span className={styles.brandName}>Paulo Viagens</span>
           </div>
 
           <p className={styles.versionText}>

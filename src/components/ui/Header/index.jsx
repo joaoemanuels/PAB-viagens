@@ -1,9 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, Menu, MessageCircleQuestionMark } from "lucide-react";
-import styles from "./header.module.css";
+
+import avatar from "../../../assets/images/profile.png";
 import Modal from "../Modal";
-import { passengersData } from "../../../data/passengers";
+
+import styles from "./header.module.css";
 
 export default function Header({
   navigationType = "menu",
@@ -43,7 +45,7 @@ export default function Header({
       <p className={styles.headerContent}>PAB Mobilidade</p>
 
       <div className={styles.userAvatar} onClick={handleBooking}>
-        <img src={passengersData.avatar} alt="Avatar" />
+        <img src={avatar} alt="Avatar" />
       </div>
       {showSupportIcon && (
         <a

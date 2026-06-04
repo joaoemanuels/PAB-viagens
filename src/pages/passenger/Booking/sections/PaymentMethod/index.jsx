@@ -3,7 +3,7 @@ import styles from "./paymentMethod.module.css";
 import { Check, CreditCard, QrCode } from "lucide-react";
 
 export default function PaymentMethod() {
-  const [selectedMethod, setSelectedMethod] = useState("pix");
+  const [selectedMethod, setSelectedMethod] = useState("on_boarding");
 
   return (
     <section className={styles.paymentMethod}>
@@ -11,7 +11,7 @@ export default function PaymentMethod() {
         <h2 className={styles.sectionTitle}>Forma de Pagamento</h2>
 
         <div className={styles.radioGroup}>
-          <label
+          {/* <label
             className={`${styles.paymentCard} ${
               selectedMethod === "pix" ? styles.activeCard : ""
             }`}
@@ -44,7 +44,7 @@ export default function PaymentMethod() {
                 <div className={styles.uncheckedCircle} />
               )}
             </div>
-          </label>
+          </label> */}
 
           <label
             className={`${styles.paymentCard} ${

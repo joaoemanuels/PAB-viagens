@@ -26,6 +26,7 @@ export default function Booking() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [seats, setSeats] = useState(1);
+  const [obs, setObs] = useState("");
 
   const isValid =
     name.trim() !== "" && address.trim() !== "" && selectedDate !== "";
@@ -77,7 +78,8 @@ export default function Booking() {
       `💺 Assentos: ${seats}\n` +
       `💰 Total: R$ ${formatCurrency(price_per_seat * seats)}\n\n` +
       `👤 Nome: ${name}\n` +
-      `🏠 Endereço: ${address}`;
+      `🏠 Endereço: ${address}\n` +
+      `🏠 Observação: ${obs}`;
 
     const url = `https://wa.me/${OPERATOR_PHONE}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -105,6 +107,8 @@ export default function Booking() {
         onAddressChange={setAddress}
         seats={seats}
         onSeatsChange={setSeats}
+        obs={obs}
+        onObsChange={setObs}
       />
       <PaymentMethod />
       <AlertBox />

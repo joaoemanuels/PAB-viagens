@@ -45,7 +45,9 @@ export default function TravelSummary({
             </div>
             <div className={styles.metaText}>
               <span className={styles.metaLabel}>Horário</span>
-              <time className={styles.metaValue}>{departure}</time>
+              <time className={styles.metaValue}>
+                {departure || "A confirmar"}
+              </time>
             </div>
           </div>
         </div>
