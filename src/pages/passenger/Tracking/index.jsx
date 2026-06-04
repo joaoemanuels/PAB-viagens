@@ -14,14 +14,18 @@ export default function Tracking() {
   return (
     <section className={styles.tracking}>
       <Header showSupportIcon={false} />
+
       <MapBackground
         isMinimised={isMinimised}
         role="passenger"
         tripId={tripId}
       />
+
+      {/* Adicionado a prop tripId aqui */}
       <TripDetailsSheet
         isMinimised={isMinimised}
         setIsMinimised={setIsMinimised}
+        tripId={tripId}
       />
     </section>
   );
