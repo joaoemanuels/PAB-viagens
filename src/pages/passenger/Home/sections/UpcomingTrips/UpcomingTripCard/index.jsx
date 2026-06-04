@@ -42,12 +42,12 @@ export default function UpcomingTripCard({
         <div className={styles.time}>
           <Clock3 size={16} />
 
-          <span>Partida: {departure}</span>
+          <span>Partida: {departure || "Não definido"}</span>
         </div>
 
         <Badge
           content={seatsRemaining}
-          context={"lugares restantes"}
+          context={"lugares totais"}
           variant="primary"
         />
       </div>
