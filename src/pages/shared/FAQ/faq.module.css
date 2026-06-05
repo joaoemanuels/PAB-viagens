@@ -7,7 +7,7 @@
 }
 
 .header {
-  background: #1a1f3c;
+  background: #0070eb;
   padding-bottom: 32px;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .categoryPill.active {
-  background: #1a1f3c;
+  background: #0070eb;
   border-color: #1a1f3c;
   color: #fff;
 }
@@ -283,11 +283,15 @@
 }
 
 .ctaBox {
+  display: flex;
+  flex-direction: column;
+  
   margin-top: 32px;
-  background: #1a1f3c;
+  background: #0070eb;
   border-radius: 20px;
   padding: 24px 20px;
   text-align: center;
+  
 }
 
 .ctaText {
@@ -297,8 +301,8 @@
 }
 
 .ctaButton {
-  background: #3b5bdb;
-  color: #fff;
+  background: #ffffff;
+  color: #0070eb;
   border: none;
   border-radius: 12px;
   padding: 13px 28px;
@@ -313,7 +317,9 @@
 }
 
 .ctaButton:hover {
-  background: #2f4bbf;
+  background: #0070eb;
+  border: 2px solid #fff;
+  color: white;
   transform: translateY(-1px);
 }
 

@@ -1,6 +1,7 @@
 import { Banknote, Clock, Hourglass } from "lucide-react";
-import styles from "./tripStatsGrid.module.css";
 import { formatCurrency } from "../../../../../utils/formatCurrency";
+
+import styles from "./tripStatsGrid.module.css";
 
 export default function TripStatsGrid({ price, departure, arrival }) {
   return (

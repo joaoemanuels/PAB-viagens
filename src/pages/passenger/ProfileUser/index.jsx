@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   BadgeQuestionMark,
   Bell,
+  CircleX,
   Globe,
   LockKeyhole,
   LogOut,
@@ -16,7 +17,6 @@ import {
 import Header from "../../../components/ui/Header";
 import ProfileItem from "../../../components/ui/ProfileItem";
 import ProfileSection from "../../../components/ui/ProfileSection";
-import AppVersion from "../../../components/ui/AppVersion";
 import ProfileHeader from "../../../components/common/ProfileHeader";
 import NotLoggedState from "../../../components/common/NotLoggedState";
 import Loading from "../../../components/ui/Loading";
@@ -93,6 +93,7 @@ export default function ProfileUser() {
             value={profile?.settings?.language}
             isLink
           />
+          <ProfileItem icon={<CircleX />} label="Excluir Conta"  />
         </ProfileSection>
 
         <ProfileSection>
@@ -102,6 +103,7 @@ export default function ProfileUser() {
             isLink
             onClick={() => navigate("/faq")}
           />
+
           <ProfileItem
             icon={<LogOut />}
             label="Sair da Conta"
@@ -109,8 +111,6 @@ export default function ProfileUser() {
             onClick={handleLogout}
           />
         </ProfileSection>
-
-        <AppVersion className={styles.version} version="Versão 1.0.0" />
       </div>
     </section>
   );

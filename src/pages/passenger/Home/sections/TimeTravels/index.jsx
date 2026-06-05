@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../../services/supabase/supabase";
+
 import TravelCard from "./TravelCard";
+
 import styles from "./timeTravels.module.css";
 
 export default function TimeTravels({ origin = "", destination = "" }) {

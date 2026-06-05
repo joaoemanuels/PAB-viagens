@@ -1,8 +1,10 @@
 import { CalendarDays, Clock, MoveRight } from "lucide-react";
-import styles from "./travelSummary.module.css";
 import { formatCurrency } from "../../../../../utils/formatCurrency";
 import { formatDate } from "../../../../../utils/formatDate";
+
 import Badge from "../../../../../components/ui/Badge";
+
+import styles from "./travelSummary.module.css";
 
 export default function TravelSummary({
   price,

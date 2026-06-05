@@ -9,6 +9,7 @@ import {
   MapPin,
   Search,
   User,
+  X,
 } from "lucide-react";
 
 import styles from "./faq.module.css";
@@ -27,7 +28,7 @@ const faqs = {
     {
       question: "Como faço uma reserva?",
       answer:
-        "Na tela inicial, selecione seu ponto de partida e destino, escolha o tipo de veículo desejado e confirme a reserva. Você receberá uma confirmação por e-mail e notificação no app.",
+        "Na tela inicial, selecione seu ponto de partida e destino, ou role a tela até achar a viagem desejada e clique em 'Reservar agora'. Você será redirecionado diretamente para o WhatsApp pra confirmação final.",
     },
     {
       question: "Posso agendar uma viagem com antecedência?",
@@ -35,109 +36,103 @@ const faqs = {
         "Sim! Você pode agendar viagens com até 7 dias de antecedência. Basta selecionar a opção 'Agendar' na tela de reserva e escolher a data e horário desejados.",
     },
     {
-      question: "Como altero o destino depois de fazer a reserva?",
-      answer:
-        "Após confirmar a reserva, acesse 'Minhas Reservas', selecione a viagem desejada e toque em 'Editar destino'. Alterações são permitidas até 10 minutos antes da partida.",
-    },
-    {
       question: "Posso fazer mais de uma reserva ao mesmo tempo?",
       answer:
-        "Atualmente, o PAB Viagens permite apenas uma reserva ativa por vez. Após concluir ou cancelar a viagem em andamento, você pode fazer uma nova reserva.",
+        "Sim, porém atualmente todo o gerenciamento é feito diretamente pelo Whatsapp, o site funciona apenas para consulta de horários e rastreamento. Mais funcionalidades em breve",
+    },
+    {
+      question: "Preciso criar uma conta para reservar?",
+      answer:
+        "Sim, para reservar diretamente pelo site é necessário realizar um cadastro, porém, é possível reservar diretamente pelo Whatsapp",
+    },
+    {
+      question: "Como sei se ainda existem vagas disponíveis?",
+      answer:
+        "A disponibilidade é confirmada diretamente com o motorista durante o atendimento pelo WhatsApp.",
     },
   ],
   pagamento: [
     {
       question: "Quais formas de pagamento são aceitas?",
       answer:
-        "Aceitamos cartão de crédito (Visa, Mastercard, Elo e Amex), cartão de débito, PIX e saldo na carteira do app. Parcelamento disponível para viagens acima de R$50.",
+        "Os métodos de pagamento aceitos são PIX, e dinheiro. Ambos disponíveis no embarque",
     },
     {
       question: "Como adiciono um cartão de crédito?",
-      answer:
-        "Acesse Perfil > Pagamentos > Adicionar novo cartão. Insira os dados do cartão e confirme com o código de segurança. O cartão será validado com uma cobrança temporária de R$1,00 que é estornada em até 24h.",
+      answer: "Cartão de débito e crédito por enquanto não está disponível",
     },
     {
       question: "Quando o pagamento é cobrado?",
       answer:
-        "O pagamento é processado ao final da viagem, com base na distância percorrida e tempo de viagem. Para reservas agendadas, o valor é pré-autorizado no cartão 1 hora antes do início.",
+        "O pagamento pode ser feito tanto ao final, quanto no início da viagem.",
     },
     {
       question: "Como funciona o PIX no app?",
       answer:
-        "Ao escolher PIX como forma de pagamento, um QR Code é gerado ao fim da viagem. Você tem 15 minutos para realizar o pagamento. Após confirmação, a viagem é finalizada automaticamente.",
+        "Essa forma de pagamento direto pelo site ainda não está disponível, sendo possível o pagamento apenas em contato direto com o motorista",
+    },
+    {
+      question: "Posso pagar na hora da viagem?",
+      answer:
+        "Sim. O pagamento pode ser realizado no embarque ou ao final da viagem, conforme combinado com o motorista.",
     },
   ],
   cancelamento: [
     {
       question: "Como cancelo uma reserva?",
       answer:
-        "Acesse 'Minhas Reservas', selecione a viagem e toque em 'Cancelar reserva'. Confirme a solicitação. O cancelamento é imediato e você receberá uma notificação de confirmação.",
-    },
-    {
-      question: "Existe taxa de cancelamento?",
-      answer:
-        "Cancelamentos feitos com mais de 30 minutos de antecedência são gratuitos. Entre 10 e 30 minutos, há uma taxa de 20% do valor estimado. Abaixo de 10 minutos, a taxa é de 50%.",
+        "Todo gerenciamento de reserva, pagamento e cancelamento é feito diretamente pelo Whatsapp do motorista.",
     },
     {
       question: "Como solicito reembolso?",
       answer:
-        "Em caso de cancelamento com direito a reembolso, o valor é devolvido automaticamente em até 5 dias úteis para o cartão utilizado, ou instantaneamente para a carteira do app.",
+        "O cancelamento/reembolso é feito exclusivamente pelo Whatsapp do motorista",
     },
     {
       question: "O motorista pode cancelar minha reserva?",
       answer:
-        "Em situações excepcionais, o motorista pode cancelar. Nesse caso, você não é cobrado por nada e recebe um crédito de compensação automático na carteira do app.",
+        "Em situações excepcionais, o motorista pode cancelar mediante aviso prévio via Whatsapp",
     },
   ],
   rastreamento: [
     {
       question: "Como acompanho a localização do motorista?",
       answer:
-        "Após a confirmação da reserva, acesse a tela 'Rastreamento' no menu inferior. Você verá o mapa em tempo real com a posição do motorista e o tempo estimado de chegada.",
+        "Acesse a opção 'Rastrear' no menu inferior. A localização é atualizada em tempo real a cada 5 segundos após o motorista iniciar a viagem.",
     },
     {
       question: "Posso compartilhar minha localização durante a viagem?",
       answer:
-        "Sim! Na tela de rastreamento, toque em 'Compartilhar viagem'. Você pode enviar um link para amigos ou familiares acompanharem sua rota em tempo real sem precisar ter o app.",
+        "Sim! Na tela de rastreamento, toque em 'Compartilhar viagem'. Você pode enviar um link para amigos ou familiares acompanharem sua rota em tempo real.",
     },
     {
       question: "O rastreamento funciona sem internet?",
       answer:
-        "O rastreamento requer conexão com a internet. Em áreas de baixo sinal, o mapa pode demorar mais para atualizar. O motorista também tem acesso ao seu destino offline.",
+        "O rastreamento requer conexão com a internet. Em áreas de baixo sinal, o mapa pode demorar mais para atualizar.",
     },
   ],
   conta: [
     {
       question: "Como altero minha senha?",
       answer:
-        "Acesse Perfil > Configurações > Segurança > Alterar senha. Você precisará confirmar a senha atual e inserir a nova senha duas vezes. A mudança entra em vigor imediatamente.",
+        "Essas funcionalidades estarão disponíveis em futuras atualizações",
     },
     {
       question: "Como atualizo meu número de telefone?",
       answer:
-        "Vá em Perfil > Editar perfil > Telefone. Insira o novo número e confirme com o código SMS enviado. Por segurança, esta ação requer verificação em dois fatores.",
+        "Essas funcionalidades estarão disponíveis em futuras atualizações",
     },
     {
       question: "Posso excluir minha conta?",
       answer:
-        "Sim. Acesse Perfil > Configurações > Conta > Excluir conta. O processo leva até 30 dias para ser concluído. Durante esse período, você pode cancelar a exclusão entrando em contato com o suporte.",
+        "Essas funcionalidades estarão disponíveis em futuras atualizações",
     },
   ],
   motorista: [
     {
-      question: "Como avaliamos o motorista?",
-      answer:
-        "Ao finalizar a viagem, uma tela de avaliação aparece automaticamente. Dê de 1 a 5 estrelas e deixe um comentário opcional. Sua avaliação ajuda a manter a qualidade do serviço.",
-    },
-    {
-      question: "Posso solicitar um motorista específico?",
-      answer:
-        "Por enquanto, não é possível escolher um motorista específico. O sistema conecta automaticamente com o motorista disponível mais próximo com melhor avaliação.",
-    },
-    {
       question: "O que faço se esquecer algo no carro?",
       answer:
-        "Acesse 'Minhas Reservas' > selecione a viagem concluída > 'Reportar item esquecido'. Entraremos em contato com o motorista. Também disponibilizamos o contato do motorista por 24h após a viagem.",
+        "Você pode entrar em contato de forma imediata com o motorista informando o ocorrido",
     },
   ],
 };
@@ -220,7 +215,7 @@ export default function FAQ() {
                 className={styles.searchClear}
                 onClick={() => setSearchQuery("")}
               >
-                ×
+                <X />
               </button>
             )}
           </div>

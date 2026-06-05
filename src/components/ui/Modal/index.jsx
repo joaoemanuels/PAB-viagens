@@ -134,10 +134,7 @@ export default function Modal({ isOpen, onClose }) {
             </span>
             <span className={styles.brandName}>Paulo Viagens</span>
           </div>
-
-          <p className={styles.versionText}>
-            <AppVersion version={profile?.app_version} />
-          </p>
+          <AppVersion />
         </div>
       </div>
     </div>

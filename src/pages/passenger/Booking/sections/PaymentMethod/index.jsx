@@ -1,6 +1,7 @@
 import { useState } from "react";
-import styles from "./paymentMethod.module.css";
 import { Check, CreditCard, QrCode } from "lucide-react";
+
+import styles from "./paymentMethod.module.css";
 
 export default function PaymentMethod() {
   const [selectedMethod, setSelectedMethod] = useState("on_boarding");

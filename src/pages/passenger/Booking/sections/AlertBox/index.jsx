@@ -1,4 +1,5 @@
 import { CircleAlert } from "lucide-react";
+
 import styles from "./alertBox.module.css";
 
 export default function AlertBox() {

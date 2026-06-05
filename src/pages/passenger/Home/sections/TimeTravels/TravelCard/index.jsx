@@ -1,6 +1,8 @@
 import { Bus } from "lucide-react";
-import styles from "../timeTravels.module.css";
+
 import Badge from "../../../../../../components/ui/Badge";
+
+import styles from "../timeTravels.module.css";
 
 export default function TravelCard({ travel }) {
   return (

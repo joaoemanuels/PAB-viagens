@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./upcomingTripCard.module.css";
-
 import { BusFront, Clock3 } from "lucide-react";
 import { formatCurrency } from "../../../../../../utils/formatCurrency";
+
 import Badge from "../../../../../../components/ui/Badge";
 import Button from "../../../../../../components/ui/Button";
+
+import styles from "./upcomingTripCard.module.css";
 
 export default function UpcomingTripCard({
   category,
