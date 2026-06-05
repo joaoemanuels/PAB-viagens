@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Ban,
+  BusFront,
+  CalendarDays,
+  CreditCard,
+  MapPin,
+  Search,
+  User,
+} from "lucide-react";
 
 import styles from "./faq.module.css";
 
 const categories = [
-  { id: "reservas", icon: "🗓️", label: "Reservas" },
-  { id: "pagamento", icon: "💳", label: "Pagamento" },
-  { id: "cancelamento", icon: "↩️", label: "Cancelamento" },
-  { id: "rastreamento", icon: "📍", label: "Rastreamento" },
-  { id: "conta", icon: "👤", label: "Minha Conta" },
-  { id: "motorista", icon: "🚗", label: "Motorista" },
+  { id: "reservas", icon: <CalendarDays />, label: "Reservas" },
+  { id: "pagamento", icon: <CreditCard />, label: "Pagamento" },
+  { id: "cancelamento", icon: <Ban />, label: "Cancelamento" },
+  { id: "rastreamento", icon: <MapPin />, label: "Rastreamento" },
+  { id: "conta", icon: <User />, label: "Minha Conta" },
+  { id: "motorista", icon: <BusFront />, label: "Motorista" },
 ];
 
 const faqs = {
@@ -162,6 +171,10 @@ export default function FAQ() {
     items.map((item) => ({ ...item, category: cat })),
   );
 
+  const message = encodeURIComponent(
+    "Olá Paulo, vim do site Pab Viagens e preciso de ajuda.",
+  );
+
   const filtered = searchQuery.trim()
     ? allFaqs.filter(
         (f) =>
@@ -194,18 +207,7 @@ export default function FAQ() {
         <div className={styles.heroArea}>
           <p className={styles.heroTagline}>Como podemos ajudar?</p>
           <div className={styles.searchWrapper}>
-            <svg
-              className={styles.searchIcon}
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
+            <Search className={styles.searchIcon} />
             <input
               className={styles.searchInput}
               type="text"
@@ -224,32 +226,6 @@ export default function FAQ() {
           </div>
         </div>
       </header>
-
-      {!isSearching && (
-        <section className={styles.supportCards}>
-          <a className={styles.supportCard} href="#">
-            <span className={styles.supportCardIcon}>💬</span>
-            <div>
-              <strong>Chat ao Vivo</strong>
-              <p>Seg–Sex, 8h–22h</p>
-            </div>
-          </a>
-          <a className={styles.supportCard} href="#">
-            <span className={styles.supportCardIcon}>📞</span>
-            <div>
-              <strong>Telefone</strong>
-              <p>0800 123 4567</p>
-            </div>
-          </a>
-          <a className={styles.supportCard} href="#">
-            <span className={styles.supportCardIcon}>✉️</span>
-            <div>
-              <strong>E-mail</strong>
-              <p>Resposta em até 24h</p>
-            </div>
-          </a>
-        </section>
-      )}
 
       <main className={styles.main}>
         {!isSearching && (
@@ -301,7 +277,14 @@ export default function FAQ() {
 
         <div className={styles.ctaBox}>
           <p className={styles.ctaText}>Não encontrou o que precisava?</p>
-          <button className={styles.ctaButton}>Falar com o suporte</button>
+          <a
+            href={`https://wa.me/5583981922611?text=${message}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButton}
+          >
+            Falar com o suporte
+          </a>
         </div>
       </main>
     </div>

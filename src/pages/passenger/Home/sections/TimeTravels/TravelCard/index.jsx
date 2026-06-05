@@ -6,7 +6,7 @@ export default function TravelCard({ travel }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
-        <Badge content={travel.type} className={styles.conventional} />
+        <Badge content="Diário" className={styles.conventional} />
 
         <span className={styles.busIcon}>
           <Bus />
@@ -39,10 +39,6 @@ export default function TravelCard({ travel }) {
           </div>
         ))}
       </div>
-
-      {travel.hasDetails && (
-        <button className={styles.detailsButton}>Ver detalhes da rota</button>
-      )}
     </div>
   );
 }

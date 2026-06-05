@@ -9,7 +9,6 @@ import {
   CreditCard,
   LogOut,
   Star,
-  Ticket,
   User,
 } from "lucide-react";
 import Icon from "../../../assets/images/favicon.svg";
@@ -81,7 +80,7 @@ export default function Modal({ isOpen, onClose }) {
               <span className={styles.itemText}>Minha Conta</span>
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="/reserves"
               className={getNavLinkClass}
               onClick={onClose}
@@ -90,7 +89,7 @@ export default function Modal({ isOpen, onClose }) {
                 <Ticket />
               </span>
               <span className={styles.itemText}>Meus Bilhetes</span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/payMethod"

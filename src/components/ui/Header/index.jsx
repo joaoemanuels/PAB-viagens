@@ -42,7 +42,7 @@ export default function Header({
         <ArrowLeft className={styles.backButton} onClick={handleBackClick} />
       )}
 
-      <p className={styles.headerContent}>PAB Mobilidade</p>
+      <p className={styles.headerContent}>PAB Viagens</p>
 
       <div className={styles.userAvatar} onClick={handleBooking}>
         <img src={avatar} alt="Avatar" />

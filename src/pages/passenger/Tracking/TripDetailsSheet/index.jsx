@@ -56,7 +56,7 @@ export default function TripDetailsSheet({
 
         setTrip({
           statusText: "Viagem a caminho",
-          dropoffPoint: `Ponto de desembarque: ${data.routes?.destination || "Não informado"}`,
+          dropoffPoint: "Em breve",
           driver: {
             name: driverData?.full_name || "Motorista",
             avatar:
@@ -164,7 +164,7 @@ export default function TripDetailsSheet({
               const msg = encodeURIComponent(
                 "Olá, estou acompanhando a viagem e preciso falar com você.",
               );
-              window.open(`https://wa.me/5583999999999?text=${msg}`, "_blank");
+              window.open(`https://wa.me/5583981922611?text=${msg}`, "_blank");
             }}
           />
 

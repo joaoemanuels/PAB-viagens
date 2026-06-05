@@ -1,17 +1,15 @@
 import { Pencil } from "lucide-react";
+
 import styles from "./profileHeader.module.css";
-import { passengersData } from "../../../data/passengers";
-import userProfile_def from "../../../assets/images/userProfile_def.png";
+import avatar from "../../../assets/images/profile.png";
 
 export default function ProfileHeader({ name, onEditAvatar }) {
+  const firstName = name?.trim().split(" ")[0] || "Usuário";
+  
   return (
     <div className={styles.profileHeader}>
       <div className={styles.avatarContainer}>
-        <img
-          src={passengersData.avatar || userProfile_def}
-          alt={name}
-          className={styles.avatarImage}
-        />
+        <img src={avatar} alt={name} className={styles.avatarImage} />
         <button
           className={styles.avatarEditBtn}
           onClick={onEditAvatar}
@@ -22,7 +20,7 @@ export default function ProfileHeader({ name, onEditAvatar }) {
           </span>
         </button>
       </div>
-      <h1 className={styles.profileName}>{name || "Usuário"}</h1>
+      <h1 className={styles.profileName}>{firstName}</h1>
     </div>
   );
 }

@@ -100,6 +100,7 @@ export default function ProfileUser() {
             icon={<BadgeQuestionMark />}
             label="Ajuda e Suporte"
             isLink
+            onClick={() => navigate("/faq")}
           />
           <ProfileItem
             icon={<LogOut />}

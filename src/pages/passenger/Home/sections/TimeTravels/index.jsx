@@ -13,7 +13,6 @@ export default function TimeTravels({ origin = "", destination = "" }) {
       setLoading(true);
       setError(null);
 
-      // Adicionado 'stops' e corrigido os nomes conforme a imagem do seu banco
       let query = supabase.from("routes").select(`
         id,
         category,
@@ -39,29 +38,28 @@ export default function TimeTravels({ origin = "", destination = "" }) {
         setError(error.message);
       } else {
         const formattedTrips = data.map((item) => {
-          // Buscando o horário da primeira parada (tipo departure) dentro do JSON do banco
-          const departureStop = Array.isArray(item.stops) 
-            ? item.stops.find(stop => stop.type === "departure") 
+          const departureStop = Array.isArray(item.stops)
+            ? item.stops.find((stop) => stop.type === "departure")
             : null;
-          
+
           const formattedTime = departureStop?.time || "--:--";
 
           return {
             id: item.id,
             category: item.category || "CONVENCIONAL",
             type: item.type || "CONVENCIONAL",
-            isExecutive: item.is_executive || false, // Usando a coluna real booleana do banco
+            isExecutive: item.is_executive || false,
             route: `${item.origin} → ${item.destination}`,
             origin: item.origin,
             destination: item.destination,
-            date: "2026-10-15", 
+            date: "2026-10-15",
             departure: formattedTime,
-            arrival: "", 
+            arrival: "",
             duration: "",
             price: Number(item.price_per_seat) || 0,
-            seatsRemaining: 12, // Temporário, já que vagas ficam na tabela 'trips'
+            seatsRemaining: 12,
             hasDetails: true,
-            stops: Array.isArray(item.stops) ? item.stops : [], // Injeta o JSON do banco direto aqui
+            stops: Array.isArray(item.stops) ? item.stops : [],
           };
         });
 
@@ -83,16 +81,18 @@ export default function TimeTravels({ origin = "", destination = "" }) {
 
       <div className={styles.cardsList}>
         {loading && <p>Carregando horários...</p>}
-        
-        {error && <p className={styles.errorMessage}>Erro ao carregar: {error}</p>}
+
+        {error && (
+          <p className={styles.errorMessage}>Erro ao carregar: {error}</p>
+        )}
 
         {!loading && !error && trips.length === 0 && (
           <p>Nenhuma viagem encontrada para este trajeto.</p>
         )}
 
-        {!loading && !error && trips.map((travel) => (
-          <TravelCard key={travel.id} travel={travel} />
-        ))}
+        {!loading &&
+          !error &&
+          trips.map((travel) => <TravelCard key={travel.id} travel={travel} />)}
       </div>
     </section>
   );
