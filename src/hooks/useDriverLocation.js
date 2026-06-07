@@ -17,7 +17,7 @@ export function useShareLocation(tripId) {
     // REGRA DE NEGÓCIO: Validação da janela de horário (05:00 às 12:00)
     const agora = new Date();
     const hora = agora.getHours();
-    if (hora < 5 || hora >= 12) {
+    if (hora < 5 || hora >= 19) {
       console.warn(
         "Fora do horário de operação (05:00 às 12:00). Envio bloqueado.",
       );
