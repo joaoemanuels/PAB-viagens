@@ -6,13 +6,15 @@ export default function SocialButton({
   icon,
   className,
   variant = "primary",
+  onClick,
 }) {
   return (
-    <button type={type} className={styles.socialButton}>
+    <button type={type} className={styles.socialButton} onClick={onClick}>
       <img
         src={icon}
         className={`${styles.socialIcon} ${styles[variant]} ${className}`}
-      ></img>
+        alt=""
+      />
       {content}
     </button>
   );

@@ -1,5 +1,6 @@
 import styles from "./appVersion.module.css";
+import packageJson from "../../../../package.json";
 
 export default function AppVersion() {
-  return <footer className={styles.appVersion}>v1.0.0</footer>;
+  return <footer className={styles.appVersion}>v{packageJson.version}</footer>;
 }

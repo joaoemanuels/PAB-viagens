@@ -5,11 +5,6 @@ export const authService = {
     const isRestricted = role === "driver";
     const expectedToken = import.meta.env.VITE_SECURITY_TOKEN || "";
 
-    console.log("DEBUG REGISTRO:");
-    console.log("Role recebida:", role);
-    console.log("Token digitado pelo usuário:", securityToken);
-    console.log("Token esperado que veio do .env da Vercel:", expectedToken);
-
     if (isRestricted && securityToken !== expectedToken) {
       throw new Error("Código de autenticação inválido ou não fornecido.");
     }
@@ -26,8 +21,6 @@ export const authService = {
         },
       },
     });
-
-    console.log("auth.signUp resultado:", { data, error });
 
     if (error) throw new Error(error.message);
 
@@ -60,7 +53,6 @@ export const authService = {
       email = userFound.email;
     }
 
-    // 2. Realiza a autenticação no Supabase Auth
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -70,14 +62,9 @@ export const authService = {
 
     const { data: profile } = await supabase
       .from("users")
-      .select("role") // Traz a role para validação
+      .select("role")
       .eq("auth_id", data.user.id)
       .maybeSingle();
-
-    console.log("Perfil encontrado para validação de role:", {
-      identifier,
-      profile,
-    });
 
     if (!profile) {
       await supabase.auth.signOut();
@@ -107,9 +94,42 @@ export const authService = {
       .from("users")
       .select("*")
       .eq("auth_id", data.user.id)
+      .maybeSingle();
+
+    if (profile) return profile;
+
+    const userEmail = data.user.email;
+    const isDriverRoute = window.location.pathname.includes("driver");
+
+    if (isDriverRoute) {
+      await supabase.auth.signOut();
+      throw new Error(
+        "Motoristas precisam se cadastrar com senha usando o código de segurança.",
+      );
+    }
+
+    const { data: newProfile, error: dbError } = await supabase
+      .from("users")
+      .insert({
+        id: data.user.id,
+        auth_id: data.user.id,
+        full_name:
+          data.user.user_metadata.full_name ||
+          data.user.user_metadata.name ||
+          "Usuário Google",
+        email: userEmail,
+        phone: data.user.phone || null,
+        role: "passenger",
+      })
+      .select()
       .single();
 
-    return profile;
+    if (dbError) {
+      await supabase.auth.signOut();
+      return null;
+    }
+
+    return newProfile;
   },
 
   updateProfile: async (userId, data) => {
@@ -122,7 +142,59 @@ export const authService = {
       .eq("id", userId);
 
     if (error) throw new Error(error.message);
-
     return true;
+  },
+
+  loginWithGoogle: async (googleIdToken, currentRole) => {
+    const { data, error } = await supabase.auth.signInWithIdToken({
+      provider: "google",
+      token: googleIdToken,
+    });
+
+    if (error) throw new Error(error.message);
+
+    const user = data.user;
+    if (!user) throw new Error("Não foi possível obter os dados do usuário do Google.");
+
+    const { data: profile } = await supabase
+      .from("users")
+      .select("*")
+      .eq("auth_id", user.id)
+      .maybeSingle();
+
+    if (profile) {
+      if (currentRole && profile.role !== currentRole) {
+        await supabase.auth.signOut();
+        throw new Error("Este e-mail está cadastrado com outro tipo de conta.");
+      }
+      return profile;
+    }
+
+    if (currentRole === "driver") {
+      await supabase.auth.signOut();
+      throw new Error(
+        "Motoristas precisam se cadastrar com senha usando o código de segurança."
+      );
+    }
+
+    const { data: newProfile, error: dbError } = await supabase
+      .from("users")
+      .insert({
+        id: user.id,
+        auth_id: user.id,
+        full_name: user.user_metadata.full_name || user.user_metadata.name || "Usuário Google",
+        email: user.email,
+        phone: user.phone || null,
+        role: currentRole || "passenger",
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      await supabase.auth.signOut();
+      throw new Error(dbError.message);
+    }
+
+    return newProfile;
   },
 };

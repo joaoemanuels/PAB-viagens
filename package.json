@@ -1,7 +1,7 @@
 {
   "name": "pab-viagens",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "@react-oauth/google": "^0.13.5",
     "@supabase/supabase-js": "^2.106.2",
     "axios": "^1.16.1",
     "clsx": "^2.1.1",
