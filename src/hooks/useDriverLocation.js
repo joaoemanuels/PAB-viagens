@@ -19,7 +19,7 @@ export function useShareLocation(tripId) {
     const hora = agora.getHours();
     if (hora < 5 || hora >= 19) {
       console.warn(
-        "Fora do horário de operação (05:00 às 12:00). Envio bloqueado.",
+        "Fora do horário de operação (05:00 às 19:00). Envio bloqueado.",
       );
       return;
     }
@@ -38,18 +38,16 @@ export function useShareLocation(tripId) {
             pos.coords.longitude,
           );
 
-          const { error } = await supabase
-            .from("driver_locations")
-            .upsert(
-              {
-                trip_id: tripId,
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude,
-                accuracy: pos.coords.accuracy,
-                timestamp: new Date().toISOString(),
-              },
-              { onConflict: "trip_id" },
-            );
+          const { error } = await supabase.from("driver_locations").upsert(
+            {
+              trip_id: tripId,
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude,
+              accuracy: pos.coords.accuracy,
+              timestamp: new Date().toISOString(),
+            },
+            { onConflict: "trip_id" },
+          );
 
           if (error) console.error("Erro no upsert do Supabase:", error);
         },

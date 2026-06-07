@@ -9,17 +9,11 @@ export const authService = {
       throw new Error("Código de autenticação inválido ou não fornecido.");
     }
 
+    // Exemplo de fluxo resiliente no signUp
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-          phone,
-          role,
-          security_token: securityToken || null,
-        },
-      },
+      options: { data: { full_name: fullName, role, phone } }, // O banco lê daqui via Trigger
     });
 
     if (error) throw new Error(error.message);
@@ -155,8 +149,10 @@ export const authService = {
   },
 
   async sendPasswordResetEmail(email) {
+    const redirectUrl = import.meta.env.VITE_APP_URL || "http://localhost:5173";
+
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://localhost:5173/resetPassword",
+      redirectTo: `${redirectUrl}/resetPassword`,
     });
     if (error) throw new Error(error.message);
     return true;
