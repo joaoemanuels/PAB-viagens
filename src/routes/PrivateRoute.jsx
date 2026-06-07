@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { Loading } from "../components/common/Loading";
-
 import NotLoggedState from "../components/common/NotLoggedState";
 
 function PrivateRoute({ children, allowedRole = null }) {

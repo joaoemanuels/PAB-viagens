@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { authService } from "../services/auth";
+import { supabase } from "../services/supabase/supabase";
 
 const AuthContext = createContext({});
 
@@ -14,11 +15,27 @@ export function AuthProvider({ children }) {
         setUser(currentUser);
       } catch (error) {
         console.error("Erro ao carregar usuário:", error);
+        setUser(null);
       } finally {
         setLoading(false);
       }
     }
     loadUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        const currentUser = await authService.getCurrentUser();
+        setUser(currentUser);
+      } else if (event === "SIGNED_OUT") {
+        setUser(null); // Limpa o estado global na hora!
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const loginWithGoogle = async (googleAccessToken, currentRole) => {
@@ -37,9 +54,20 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const logout = async () => {
+    setLoading(true);
+    try {
+      await authService.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Erro ao deslogar:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <AuthContext.Provider
-      value={{ isLogged: !!user, user, loading, loginWithGoogle }}
+      value={{ isLogged: !!user, user, loading, loginWithGoogle, logout }}
     >
       {children}
     </AuthContext.Provider>

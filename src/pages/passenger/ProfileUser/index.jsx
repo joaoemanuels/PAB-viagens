@@ -24,17 +24,25 @@ import styles from "./profileUser.module.css";
 
 export default function ProfileUser() {
   const navigate = useNavigate();
-  const { isLogged, loading } = useAuth();
+  const { isLogged, loading, logout } = useAuth();
   const [profile, setProfile] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     async function fetchProfile() {
-      if (!isLogged) return;
+      if (!isLogged) {
+        setProfile(null);
+        return;
+      }
 
-      const data = await authService.getCurrentUser();
-      setProfile(data);
+      try {
+        const data = await authService.getCurrentUser();
+        setProfile(data);
+      } catch (error) {
+        console.error(error);
+        setProfile(null);
+      }
     }
 
     fetchProfile();
@@ -48,7 +56,7 @@ export default function ProfileUser() {
 
   const handleLogout = async () => {
     try {
-      await authService.signOut();
+      await logout();
       navigate("/home");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
@@ -61,7 +69,7 @@ export default function ProfileUser() {
 
       await authService.deleteAccount();
 
-      await authService.signOut();
+      await logout();
 
       navigate("/home", { state: { accountDeleted: true } });
     } catch (error) {
