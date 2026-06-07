@@ -10,49 +10,52 @@
   z-index: 1;
 }
 
-.mapBackground :global(.leaflet-container) {
-  background: #fff;
+.mapBackground :global(.mapboxgl-canvas-container) {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
-  font-size: 14px;
 }
 
-.mapBackground :global(.leaflet-control-attribution) {
-  background: rgba(255, 255, 255, 0.8);
-  font-size: 11px;
-}
-
-.mapBackground :global(.leaflet-control-zoom) {
+.mapBackground :global(.mapboxgl-ctrl-group) {
   border-radius: 8px;
   border: 1px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
-.mapBackground :global(.leaflet-popup-content-wrapper) {
+.mapBackground :global(.mapboxgl-ctrl-group button) {
+  width: 32px;
+  height: 32px;
+}
+
+.mapBackground :global(.mapboxgl-ctrl-attrib) {
+  background: rgba(255, 255, 255, 0.8) !important;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mapBackground :global(.mapboxgl-popup-content) {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: none;
-  padding: 0;
-}
-
-.mapBackground :global(.leaflet-popup-content) {
-  margin: 12px 16px;
+  padding: 12px 16px;
   font-size: 13px;
   color: #333;
   line-height: 1.4;
 }
 
-.mapBackground :global(.leaflet-popup-tip) {
-  background-color: #fff;
+.mapBackground :global(.mapboxgl-popup-anchor-top .mapboxgl-popup-tip) {
+  border-bottom-color: #fff;
+}
+.mapBackground :global(.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip) {
+  border-top-color: #fff;
 }
 
-.mapBackground :global(.leaflet-popup-close-button) {
+.mapBackground :global(.mapboxgl-popup-close-button) {
   display: none;
 }
 
-/* Markers */
 .userMarker {
   filter: drop-shadow(0 2px 4px rgba(0, 122, 255, 0.2));
 }
@@ -61,13 +64,9 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Mobile */
 @media (min-width: 768px) {
-  .mapBackground :global(.leaflet-control-zoom) {
-    margin: 20px;
-  }
-
-  .mapBackground :global(.leaflet-control-attribution) {
-    display: block;
+  .mapBackground :global(.mapboxgl-ctrl-top-right) {
+    top: 20px;
+    right: 20px;
   }
 }

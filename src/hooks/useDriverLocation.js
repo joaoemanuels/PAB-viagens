@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { supabase } from "../services/supabase/supabase.js"; // caminho correto
+import { supabase } from "../services/supabase/supabase.js";
 
 const INTERVAL_MS = 4000;
 
 export function useShareLocation(tripId) {
-  // ← recebe tripId, não driver_id
   const [isSharing, setIsSharing] = useState(false);
   const intervalRef = useRef(null);
 
@@ -13,6 +12,21 @@ export function useShareLocation(tripId) {
     if (!tripId) {
       console.warn("tripId ausente, abortando");
       return;
+    }
+
+    // REGRA DE NEGÓCIO: Validação da janela de horário (05:00 às 12:00)
+    const agora = new Date();
+    const hora = agora.getHours();
+    if (hora < 5 || hora >= 12) {
+      console.warn(
+        "Fora do horário de operação (05:00 às 12:00). Envio bloqueado.",
+      );
+      return;
+    }
+
+    // PROTEÇÃO: Limpa qualquer intervalo órfão ativo antes de criar um novo
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
 
     const share = () => {
@@ -24,7 +38,7 @@ export function useShareLocation(tripId) {
             pos.coords.longitude,
           );
 
-          const { data, error } = await supabase
+          const { error } = await supabase
             .from("driver_locations")
             .upsert(
               {
@@ -37,24 +51,32 @@ export function useShareLocation(tripId) {
               { onConflict: "trip_id" },
             );
 
-          console.log("upsert resultado:", { data, error }); // ← erro aparece aqui
+          if (error) console.error("Erro no upsert do Supabase:", error);
         },
-        (err) => console.error("geolocation erro:", err), // ← erro de GPS aparece aqui
+        (err) => console.error("geolocation erro:", err),
         { enableHighAccuracy: true, timeout: 10000 },
       );
     };
 
-    share();
+    share(); // Executa a primeira imediatamente
     intervalRef.current = setInterval(share, INTERVAL_MS);
     setIsSharing(true);
   }, [tripId]);
 
   const stop = useCallback(() => {
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
     setIsSharing(false);
   }, []);
 
-  useEffect(() => () => clearInterval(intervalRef.current), []);
+  // Garante a limpeza completa quando o componente desmontar da tela
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return { isSharing, start, stop };
 }
@@ -70,28 +92,26 @@ export function useWatchDriver(tripId) {
       .from("driver_locations")
       .select("latitude, longitude")
       .eq("trip_id", tripId)
-      .maybeSingle() // maybeSingle evita estourar erro no console se a linha ainda não existir
+      .maybeSingle()
       .then(({ data }) => {
         if (data && data.latitude && data.longitude) {
           setDriverLocation({ lat: data.latitude, lng: data.longitude });
         }
       });
 
-    // 2. Escuta atualizações em tempo real (Formato corrigido)
+    // 2. Escuta atualizações em tempo real com CANAL DINÂMICO único por viagem
     const channel = supabase
-      .channel("driver-location-channel") // Nome genérico para o canal
+      .channel(`driver-location-${tripId}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "driver_locations",
-          // Removido o parâmetro 'filter' daqui
         },
         (payload) => {
-          console.log("Realtime recebido do motorista (Sem filtro):", payload);
+          console.log(`Realtime recebido para viagem ${tripId}:`, payload);
 
-          // Filtramos diretamente no código para garantir que pertence a esta viagem
           if (
             payload.new &&
             payload.new.trip_id === tripId &&
@@ -106,7 +126,6 @@ export function useWatchDriver(tripId) {
         },
       )
       .subscribe((status) => {
-        // Log para você ter certeza na aba do navegador se o realtime conectou
         console.log(`Status da conexão Realtime (${tripId}):`, status);
       });
 

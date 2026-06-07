@@ -1,21 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./mapBackground.module.css";
 
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import markerIconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import {
   useShareLocation,
   useWatchDriver,
 } from "../../../../hooks/useDriverLocation";
 
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+
 export default function MapBackground({ role, tripId, isMinimised }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
-  const markersRef = useRef({});
-  const polylineRef = useRef(null);
+
+  // Guardamos as referências dos marcadores e polylines para atualizá-los sem recriar
+  const userMarkerRef = useRef(null);
+  const driverMarkerRef = useRef(null);
 
   const [userLocation, setUserLocation] = useState(null);
   const [mapReady, setMapReady] = useState(false);
@@ -30,39 +31,45 @@ export default function MapBackground({ role, tripId, isMinimised }) {
   const [staticDriverLocation] = useState({ lat: -7.2273, lng: -35.8812 });
   const driverLocation = liveDriverLocation ?? staticDriverLocation;
 
-  // Inicializar mapa
+  // 1. Inicializar o Mapa (Uma única vez)
   useEffect(() => {
     if (mapInstanceRef.current) return;
 
-    const map = L.map(mapRef.current, {
-      zoomControl: true,
-      attributionControl: true,
-      preferCanvas: true,
-    }).setView([-7.2273, -35.8812], 13);
+    const map = new mapboxgl.Map({
+      container: mapRef.current,
+      style: "mapbox://styles/mapbox/streets-v12", // Estilo com foco em trânsito/ruas
+      center: [-35.8812, -7.2273], // NOTA: Mapbox usa [Lng, Lat]
+      zoom: 13,
+    });
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19,
-      minZoom: 0,
-    }).addTo(map);
+    // Adiciona controles de navegação simples (opcional)
+    map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-    mapInstanceRef.current = map;
-    setMapReady(true);
+    map.on("load", () => {
+      mapInstanceRef.current = map;
+      setMapReady(true);
+    });
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
   }, []);
 
-  // Avisar o Leaflet que o container mudou de tamanho após a animação do sheet
+  // 2. Substitui o antigo 'invalidateSize' do Leaflet para reajustar o container
   useEffect(() => {
     if (!mapInstanceRef.current) return;
 
     const timer = setTimeout(() => {
-      mapInstanceRef.current.invalidateSize();
+      mapInstanceRef.current.resize();
     }, 350);
 
     return () => clearTimeout(timer);
   }, [isMinimised]);
 
-  // Localização do usuário
+  // 3. Capturar localização do Usuário (Nativo do Navegador)
   useEffect(() => {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
@@ -72,111 +79,143 @@ export default function MapBackground({ role, tripId, isMinimised }) {
           lng: pos.coords.longitude,
         }),
       () => setUserLocation({ lat: -7.23, lng: -35.885 }),
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 }, // Cache de apenas 10 segundos
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 },
     );
   }, []);
 
-  // Atualizar marcadores
+  // 4. Efeito principal: Atualizar Marcadores, Linha e Enquadramento (fitBounds)
   useEffect(() => {
     if (!mapReady || !mapInstanceRef.current) return;
     const map = mapInstanceRef.current;
 
-    // 1. CONTROLAR O MARCADOR DO USUÁRIO
+    // Lembrete crucial: Mapbox sempre espera as coordenadas como [lng, lat]
+
+    // ---- MARCADOR DO USUÁRIO (Estilo CircleMarker azul) ----
     if (userLocation) {
-      if (!markersRef.current.user) {
-        // Cria se não existir
-        markersRef.current.user = L.circleMarker(
-          [userLocation.lat, userLocation.lng],
-          {
-            radius: 6,
-            fillColor: "#007AFF",
-            color: "#fff",
-            weight: 2,
-            fillOpacity: 0.9,
-          },
-        ).addTo(map);
+      if (!userMarkerRef.current) {
+        // Criamos uma Div customizada para emular o CircleMarker do Leaflet via CSS puro
+        const el = document.createElement("div");
+        el.style.width = "12px";
+        el.style.height = "12px";
+        el.style.borderRadius = "50%";
+        el.style.backgroundColor = "#007AFF";
+        el.style.border = "2px solid #fff";
+        el.style.boxShadow = "0 0 4px rgba(0,0,0,0.3)";
+
+        userMarkerRef.current = new mapboxgl.Marker(el)
+          .setLngLat([userLocation.lng, userLocation.lat])
+          .addTo(map);
       } else {
-        // Apenas move se já existir
-        markersRef.current.user.setLatLng([userLocation.lat, userLocation.lng]);
+        userMarkerRef.current.setLngLat([userLocation.lng, userLocation.lat]);
       }
     }
 
-    // 2. CONTROLAR O MARCADOR DO MOTORISTA
-    if (!markersRef.current.driver) {
-      // Cria se não existir
-      markersRef.current.driver = L.marker(
-        [driverLocation.lat, driverLocation.lng],
-        {
-          icon: L.icon({
-            iconUrl: markerIcon,
-            iconRetinaUrl: markerIconRetina,
-            shadowUrl: markerShadow,
-            boxShadow: "none",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41],
-          }),
-          title: "Sua van",
-        },
-      ).addTo(map);
+    // ---- MARCADOR DO MOTORISTA ----
+    if (!driverMarkerRef.current) {
+      // Marcador padrão do Mapbox (Pin vermelho clássico)
+      // Se quiser usar imagem própria futuramente, basta passar um elemento HTML aqui igual fizemos no usuário
+      driverMarkerRef.current = new mapboxgl.Marker({ color: "#FF3B30" })
+        .setLngLat([driverLocation.lng, driverLocation.lat])
+        .addTo(map);
     } else {
-      // Apenas move suavemente se já existir
-      markersRef.current.driver.setLatLng([
-        driverLocation.lat,
+      // O Mapbox faz transições de coordenadas de forma extremamente suave por padrão
+      driverMarkerRef.current.setLngLat([
         driverLocation.lng,
+        driverLocation.lat,
       ]);
     }
 
-    // 3. CONTROLAR A LINHA (POLYLINE)
+    // ---- LINHA ENTRE OS DOIS (POLYLINE VIA LAYER) ----
     if (userLocation) {
-      const newCoords = [
-        [userLocation.lat, userLocation.lng],
-        [driverLocation.lat, driverLocation.lng],
+      const coordinates = [
+        [userLocation.lng, userLocation.lat],
+        [driverLocation.lng, driverLocation.lat],
       ];
 
-      if (!polylineRef.current) {
-        polylineRef.current = L.polyline(newCoords, {
-          color: "#007AFF",
-          weight: 2,
-          opacity: 0.6,
-          dashArray: "5, 5",
-        }).addTo(map);
-      } else {
-        polylineRef.current.setLatLngs(newCoords);
-      }
-      if (!hasCenteredRef.current) {
-        const isMobile = window.innerWidth < 768;
-        const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
-
-        map.fitBounds(L.latLngBounds(newCoords), {
-          paddingTopLeft: [80, 80],
-          paddingBottomRight: [80, bottomPadding],
-          maxZoom: 15,
+      // No Mapbox, polylines são adicionadas via Sources (Fontes GeoJSON) + Layers (Camadas)
+      if (!map.getSource("route-line")) {
+        map.addSource("route-line", {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: coordinates,
+            },
+          },
         });
 
-        hasCenteredRef.current = true; // Trava para não centralizar mais automaticamente
+        map.addLayer({
+          id: "route-line-layer",
+          type: "line",
+          source: "route-line",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#007AFF",
+            "line-width": 2,
+            "line-opacity": 0.6,
+            "line-dasharray": [2, 2], // Linha tracejada equivalente ao 'dashArray' do Leaflet
+          },
+        });
+      } else {
+        // Se a fonte já existe, apenas atualizamos os dados geográficos na tela de forma limpa
+        map.getSource("route-line").setData({
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: coordinates,
+          },
+        });
       }
 
-      // Ajusta o enquadramento do mapa
+      // ---- AJUSTE DE CÂMERA (FITBOUNDS) ----
       const isMobile = window.innerWidth < 768;
       const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
 
-      map.fitBounds(L.latLngBounds(newCoords), {
-        paddingTopLeft: [80, 80],
-        paddingBottomRight: [80, bottomPadding],
+      // Calculamos o bounding box manualmente (O Mapbox pede no formato [Sudoeste, Nordeste])
+      const bounds = new mapboxgl.LngLatBounds(
+        [
+          Math.min(userLocation.lng, driverLocation.lng),
+          Math.min(userLocation.lat, driverLocation.lat),
+        ],
+        [
+          Math.max(userLocation.lng, driverLocation.lng),
+          Math.max(userLocation.lat, driverLocation.lat),
+        ],
+      );
+
+      // Executa a primeira centralização obrigatória
+      if (!hasCenteredRef.current) {
+        map.fitBounds(bounds, {
+          padding: { top: 80, bottom: bottomPadding, left: 80, right: 80 },
+          maxZoom: 15,
+          animate: true,
+        });
+        hasCenteredRef.current = true;
+      }
+
+      // Mantém o enquadramento atualizado conforme eles se movem
+      map.fitBounds(bounds, {
+        padding: { top: 80, bottom: bottomPadding, left: 80, right: 80 },
         maxZoom: 15,
+        animate: true, // Garante que a transição do enquadramento seja fluida
       });
     }
   }, [userLocation, driverLocation, mapReady, isMinimised]);
 
-  console.log("=== DEBUG PASSEGER ===");
-  console.log("tripId recebido no mapa:", tripId);
-  console.log("liveDriverLocation do Supabase:", liveDriverLocation);
-  console.log("driverLocation calculado:", driverLocation);
   return (
     <div style={{ position: "relative", width: "100%", flex: 1, minHeight: 0 }}>
-      <section className={styles.mapBackground} ref={mapRef} />
+      {/* Container do Mapa */}
+      <section
+        className={styles.mapBackground}
+        ref={mapRef}
+        style={{ width: "100%", height: "100%" }}
+      />
 
       {role === "driver" && (
         <button
