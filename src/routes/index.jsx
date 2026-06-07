@@ -6,6 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 import ScrollToTop from "../components/common/ScrollToTop";
 import AuthLayout from "../components/layout/AuthLayout";
 import AdminLayout from "../components/layout/AdminLayout";
+import RecoveryRoute from "./RecoveryRoute";
 
 const SelectRole = lazy(() => import("../pages/shared/SelectRole"));
 const Login = lazy(() => import("../pages/shared/Login"));
@@ -24,7 +25,8 @@ const Admin = lazy(() => import("../pages/admin/Admin"));
 const Travels = lazy(() => import("../pages/admin/Travels"));
 const ProfileAdmin = lazy(() => import("../pages/admin/ProfileAdmin"));
 
-import FAQ from "../pages/shared/FAQ";
+const FAQ = lazy(() => import("../pages/shared/FAQ"));
+const ResetPassword = lazy(() => import("../pages/shared/ResetPassword"));
 
 function AppRoutes() {
   return (
@@ -66,6 +68,15 @@ function AppRoutes() {
           <Route path="/travelsAdmin" element={<Travels />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
         </Route>
+
+        <Route
+          path="/resetPassword"
+          element={
+            <RecoveryRoute>
+              <ResetPassword />
+            </RecoveryRoute>
+          }
+        />
 
         <Route path="/faq" element={<FAQ />} />
 

@@ -145,6 +145,32 @@ export const authService = {
     return true;
   },
 
+  async deleteAccount() {
+    const { error } = await supabase.rpc("delete_current_user");
+
+    if (error) throw new Error(error.message);
+
+    await supabase.auth.signOut();
+    return true;
+  },
+
+  async sendPasswordResetEmail(email) {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://localhost:5173/resetPassword",
+    });
+    if (error) throw new Error(error.message);
+    return true;
+  },
+
+  async updatePassword(newPassword) {
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
   loginWithGoogle: async (googleIdToken, currentRole) => {
     const { data, error } = await supabase.auth.signInWithIdToken({
       provider: "google",
@@ -154,7 +180,8 @@ export const authService = {
     if (error) throw new Error(error.message);
 
     const user = data.user;
-    if (!user) throw new Error("Não foi possível obter os dados do usuário do Google.");
+    if (!user)
+      throw new Error("Não foi possível obter os dados do usuário do Google.");
 
     const { data: profile } = await supabase
       .from("users")
@@ -173,7 +200,7 @@ export const authService = {
     if (currentRole === "driver") {
       await supabase.auth.signOut();
       throw new Error(
-        "Motoristas precisam se cadastrar com senha usando o código de segurança."
+        "Motoristas precisam se cadastrar com senha usando o código de segurança.",
       );
     }
 
@@ -182,7 +209,10 @@ export const authService = {
       .insert({
         id: user.id,
         auth_id: user.id,
-        full_name: user.user_metadata.full_name || user.user_metadata.name || "Usuário Google",
+        full_name:
+          user.user_metadata.full_name ||
+          user.user_metadata.name ||
+          "Usuário Google",
         email: user.email,
         phone: user.phone || null,
         role: currentRole || "passenger",

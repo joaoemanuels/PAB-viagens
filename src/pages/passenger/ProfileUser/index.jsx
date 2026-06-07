@@ -4,9 +4,7 @@ import { authService } from "../../../services/auth";
 import { useNavigate } from "react-router-dom";
 import {
   BadgeQuestionMark,
-  Bell,
   CircleX,
-  Globe,
   LockKeyhole,
   LogOut,
   Mail,
@@ -20,6 +18,7 @@ import ProfileSection from "../../../components/ui/ProfileSection";
 import ProfileHeader from "../../../components/common/ProfileHeader";
 import NotLoggedState from "../../../components/common/NotLoggedState";
 import Loading from "../../../components/ui/Loading";
+import ModalDelete from "../../../components/ui/ModalDelete";
 
 import styles from "./profileUser.module.css";
 
@@ -27,6 +26,8 @@ export default function ProfileUser() {
   const navigate = useNavigate();
   const { isLogged, loading } = useAuth();
   const [profile, setProfile] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -51,6 +52,33 @@ export default function ProfileUser() {
       navigate("/home");
     } catch (error) {
       console.error("Erro ao tentar deslogar:", error);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      setIsDeleting(true);
+
+      await authService.deleteAccount();
+
+      await authService.signOut();
+
+      navigate("/home", { state: { accountDeleted: true } });
+    } catch (error) {
+      console.error("Erro ao excluir conta:", error);
+    } finally {
+      setIsDeleting(false);
+      setIsDeleteModalOpen(false);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    try {
+      await authService.sendPasswordResetEmail(profile?.email);
+      alert("E-mail de redefinição enviado! Verifique sua caixa de entrada.");
+    } catch (error) {
+      console.error("Erro ao enviar e-mail:", error);
+      alert("Não foi possível enviar o e-mail de redefinição.");
     }
   };
 
@@ -82,36 +110,46 @@ export default function ProfileUser() {
         </ProfileSection>
 
         <ProfileSection title="Segurança">
-          <ProfileItem icon={<LockKeyhole />} label="Alterar Senha" isLink />
-        </ProfileSection>
-
-        <ProfileSection title="Configurações">
-          <ProfileItem icon={<Bell />} label="Notificações" isLink />
           <ProfileItem
-            icon={<Globe />}
-            label="Idioma"
-            value={profile?.settings?.language}
+            icon={<LockKeyhole />}
+            label="Alterar Senha"
             isLink
+            onClick={handleResetPassword}
           />
-          <ProfileItem icon={<CircleX />} label="Excluir Conta"  />
         </ProfileSection>
 
-        <ProfileSection>
+        <ProfileSection title="Suporte">
           <ProfileItem
             icon={<BadgeQuestionMark />}
             label="Ajuda e Suporte"
             isLink
             onClick={() => navigate("/faq")}
           />
+        </ProfileSection>
 
+        <ProfileSection title="Conta">
           <ProfileItem
             icon={<LogOut />}
             label="Sair da Conta"
-            variant="danger"
             onClick={handleLogout}
+          />
+
+          <ProfileItem
+            icon={<CircleX />}
+            label="Excluir Conta"
+            variant="danger"
+            onClick={() => setIsDeleteModalOpen(true)}
           />
         </ProfileSection>
       </div>
+
+      {isDeleteModalOpen && (
+        <ModalDelete
+          onConfirm={handleDeleteAccount}
+          onCancel={() => setIsDeleteModalOpen(false)}
+          isLoading={isDeleting}
+        />
+      )}
     </section>
   );
 }
