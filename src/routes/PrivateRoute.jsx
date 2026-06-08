@@ -18,13 +18,15 @@ function PrivateRoute({ children, allowedRole = null }) {
     return <Navigate to={`/login/${allowedRole}`} replace />;
   }
 
-  if (allowedRole && user?.role !== allowedRole) {
+  const userRole = user?.user_metadata?.role;
+
+  if (allowedRole && userRole !== allowedRole) {
     console.warn(
-      `Acesso negado: Usuário com role ${user?.role} tentou acessar rota de ${allowedRole}`,
+      `Acesso negado: Usuário com role ${userRole} tentou acessar rota de ${allowedRole}`,
     );
 
     return (
-      <Navigate to={user?.role === "driver" ? "/driver" : "/home"} replace />
+      <Navigate to={userRole === "driver" ? "/driver" : "/home"} replace />
     );
   }
 

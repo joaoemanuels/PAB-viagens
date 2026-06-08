@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../hooks/useAuth";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +19,7 @@ import FormField from "../../../../components/ui/FormField";
 import PasswordField from "../../../../components/ui/PasswordField";
 
 export default function RegisterForm({ role, securityToken }) {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -55,6 +57,8 @@ export default function RegisterForm({ role, securityToken }) {
         role,
         securityToken: data.securityToken || null,
       });
+      
+      await login(data.email, data.password, role);
 
       if (role === "driver") {
         navigate("/driver");
@@ -78,25 +82,32 @@ export default function RegisterForm({ role, securityToken }) {
 
       <form className={styles.form} onSubmit={handleSubmit(handleRegister)}>
         <FormField
+          id="name"
           label="Nome Completo"
           icon={<User size={20} />}
           placeholder="Ex: João Silva"
+          autoComplete="name"
           register={register("fullName")}
           error={errors.fullName}
         />
 
         <FormField
+          id="email"
+          type="email"
           label="E-mail"
           icon={<Mail size={20} />}
           placeholder="email@exemplo.com"
+          autoComplete="email"
           register={register("email")}
           error={errors.email}
         />
 
         <FormField
+          id="phone"
           label="Telefone"
           icon={<Phone size={20} />}
           placeholder="(99) 99999-9999"
+          autoComplete="tel"
           register={{
             ...rest,
             onChange: (e) => {
@@ -108,14 +119,17 @@ export default function RegisterForm({ role, securityToken }) {
         />
 
         <PasswordField
+          id="password"
           label="Senha"
           placeholder="Mínimo 6 caracteres"
+          autoComplete="new-password"
           register={register("password")}
           error={errors.password}
         />
 
         {isRestrictedRole && (
           <FormField
+            id="securityToken"
             label="Código de Autenticação / Convite"
             icon={<ShieldCheck size={20} color="#e11d48" />}
             placeholder="Digite o código fornecido pela empresa"
@@ -125,8 +139,9 @@ export default function RegisterForm({ role, securityToken }) {
         )}
 
         <div className={styles.checkboxGroup}>
-          <label className={styles.checkboxLabel}>
+          <label htmlFor="terms" className={styles.checkboxLabel}>
             <input
+              id="terms"
               type="checkbox"
               className={styles.checkboxInput}
               {...register("terms")}

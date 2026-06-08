@@ -13,18 +13,20 @@ import Header from "../../../components/ui/Header";
 export default function Login() {
   const { role } = useParams();
   const { isLogged, user } = useAuth();
-  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  console.log("DEBUG USER ROLE:", user);
   useEffect(() => {
     if (isLogged && user) {
-      if (user.role === "driver") {
+      const userRole = user.user_metadata?.role || role;
+
+      if (userRole === "driver") {
         navigate("/driver", { replace: true });
       } else {
         navigate("/home", { replace: true });
       }
     }
-  }, [isLogged, user, navigate]);
+  }, [isLogged, user, role, navigate]);
 
   return (
     <section>

@@ -39,6 +39,24 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
+  const login = async (identifier, password, currentRole) => {
+    setLoading(true);
+    try {
+      const loggedUser = await authService.signIn(
+        identifier,
+        password,
+        currentRole,
+      );
+      setUser(loggedUser);
+      return loggedUser;
+    } catch (error) {
+      console.error("Erro no login tradicional:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const loginWithGoogle = async (googleAccessToken, currentRole) => {
     setLoading(true);
     try {
@@ -68,7 +86,14 @@ export function AuthProvider({ children }) {
   };
   return (
     <AuthContext.Provider
-      value={{ isLogged: !!user, user, loading, loginWithGoogle, logout }}
+      value={{
+        isLogged: !!user,
+        user,
+        loading,
+        login,
+        loginWithGoogle,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

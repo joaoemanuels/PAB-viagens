@@ -8,14 +8,21 @@ export default function FormField({
   error,
   register,
   id,
+  ...props
 }) {
   return (
     <div className={styles.inputGroup}>
       <label htmlFor={id}>{label}</label>
 
       <div className={styles.inputWrapper}>
-        {icon} 
-        <input id={id} type={type} placeholder={placeholder} {...register} />
+        {icon}
+        <input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          {...props}
+          {...register}
+        />
       </div>
 
       {error && <p className={styles.fieldError}>{error.message}</p>}

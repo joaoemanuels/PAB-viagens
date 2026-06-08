@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authService } from "../../../../services/auth";
 import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 
 import Button from "../../../../components/ui/Button";
 
 import styles from "./loginForm.module.css";
+import { useAuth } from "../../../../hooks/useAuth";
 
 const loginSchema = z.object({
   identifier: z.string().min(1, "Informe e-mail"),
@@ -16,11 +15,10 @@ const loginSchema = z.object({
 });
 
 export default function LoginForm({ role }) {
-  const navigate = useNavigate();
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -39,17 +37,7 @@ export default function LoginForm({ role }) {
     setLoading(true);
 
     try {
-      const loggedUser = await authService.signIn(
-        data.identifier,
-        data.password,
-        role,
-      );
-
-      if (role === "driver") {
-        navigate("/driver", { replace: true });
-      } else {
-        navigate("/home", { replace: true });
-      }
+      await login(data.identifier, data.password, role);
     } catch (err) {
       setError(err.message || "Ocorreu um erro ao fazer login.");
     } finally {
@@ -67,13 +55,15 @@ export default function LoginForm({ role }) {
 
       <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
         <div className={styles.inputGroup}>
-          <label htmlFor="identifier">E-mail ou CPF</label>
+          <label htmlFor="identifier">E-mail</label>
 
           <div className={styles.inputWrapper}>
             <Mail className={styles.inputIcon} size={20} />
             <input
-              type="text"
-              placeholder="Digite seu e-mail ou CPF"
+              type="email"
+              id="identifier"
+              placeholder="Digite seu e-mail"
+              autoComplete="username"
               {...register("identifier")}
             />
           </div>
@@ -94,7 +84,9 @@ export default function LoginForm({ role }) {
             <LockKeyhole className={styles.inputIcon} size={20} />
             <input
               type={showPassword ? "text" : "password"}
+              id="password"
               placeholder="Digite sua senha"
+              autoComplete="current-password"
               {...register("password")}
             />
 

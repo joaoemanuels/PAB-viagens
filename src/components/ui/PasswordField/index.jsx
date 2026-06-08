@@ -9,6 +9,7 @@ export default function PasswordField({
   error,
   register,
   id,
+  autoComplete,
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,6 +27,7 @@ export default function PasswordField({
           id={id}
           type={showPassword ? "text" : "password"}
           placeholder={placeholder}
+          autoComplete={autoComplete}
           {...register}
         />
 
