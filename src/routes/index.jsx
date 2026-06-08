@@ -20,6 +20,7 @@ const Booking = lazy(() => import("../pages/passenger/Booking"));
 const Reserves = lazy(() => import("../pages/passenger/Reserves"));
 const ProfileUser = lazy(() => import("../pages/passenger/ProfileUser"));
 const PayMethod = lazy(() => import("../pages/passenger/PayMethod"));
+const TrackingGate = lazy(() => import("../components/ui/TrackingGate"));
 
 const Admin = lazy(() => import("../pages/admin/Admin"));
 const Travels = lazy(() => import("../pages/admin/Travels"));
@@ -43,6 +44,7 @@ function AppRoutes() {
           <Route path="/trips/:tripId" element={<Trips />} />
           <Route path="/tracking/:tripId" element={<Tracking />} />
           <Route path="/payMethod" element={<PayMethod />} />
+          <Route path="/rastrear" element={<TrackingGate />} />
         </Route>
 
         <Route

@@ -9,7 +9,6 @@ export function usePassengerLocation(tripId) {
 
     let isMounted = true;
 
-    // 1. Busca a posição inicial
     async function getInitialLocation() {
       const { data } = await supabase
         .from("driver_locations")
@@ -17,40 +16,39 @@ export function usePassengerLocation(tripId) {
         .eq("trip_id", tripId)
         .maybeSingle();
 
-      // Só atualiza se o componente ainda estiver montado e se o Realtime já não tiver atualizado
-      if (isMounted && data && !coords) {
+      if (isMounted && data) {
         setCoords({ lat: data.latitude, lng: data.longitude });
       }
     }
 
     getInitialLocation();
 
-    // 2. Inscreve no Realtime
     const channel = supabase
       .channel(`track-trip-${tripId}`)
       .on(
         "postgres_changes",
         {
-          event: "UPDATE", // Se o motorista usa insert para histórico, mude para "INSERT"
+          event: "*", // troca UPDATE por * para pegar INSERT e UPDATE
           schema: "public",
           table: "driver_locations",
-          filter: `trip_id=eq.${tripId}`,
+          filter: `trip_id=eq.${tripId}`, // ← ADICIONADO
         },
         (payload) => {
           if (isMounted && payload.new) {
-            const { latitude, longitude } = payload.new;
-            setCoords({ lat: latitude, lng: longitude });
+            setCoords({
+              lat: payload.new.latitude,
+              lng: payload.new.longitude,
+            });
           }
         },
       )
       .subscribe();
 
-    // Limpeza estrita
     return () => {
       isMounted = false;
-      channel.unsubscribe();
+      supabase.removeChannel(channel); // ← era unsubscribe(), agora removeChannel
     };
-  }, [tripId, coords]);
+  }, [tripId]); // ← removido coords das deps
 
   return coords;
 }
