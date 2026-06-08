@@ -12,43 +12,41 @@ export default function UpcomingTrips({ origin, destination }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let active = true;
+
     async function fetchTrips() {
       setLoading(true);
       setError(null);
 
       let query = supabase.from("trips").select(`
-        id,
-        departure_time,
-        available_seats,
-        routes (
-          origin,
-          destination,
-          category,
-          type,
-          price_per_seat
-        )
-      `);
+      id,
+      departure_time,
+      available_seats,
+      routes ( origin, destination, category, type, price_per_seat )
+    `);
 
-      if (origin.trim()) {
+      if (origin.trim())
         query = query.ilike("routes.origin", `%${origin.trim()}%`);
-      }
-
-      if (destination.trim()) {
+      if (destination.trim())
         query = query.ilike("routes.destination", `%${destination.trim()}%`);
-      }
 
       const { data, error } = await query;
 
-      if (error) {
-        setError(error.message);
-      } else {
-        setTrips(data.filter((t) => t.routes !== null));
+      if (active) {
+        if (error) {
+          setError(error.message);
+        } else {
+          setTrips(data.filter((t) => t.routes !== null));
+        }
+        setLoading(false);
       }
-
-      setLoading(false);
     }
 
     fetchTrips();
+
+    return () => {
+      active = false;
+    };
   }, [origin, destination]);
 
   return (

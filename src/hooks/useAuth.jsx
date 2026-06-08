@@ -9,31 +9,32 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function loadUser() {
       try {
         const currentUser = await authService.getCurrentUser();
-        setUser(currentUser);
+        if (isMounted) setUser(currentUser);
       } catch (error) {
         console.error("Erro ao carregar usuário:", error);
-        setUser(null);
+        if (isMounted) setUser(null);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     }
+
     loadUser();
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "SIGNED_IN" && session) {
-        const currentUser = await authService.getCurrentUser();
-        setUser(currentUser);
-      } else if (event === "SIGNED_OUT") {
-        setUser(null); // Limpa o estado global na hora!
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_OUT") {
+        setUser(null);
       }
     });
 
     return () => {
+      isMounted = false;
       subscription.unsubscribe();
     };
   }, []);
