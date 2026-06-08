@@ -10,20 +10,34 @@ import {
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
+// Calcula distância entre dois pontos em metros (Haversine simplificado)
+function getDistanceMeters(a, b) {
+  const R = 6371000;
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+  const dLng = ((b.lng - a.lng) * Math.PI) / 180;
+  const sinDLat = Math.sin(dLat / 2);
+  const sinDLng = Math.sin(dLng / 2);
+  const c =
+    sinDLat * sinDLat +
+    Math.cos((a.lat * Math.PI) / 180) *
+      Math.cos((b.lat * Math.PI) / 180) *
+      sinDLng *
+      sinDLng;
+  return R * 2 * Math.atan2(Math.sqrt(c), Math.sqrt(1 - c));
+}
+
 export default function MapBackground({ role, tripId, isMinimised }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
-
-  // Guardamos as referências dos marcadores e polylines para atualizá-los sem recriar
   const userMarkerRef = useRef(null);
   const driverMarkerRef = useRef(null);
+  const lastRoutedDriverRef = useRef(null); // última posição do motorista que gerou uma rota
+  const hasCenteredRef = useRef(false);
 
   const [userLocation, setUserLocation] = useState(null);
   const [mapReady, setMapReady] = useState(false);
-  const hasCenteredRef = useRef(false);
 
   const { isSharing, start, stop } = useShareLocation(tripId);
-
   const liveDriverLocation = useWatchDriver(
     role === "passenger" ? tripId : null,
   );
@@ -31,18 +45,17 @@ export default function MapBackground({ role, tripId, isMinimised }) {
   const [staticDriverLocation] = useState({ lat: -7.2273, lng: -35.8812 });
   const driverLocation = liveDriverLocation ?? staticDriverLocation;
 
-  // 1. Inicializar o Mapa (Uma única vez)
+  // 1. Inicializar mapa
   useEffect(() => {
     if (mapInstanceRef.current) return;
 
     const map = new mapboxgl.Map({
       container: mapRef.current,
-      style: "mapbox://styles/mapbox/streets-v12", // Estilo com foco em trânsito/ruas
-      center: [-35.8812, -7.2273], // NOTA: Mapbox usa [Lng, Lat]
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [-35.8812, -7.2273],
       zoom: 13,
     });
 
-    // Adiciona controles de navegação simples (opcional)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
     map.on("load", () => {
@@ -58,42 +71,32 @@ export default function MapBackground({ role, tripId, isMinimised }) {
     };
   }, []);
 
-  // 2. Substitui o antigo 'invalidateSize' do Leaflet para reajustar o container
+  // 2. Resize ao minimizar
   useEffect(() => {
     if (!mapInstanceRef.current) return;
-
-    const timer = setTimeout(() => {
-      mapInstanceRef.current.resize();
-    }, 350);
-
+    const timer = setTimeout(() => mapInstanceRef.current.resize(), 350);
     return () => clearTimeout(timer);
   }, [isMinimised]);
 
-  // 3. Capturar localização do Usuário (Nativo do Navegador)
+  // 3. Localização do usuário
   useEffect(() => {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       (pos) =>
-        setUserLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        }),
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
       () => setUserLocation({ lat: -7.23, lng: -35.885 }),
       { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 },
     );
   }, []);
 
-  // 4. Efeito principal: Atualizar Marcadores, Linha e Enquadramento (fitBounds)
+  // 4. Efeito principal — marcadores, rota e câmera
   useEffect(() => {
     if (!mapReady || !mapInstanceRef.current) return;
     const map = mapInstanceRef.current;
 
-    // Lembrete crucial: Mapbox sempre espera as coordenadas como [lng, lat]
-
-    // ---- MARCADOR DO USUÁRIO (Estilo CircleMarker azul) ----
+    // ---- MARCADOR DO USUÁRIO ----
     if (userLocation) {
       if (!userMarkerRef.current) {
-        // Criamos uma Div customizada para emular o CircleMarker do Leaflet via CSS puro
         const el = document.createElement("div");
         el.style.width = "12px";
         el.style.height = "12px";
@@ -101,7 +104,6 @@ export default function MapBackground({ role, tripId, isMinimised }) {
         el.style.backgroundColor = "#007AFF";
         el.style.border = "2px solid #fff";
         el.style.boxShadow = "0 0 4px rgba(0,0,0,0.3)";
-
         userMarkerRef.current = new mapboxgl.Marker(el)
           .setLngLat([userLocation.lng, userLocation.lat])
           .addTo(map);
@@ -112,72 +114,75 @@ export default function MapBackground({ role, tripId, isMinimised }) {
 
     // ---- MARCADOR DO MOTORISTA ----
     if (!driverMarkerRef.current) {
-      // Marcador padrão do Mapbox (Pin vermelho clássico)
-      // Se quiser usar imagem própria futuramente, basta passar um elemento HTML aqui igual fizemos no usuário
       driverMarkerRef.current = new mapboxgl.Marker({ color: "#FF3B30" })
         .setLngLat([driverLocation.lng, driverLocation.lat])
         .addTo(map);
     } else {
-      // O Mapbox faz transições de coordenadas de forma extremamente suave por padrão
-      driverMarkerRef.current.setLngLat([
-        driverLocation.lng,
-        driverLocation.lat,
-      ]);
+      driverMarkerRef.current.setLngLat([driverLocation.lng, driverLocation.lat]);
     }
 
-    // ---- LINHA ENTRE OS DOIS (POLYLINE VIA LAYER) ----
+    // ---- ROTA PELAS RUAS (DIRECTIONS API) ----
     if (userLocation) {
-      const coordinates = [
-        [userLocation.lng, userLocation.lat],
-        [driverLocation.lng, driverLocation.lat],
-      ];
+      const shouldRefetch =
+        !lastRoutedDriverRef.current ||
+        getDistanceMeters(lastRoutedDriverRef.current, driverLocation) >= 100;
 
-      // No Mapbox, polylines são adicionadas via Sources (Fontes GeoJSON) + Layers (Camadas)
-      if (!map.getSource("route-line")) {
-        map.addSource("route-line", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            properties: {},
-            geometry: {
-              type: "LineString",
-              coordinates: coordinates,
-            },
-          },
-        });
+      if (shouldRefetch) {
+        lastRoutedDriverRef.current = driverLocation;
 
-        map.addLayer({
-          id: "route-line-layer",
-          type: "line",
-          source: "route-line",
-          layout: {
-            "line-join": "round",
-            "line-cap": "round",
-          },
-          paint: {
-            "line-color": "#007AFF",
-            "line-width": 2,
-            "line-opacity": 0.6,
-            "line-dasharray": [2, 2], // Linha tracejada equivalente ao 'dashArray' do Leaflet
-          },
-        });
-      } else {
-        // Se a fonte já existe, apenas atualizamos os dados geográficos na tela de forma limpa
-        map.getSource("route-line").setData({
-          type: "Feature",
-          properties: {},
-          geometry: {
-            type: "LineString",
-            coordinates: coordinates,
-          },
-        });
+        const fetchRoute = async () => {
+          try {
+            const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${driverLocation.lng},${driverLocation.lat};${userLocation.lng},${userLocation.lat}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (!data.routes?.[0]) return;
+
+            const coordinates = data.routes[0].geometry.coordinates;
+
+            if (!map.getSource("route-line")) {
+              map.addSource("route-line", {
+                type: "geojson",
+                data: {
+                  type: "Feature",
+                  properties: {},
+                  geometry: { type: "LineString", coordinates },
+                },
+              });
+
+              map.addLayer({
+                id: "route-line-layer",
+                type: "line",
+                source: "route-line",
+                layout: {
+                  "line-join": "round",
+                  "line-cap": "round",
+                },
+                paint: {
+                  "line-color": "#007AFF",
+                  "line-width": 4,
+                  "line-opacity": 0.8,
+                },
+              });
+            } else {
+              map.getSource("route-line").setData({
+                type: "Feature",
+                properties: {},
+                geometry: { type: "LineString", coordinates },
+              });
+            }
+          } catch (err) {
+            console.error("Erro ao buscar rota:", err);
+          }
+        };
+
+        fetchRoute();
       }
 
-      // ---- AJUSTE DE CÂMERA (FITBOUNDS) ----
+      // ---- CÂMERA (FITBOUNDS) ----
       const isMobile = window.innerWidth < 768;
       const bottomPadding = isMinimised ? 80 : isMobile ? 320 : 80;
 
-      // Calculamos o bounding box manualmente (O Mapbox pede no formato [Sudoeste, Nordeste])
       const bounds = new mapboxgl.LngLatBounds(
         [
           Math.min(userLocation.lng, driverLocation.lng),
@@ -189,7 +194,6 @@ export default function MapBackground({ role, tripId, isMinimised }) {
         ],
       );
 
-      // Executa a primeira centralização obrigatória
       if (!hasCenteredRef.current) {
         map.fitBounds(bounds, {
           padding: { top: 80, bottom: bottomPadding, left: 80, right: 80 },
@@ -197,20 +201,18 @@ export default function MapBackground({ role, tripId, isMinimised }) {
           animate: true,
         });
         hasCenteredRef.current = true;
+      } else {
+        map.fitBounds(bounds, {
+          padding: { top: 80, bottom: bottomPadding, left: 80, right: 80 },
+          maxZoom: 15,
+          animate: true,
+        });
       }
-
-      // Mantém o enquadramento atualizado conforme eles se movem
-      map.fitBounds(bounds, {
-        padding: { top: 80, bottom: bottomPadding, left: 80, right: 80 },
-        maxZoom: 15,
-        animate: true, // Garante que a transição do enquadramento seja fluida
-      });
     }
   }, [userLocation, driverLocation, mapReady, isMinimised]);
 
   return (
     <div style={{ position: "relative", width: "100%", flex: 1, minHeight: 0 }}>
-      {/* Container do Mapa */}
       <section
         className={styles.mapBackground}
         ref={mapRef}
@@ -237,9 +239,7 @@ export default function MapBackground({ role, tripId, isMinimised }) {
             boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           }}
         >
-          {isSharing
-            ? "⏹ Parar compartilhamento"
-            : "📍 Compartilhar localização"}
+          {isSharing ? "⏹ Parar compartilhamento" : "📍 Compartilhar localização"}
         </button>
       )}
 
